@@ -5,9 +5,11 @@ using System.Linq;
 using UnforgottenRealms.Common;
 using UnforgottenRealms.Common.Utils;
 using UnforgottenRealms.Common.Window;
+using UnforgottenRealms.Controllers;
 using UnforgottenRealms.Gui.Components.Container;
 using UnforgottenRealms.Gui.Components.ShapeBased;
-using UnforgottenRealms.Gui.Schemas;
+using UnforgottenRealms.Services.Components;
+using UnforgottenRealms.Settings;
 
 namespace UnforgottenRealms.Services.MainMenu
 {
@@ -25,7 +27,7 @@ namespace UnforgottenRealms.Services.MainMenu
         {
         }
 
-        public static void InitializeComponents(this PageControl pageControl, GameWindow window)
+        public static void InitializeComponents(this PageControl pageControl, GameWindow window, AtomicReference<MainMenuResult> mainMenuResult, AtomicReference<Func<GameSettings>> gameSettingsProvider)
         {
             var factory = new NavigationButtonsFactory
             {
@@ -38,19 +40,36 @@ namespace UnforgottenRealms.Services.MainMenu
                 Width = navigationPanelLenght
             };
 
+            var settingsFactory = new GameSettingsService
+            {
+                BackgroundColor = backgroundColor,
+                ComponentColor = componentColor,
+                HighlightColor = highlightColor,
+                LeftMargin = menuOptionsLeftMargin,
+                SizeFactor = frameSizeFactor,
+                WindowSize = window.Size,
+                TextColor = textColor,
+                ComponentHeight = 40,
+                ComponentMargin = 6,
+                Font = FontExtensions.Font,
+                FontSize = 24,
+                TextPosition = new Vector2f(8, 4)
+            };
+
             var mainView = new ComponentContainer();
             var newGameView = new ComponentContainer();
             var optionsView = new ComponentContainer();
+            var settingsFrame = settingsFactory.NewFrame();
 
             mainView.Register(window);
             mainView.Add(factory.New(0, "NEW GAME", (s, e) => pageControl.Set(newGameView)));
             mainView.Add(factory.New(1, "OPTIONS", (s, e) => pageControl.Set(optionsView)));
-            mainView.Add(factory.New(2, "EXIT", (s, e) => window.Close()));
+            mainView.Add(factory.New(2, "EXIT", (s, e) => mainMenuResult.Value = MainMenuResult.Closed));
 
             newGameView.Register(window);
-            newGameView.Add(factory.New(0, "START", null));
+            newGameView.Add(factory.New(0, "START", (s, e) => mainMenuResult.Value = MainMenuResult.GameStarted));
             newGameView.Add(factory.New(2, "BACK", (s, e) => pageControl.Set(mainView)));
-            newGameView.Add(InitializeGameSettingsFrame(window));
+            newGameView.Add(settingsFrame.InitializeGameSettingsFrame(settingsFactory, gameSettingsProvider));
 
             optionsView.Register(window);
             optionsView.Add(factory.New(2, "BACK", (s, e) => pageControl.Set(mainView)));
@@ -74,25 +93,8 @@ namespace UnforgottenRealms.Services.MainMenu
             sprite.Texture = texture;
         }
 
-        private static Frame InitializeGameSettingsFrame(GameWindow gameWindow)
+        private static Frame InitializeGameSettingsFrame(this Frame frame, GameSettingsService factory, AtomicReference<Func<GameSettings>> gameSettingsProvider)
         {
-            var factory = new GameSettingsService
-            {
-                BackgroundColor = backgroundColor,
-                ComponentColor = componentColor,
-                HighlightColor = highlightColor,
-                LeftMargin = menuOptionsLeftMargin,
-                SizeFactor = frameSizeFactor,
-                WindowSize = gameWindow.Size,
-                TextColor = textColor,
-                ComponentHeight = 40,
-                ComponentMargin = 6,
-                Font = FontExtensions.Font,
-                FontSize = 24,
-                TextPosition = new Vector2f(8, 4)
-            };
-
-            var frame = factory.NewFrame();
             var container = new GameSettingsComponentContainer();
             var playerNumberBox = factory.PlayerNumberTextBox();
 
@@ -111,6 +113,7 @@ namespace UnforgottenRealms.Services.MainMenu
             container.AddPlayerNameTextBox(factory, 2);
 
             frame.Components = container;
+            gameSettingsProvider.Value = () => new GameSettings { Players = container.GetPlayersMetadata() };
 
             return frame;
         }

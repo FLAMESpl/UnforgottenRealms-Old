@@ -2,6 +2,8 @@
 using SFML.Window;
 using UnforgottenRealms.Gui.Components.ShapeBased;
 using UnforgottenRealms.Common.Utils;
+using UnforgottenRealms.Services.Components;
+using UnforgottenRealms.Common.Enums;
 
 namespace UnforgottenRealms.Services.MainMenu
 {
@@ -121,16 +123,16 @@ namespace UnforgottenRealms.Services.MainMenu
                     DisplayedString = PLAYER_NAME_TEXT,
                     Font = Font
                 },
-                Position = new Vector2f(PLAYER_NAME_COLOR_BUTTON_MARGIN + PLAYER_NAME_WIDTH, TopComponentPosition(index, ComponentHeight, ComponentMargin)),
+                Position = new Vector2f(0, TopComponentPosition(index, ComponentHeight, ComponentMargin)),
                 TextPosition = TextPosition
             };
 
             return textBox;
         }
 
-        public Button PlayerNameColorButton(int index)
+        public GameSettingsPlayerColourButton PlayerNameColorButton(int index)
         {
-            var button = new Button
+            var button = new GameSettingsPlayerColourButton
             {
                 HighlightBackgroundColor = HighlightColor,
                 HighlightTextColor = TextColor,
@@ -138,12 +140,11 @@ namespace UnforgottenRealms.Services.MainMenu
                 IdleTextColor = TextColor,
                 Shape = new RectangleShape
                 {
-                    FillColor = ComponentColor,
-                    Size = new Vector2f(ComponentHeight, ComponentHeight),
-
+                    Size = new Vector2f(ComponentHeight, ComponentHeight)
                 },
-                Position = new Vector2f(, TopComponentPosition(index, ComponentHeight, ComponentMargin)),
-                TextPosition = TextPosition
+                Position = new Vector2f(PLAYER_NAME_COLOR_BUTTON_MARGIN + PLAYER_NAME_WIDTH, TopComponentPosition(index, ComponentHeight, ComponentMargin)),
+                TextPosition = TextPosition,
+                Colour = PlayerColour.Red
             };
 
             return button;

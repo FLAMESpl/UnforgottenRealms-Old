@@ -1,13 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnforgottenRealms.Gui.Components.Container;
 using UnforgottenRealms.Gui.Components.ShapeBased;
+using UnforgottenRealms.Services.MainMenu;
+using UnforgottenRealms.Settings;
 
-namespace UnforgottenRealms.Services.MainMenu
+namespace UnforgottenRealms.Services.Components
 {
     public class GameSettingsComponentContainer : ComponentContainer
     {
         private Stack<TextBox> textBoxes = new Stack<TextBox>();
+        private Stack<GameSettingsPlayerColourButton> buttons = new Stack<GameSettingsPlayerColourButton>();
+
+        public PlayerMetadata[] GetPlayersMetadata()
+        {
+            var playerNames = textBoxes.Select(t => t.Text.DisplayedString).ToArray();
+            var playerColours = buttons.Select(b => b.Colour).ToArray();
+            var players = new PlayerMetadata[playerNames.Length];
+
+            for (int i = 0; i < textBoxes.Count; i++)
+            {
+                players[i] = new PlayerMetadata
+                {
+                    Colour = playerColours[i],
+                    Name = playerNames[i],
+                    Id = i
+                };
+            }
+
+            return players;
+        }
 
         public void AddPlayerNameTextBox(GameSettingsService factory, int amount)
         {
@@ -15,8 +38,11 @@ namespace UnforgottenRealms.Services.MainMenu
             for (int i = textBoxes.Count + 1; i < count; i++)
             {
                 var textBox = factory.PlayerNameTextBox(i);
+                var button = factory.PlayerNameColorButton(i);
                 textBoxes.Push(textBox);
+                buttons.Push(button);
                 Add(textBox);
+                Add(button);
             }
         }
 
@@ -25,7 +51,9 @@ namespace UnforgottenRealms.Services.MainMenu
             for (int i = 0; i < amount; i++)
             {
                 var textBox = textBoxes.Pop();
+                var button = buttons.Pop();
                 Remove(textBox);
+                Remove(button);
             }
         }
 

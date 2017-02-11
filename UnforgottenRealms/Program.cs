@@ -15,8 +15,28 @@ namespace UnforgottenRealms
         static void Main(string[] args)
         {
             SetProgramPath();
-            var controller = new MainMenuController();
-            controller.Start();
+
+            bool @continue = true;
+
+            while (@continue)
+            {
+                var menuController = new MainMenuController();
+                var result = menuController.Start();
+
+                switch (result)
+                {
+                    default:
+                    case MainMenuResult.Continue:
+                        break;
+                    case MainMenuResult.Closed:
+                        @continue = false;
+                        break;
+                    case MainMenuResult.GameStarted:
+
+                        new GameController().Start(menuController.GameSettings);
+                        break;
+                }
+            }
         }
     }
 }

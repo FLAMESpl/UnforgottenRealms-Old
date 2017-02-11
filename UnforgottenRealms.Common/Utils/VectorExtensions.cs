@@ -3,7 +3,7 @@ using SFML.Window;
 
 namespace UnforgottenRealms.Common.Helper
 {
-    public static class VectorHelpers
+    public static class VectorExtensions
     {
         public static Vector2f Position(this FloatRect rectangle)
             => new Vector2f(rectangle.Left, rectangle.Top);

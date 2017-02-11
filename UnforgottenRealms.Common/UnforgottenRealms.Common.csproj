@@ -55,9 +55,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AtomicReference.cs" />
     <Compile Include="Enums\PlayerColour.cs" />
     <Compile Include="GameEnvironment.cs" />
-    <Compile Include="Helper\VectorHelpers.cs" />
+    <Compile Include="Utils\VectorExtensions.cs" />
     <Compile Include="Messaging\Bus.cs" />
     <Compile Include="Messaging\IEvent.cs" />
     <Compile Include="Messaging\IEventHandler.cs" />

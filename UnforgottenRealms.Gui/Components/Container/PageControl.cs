@@ -16,6 +16,8 @@ namespace UnforgottenRealms.Gui.Components.Container
 
         public void Add(params IComponentContainer[] items)
         {
+            foreach (var item in items)
+                item.Enabled = false;
             _pages.AddRange(items);
         }
 

@@ -57,13 +57,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\MainMenu\GameSettingsComponentContainer.cs" />
+    <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\MainMenuResult.cs" />
+    <Compile Include="Services\Components\GameSettingsComponentContainer.cs" />
+    <Compile Include="Services\Components\GameSettingsPlayerColourButton.cs" />
     <Compile Include="Services\MainMenu\GameSettingsService.cs" />
     <Compile Include="Services\MainMenu\NavigationButtonsFactory.cs" />
     <Compile Include="Controllers\MainMenuController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MainMenu\MainMenuComponentsService.cs" />
+    <Compile Include="Settings\GameSettings.cs" />
+    <Compile Include="Settings\PlayerMetadata.cs" />
     <Compile Include="Window\GameWindowFactory.cs" />
   </ItemGroup>
   <ItemGroup>

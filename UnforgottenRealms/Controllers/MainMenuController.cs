@@ -1,7 +1,10 @@
 ﻿using SFML.Graphics;
+using System;
+using UnforgottenRealms.Common;
 using UnforgottenRealms.Common.Window;
 using UnforgottenRealms.Gui.Components.Container;
 using UnforgottenRealms.Services.MainMenu;
+using UnforgottenRealms.Settings;
 using UnforgottenRealms.Window;
 
 namespace UnforgottenRealms.Controllers
@@ -14,6 +17,8 @@ namespace UnforgottenRealms.Controllers
         private Sprite mainScreen;
         private GameWindow window;
 
+        public GameSettings GameSettings { get; private set; }
+
         public MainMenuController()
         {
             pages = new PageControl();
@@ -21,16 +26,15 @@ namespace UnforgottenRealms.Controllers
             window = GameWindowFactory.Initial();
         }
 
-        public void Start()
+        public MainMenuResult Start()
         {
-            pages.InitializeComponents(window);
-            mainScreen.InitializeMainScreen(window, MAIN_SCR_IMAGE);
-            Loop();
-        }
+            var mainMenuResult = new AtomicReference<MainMenuResult>(MainMenuResult.Continue);
+            var gameSettingsProvider = new AtomicReference<Func<GameSettings>>();
 
-        private void Loop()
-        {
-            while (window.IsOpen())
+            pages.InitializeComponents(window, mainMenuResult, gameSettingsProvider);
+            mainScreen.InitializeMainScreen(window, MAIN_SCR_IMAGE);
+
+            while (window.IsOpen() && mainMenuResult.Value == MainMenuResult.Continue)
             {
                 window.DispatchEvents();
                 window.Clear();
@@ -38,6 +42,13 @@ namespace UnforgottenRealms.Controllers
                 window.Draw(pages.Active);
                 window.Display();
             }
+
+            GameSettings = gameSettingsProvider.Value?.Invoke();
+
+            if (!window.IsOpen())
+                mainMenuResult.Value = MainMenuResult.Closed;
+
+            return mainMenuResult.Value;
         }
     }
 }
