@@ -61,17 +61,16 @@ namespace UnforgottenRealms.Services.MainMenu
             var optionsView = new ComponentContainer();
             var settingsFrame = settingsFactory.NewFrame();
 
-            mainView.Register(window);
+            pageControl.Bus.Subscribe(window);
+            
             mainView.Add(factory.New(0, "NEW GAME", (s, e) => pageControl.Set(newGameView)));
             mainView.Add(factory.New(1, "OPTIONS", (s, e) => pageControl.Set(optionsView)));
             mainView.Add(factory.New(2, "EXIT", (s, e) => mainMenuResult.Value = MainMenuResult.Closed));
-
-            newGameView.Register(window);
+            
             newGameView.Add(factory.New(0, "START", (s, e) => mainMenuResult.Value = MainMenuResult.GameStarted));
             newGameView.Add(factory.New(2, "BACK", (s, e) => pageControl.Set(mainView)));
             newGameView.Add(settingsFrame.InitializeGameSettingsFrame(settingsFactory, gameSettingsProvider));
-
-            optionsView.Register(window);
+            
             optionsView.Add(factory.New(2, "BACK", (s, e) => pageControl.Set(mainView)));
 
             pageControl.Add(mainView);

@@ -8,9 +8,9 @@ using SFML.Window;
 
 namespace UnforgottenRealms.Gui.Components.ShapeBased
 {
-    public class Frame : ShapeComponentBase, IComponentEventHandler
+    public class Frame : ShapeComponentBase, IEventHandler<TextEntered>
     {
-        public ComponentContainer Components { get; set; } = new ComponentContainer();
+        public IComponentContainer Components { get; set; } = new ComponentContainer();
         public override Vector2f Position
         {
             get

@@ -1,12 +1,13 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
 using System.Collections.Generic;
+using UnforgottenRealms.Common.Messaging;
 using UnforgottenRealms.Common.Window;
 using UnforgottenRealms.Gui.Components.Model;
 
 namespace UnforgottenRealms.Gui.Components.Container
 {
-    public interface IComponentContainer : Drawable, IEnumerable<IComponent>
+    public interface IComponentContainer : Drawable, IEnumerable<IComponent>, IEventDispatcher
     {
         Vector2f Position { get; set; }
         bool Enabled { get; set; }
@@ -16,11 +17,5 @@ namespace UnforgottenRealms.Gui.Components.Container
         void Clear();
         void Remove(IComponent component);
         void SetFocus(IComponent component);
-
-        /// <summary>
-        /// Registers to SFML window events
-        /// </summary>
-        /// <param name="window">A SFML window, source of events</param>
-        void Register(GameWindow window);
     }
 }

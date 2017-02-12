@@ -87,9 +87,10 @@ namespace UnforgottenRealms.Gui.Components.Model
         /// Background shape
         /// </summary>
         public Shape Shape { get; set; }
-        public virtual Vector2f Size 
-            => Shape != null ? Shape.GetGlobalBounds().Size() : new Vector2f(0, 0);
-        
+        public virtual Vector2f Size => Shape != null ? Shape.GetGlobalBounds().Size() : new Vector2f(0, 0);
+
+        public virtual bool Acknowledged() => true;
+
         public virtual void Draw(RenderTarget target, RenderStates states)
         {
             if (Shape != null)
@@ -98,6 +99,7 @@ namespace UnforgottenRealms.Gui.Components.Model
             if (Text != null)
                 target.Draw(Text, states);
         }
+
         public virtual void Handle(FocusGranted @event)
         {
             bool focus = ReferenceEquals(this, @event.Target);
@@ -107,6 +109,7 @@ namespace UnforgottenRealms.Gui.Components.Model
                 OnFocusChange(new FocusChangeEventArgs { Focused = focus });
             }
         }
+
         public virtual void Handle(MouseClicked @event)
         {
             if (Shape.GetGlobalBounds().Contains(@event.Mouse.X, @event.Mouse.Y))

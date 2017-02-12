@@ -1,17 +1,23 @@
 ﻿using System.Collections.Generic;
+using UnforgottenRealms.Common.Messaging;
 
 namespace UnforgottenRealms.Gui.Components.Container
 {
-    public class PageControl
+    public class PageControl : IEventDispatcher
     {
         private List<IComponentContainer> _pages;
 
+        public Bus Bus { get; private set; }
         public IComponentContainer Active { get; protected set; }
         public IEnumerable<IComponentContainer> Pages => _pages;
 
         public PageControl()
         {
             _pages = new List<IComponentContainer>();
+            Bus = new Bus();
+            Bus.MouseClick += (s, e) => Active?.Bus.Forward(s, e);
+            Bus.MouseMove += (s, e) => Active?.Bus.Forward(s, e);
+            Bus.TextEnter += (s, e) => Active?.Bus.Forward(s, e);
         }
 
         public void Add(params IComponentContainer[] items)
@@ -40,5 +46,7 @@ namespace UnforgottenRealms.Gui.Components.Container
                 Active = container;
             }
         }
+        
+        public bool Acknowledge() => true;
     }
 }

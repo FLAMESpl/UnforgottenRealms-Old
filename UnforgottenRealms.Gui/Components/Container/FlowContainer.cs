@@ -11,9 +11,7 @@ using UnforgottenRealms.Common.Utils;
 
 namespace UnforgottenRealms.Gui.Components.Container
 {
-    public class FlowContainer : Drawable,
-        IComponentContainer, IComponentEventHandler
-
+    /*public class FlowContainer : Drawable, IComponentContainer
     {
         protected GameWindow _window;
         protected List<IComponent> _components = new List<IComponent>();
@@ -22,11 +20,15 @@ namespace UnforgottenRealms.Gui.Components.Container
         public bool Enabled { get; set; } = true;
         public IComponent Focused { get; protected set; }
 
+        public Bus Bus { get; private set; }
+
         public FlowContainer() { }
 
         public IEnumerator<IComponent> GetEnumerator() => _components.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public bool Acknowledged() => Enabled;
 
         public void Add(IComponent component)
         {
@@ -58,12 +60,12 @@ namespace UnforgottenRealms.Gui.Components.Container
             Bus.Publish(@event, _components);
         }
 
-        public void Register(GameWindow window)
+        public void Register(IEventDispatcher dispatcher)
         {
-            _window = window;
-            _window.MouseButtonPressed += (s, e) => Handle(new MouseClicked { Mouse = e });
-            _window.MouseMoved += (s, e) => Handle(new MouseMoved { Mouse = e });
-            _window.TextEntered += (s, e) => Handle(new TextEntered { Text = e });
+            Bus = new Bus(dispatcher.Bus);
+            Bus.MouseClick += (s, e) => Handle(new MouseClicked { Mouse = e });
+            Bus.MouseMove += (s, e) => Handle(new MouseMoved { Mouse = e });
+            Bus.TextEnter += (s, e) => Handle(new TextEntered { Text = e });
         }
 
         public virtual void Handle(MouseClicked @event) => Bus.Publish(@event, _components);
@@ -78,5 +80,5 @@ namespace UnforgottenRealms.Gui.Components.Container
                 foreach (var item in _components)
                     target.Draw(item, states);
         }
-    }
+    }*/
 }
