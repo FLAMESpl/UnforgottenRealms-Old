@@ -27,7 +27,7 @@ namespace UnforgottenRealms.Services.MainMenu
         {
         }
 
-        public static void InitializeComponents(this PageControl pageControl, GameWindow window, AtomicReference<MainMenuResult> mainMenuResult, AtomicReference<Func<GameSettings>> gameSettingsProvider)
+        public static void InitializeComponents(this PageControl pageControl, GameWindow window, AtomicReference<NextController> mainMenuResult, AtomicReference<Func<GameSettings>> gameSettingsProvider)
         {
             var factory = new NavigationButtonsFactory
             {
@@ -65,9 +65,9 @@ namespace UnforgottenRealms.Services.MainMenu
             
             mainView.Add(factory.New(0, "NEW GAME", (s, e) => pageControl.Set(newGameView)));
             mainView.Add(factory.New(1, "OPTIONS", (s, e) => pageControl.Set(optionsView)));
-            mainView.Add(factory.New(2, "EXIT", (s, e) => mainMenuResult.Value = MainMenuResult.Closed));
+            mainView.Add(factory.New(2, "EXIT", (s, e) => mainMenuResult.Value = NextController.Exit));
             
-            newGameView.Add(factory.New(0, "START", (s, e) => mainMenuResult.Value = MainMenuResult.GameStarted));
+            newGameView.Add(factory.New(0, "START", (s, e) => mainMenuResult.Value = NextController.Game));
             newGameView.Add(factory.New(2, "BACK", (s, e) => pageControl.Set(mainView)));
             newGameView.Add(settingsFrame.InitializeGameSettingsFrame(settingsFactory, gameSettingsProvider));
             

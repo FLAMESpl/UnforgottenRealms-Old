@@ -10,16 +10,17 @@ namespace UnforgottenRealms.Common.Window
 
         public bool Acknowledge() => true;
 
-        public void Register(IEventDispatcher dispatcher)
-        {
-        }
-
         public GameWindow(VideoMode video, string title, Styles styles, ContextSettings settings) 
             : base(video, title, styles, settings)
         {
             Closed += (s, e) => Close();
             Bus = new Bus();
             Bus.Subscribe(this);
+        }
+
+        public void EnsureClosed()
+        {
+            if (IsOpen()) Close();
         }
     }
 }

@@ -7,11 +7,17 @@ using UnforgottenRealms.Settings;
 
 namespace UnforgottenRealms.Controllers
 {
-    public class GameController
+    public class GameController : Controller
     {
-        public void Start(GameSettings settings)
+        public override ControllerResult Start(ControllerSettings settings)
         {
+            var gameSettings = (GameSettings)settings;
 
+            return new ControllerResult
+            {
+                Next = NextController.MainMenu,
+                Settings = null
+            };
         }
     }
 }

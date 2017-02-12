@@ -9,15 +9,13 @@ using UnforgottenRealms.Window;
 
 namespace UnforgottenRealms.Controllers
 {
-    public class MainMenuController
+    public class MainMenuController : Controller
     {
         private const string MAIN_SCR_IMAGE = "menu.jpg";
 
         private PageControl pages;
         private Sprite mainScreen;
         private GameWindow window;
-
-        public GameSettings GameSettings { get; private set; }
 
         public MainMenuController()
         {
@@ -26,15 +24,15 @@ namespace UnforgottenRealms.Controllers
             window = GameWindowFactory.Initial();
         }
 
-        public MainMenuResult Start()
+        public override ControllerResult Start(ControllerSettings settings)
         {
-            var mainMenuResult = new AtomicReference<MainMenuResult>(MainMenuResult.Continue);
+            var mainMenuResult = new AtomicReference<NextController>(NextController.MainMenu);
             var gameSettingsProvider = new AtomicReference<Func<GameSettings>>();
 
             pages.InitializeComponents(window, mainMenuResult, gameSettingsProvider);
             mainScreen.InitializeMainScreen(window, MAIN_SCR_IMAGE);
 
-            while (window.IsOpen() && mainMenuResult.Value == MainMenuResult.Continue)
+            while (window.IsOpen() && mainMenuResult.Value == NextController.MainMenu)
             {
                 window.DispatchEvents();
                 window.Clear();
@@ -43,12 +41,13 @@ namespace UnforgottenRealms.Controllers
                 window.Display();
             }
 
-            GameSettings = gameSettingsProvider.Value?.Invoke();
+            window.EnsureClosed();
 
-            if (!window.IsOpen())
-                mainMenuResult.Value = MainMenuResult.Closed;
-
-            return mainMenuResult.Value;
+            return new ControllerResult
+            {
+                Next = mainMenuResult.Value,
+                Settings = gameSettingsProvider.Value?.Invoke()
+            };
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using UnforgottenRealms.Controllers;
+using UnforgottenRealms.Settings;
 
 namespace UnforgottenRealms
 {
@@ -16,26 +17,30 @@ namespace UnforgottenRealms
         {
             SetProgramPath();
 
-            bool @continue = true;
-
-            while (@continue)
+            var controllerResult = new ControllerResult
             {
-                var menuController = new MainMenuController();
-                var result = menuController.Start();
+                Next = NextController.MainMenu,
+                Settings = null
+            };
 
-                switch (result)
+            while (controllerResult.Next != NextController.Exit)
+            {
+                Controller controller = null;
+
+                switch (controllerResult.Next)
                 {
                     default:
-                    case MainMenuResult.Continue:
+                    case NextController.MainMenu:
+                        controller = new MainMenuController();
                         break;
-                    case MainMenuResult.Closed:
-                        @continue = false;
+                    case NextController.Game:
+                        controller = new GameController();
                         break;
-                    case MainMenuResult.GameStarted:
-
-                        new GameController().Start(menuController.GameSettings);
+                    case NextController.Exit:
                         break;
                 }
+
+                controllerResult = controller.Start(controllerResult.Settings);
             }
         }
     }
