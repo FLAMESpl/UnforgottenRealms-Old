@@ -61,6 +61,12 @@
     <Compile Include="Controllers\ControllerResult.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\NextController.cs" />
+    <Compile Include="Game\World\Coordinates\AxialCoordinates.cs" />
+    <Compile Include="Game\World\Coordinates\CubicCoordinates.cs" />
+    <Compile Include="Game\World\Coordinates\OffsetCoordinates.cs" />
+    <Compile Include="Game\World\Map.cs" />
+    <Compile Include="Game\World\Terrain\Field.cs" />
+    <Compile Include="Game\World\Terrain\Grass.cs" />
     <Compile Include="Services\Components\GameSettingsComponentContainer.cs" />
     <Compile Include="Services\Components\GameSettingsPlayerColourButton.cs" />
     <Compile Include="Services\MainMenu\GameSettingsService.cs" />
