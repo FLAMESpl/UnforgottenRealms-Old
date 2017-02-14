@@ -11,17 +11,13 @@ namespace UnforgottenRealms.Game.World.Terrain
 {
     public abstract class Field : Drawable
     {
-        protected RectangleShape rect = new RectangleShape
-        {
-            Size = new Vector2f(20, 20),
-            FillColor = Color.Red
-        };
+        protected VertexArray vertex;
 
         public AxialCoordinates Position { get; set; }
 
         public void Draw(RenderTarget target, RenderStates states)
         {
-            target.Draw(rect, states);
+            target.Draw(vertex, states);
         }
     }
 }

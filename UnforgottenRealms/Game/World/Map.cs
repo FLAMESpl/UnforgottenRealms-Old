@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnforgottenRealms.Game.World.Coordinates;
+using UnforgottenRealms.Game.World.Geometry;
 using UnforgottenRealms.Game.World.Terrain;
 
 namespace UnforgottenRealms.Game.World
@@ -42,6 +43,7 @@ namespace UnforgottenRealms.Game.World
 
         public void MockMap()
         {
+            var model = new HexModel(60);
             Size = new Vector2i(10, 10);
             fields = new List<List<Field>>();
             for (int i = 0; i < Size.X; i++)
@@ -49,7 +51,7 @@ namespace UnforgottenRealms.Game.World
                 fields.Add(new List<Field>());
                 for (int j = 0; j < Size.Y; j++)
                 {
-                    fields[i].Add(new Grass(new OffsetCoordinates(i, j)));
+                    fields[i].Add(new Grass(new OffsetCoordinates(i, j), model));
                 }
             }
         }

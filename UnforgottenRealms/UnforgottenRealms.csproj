@@ -64,6 +64,7 @@
     <Compile Include="Game\World\Coordinates\AxialCoordinates.cs" />
     <Compile Include="Game\World\Coordinates\CubicCoordinates.cs" />
     <Compile Include="Game\World\Coordinates\OffsetCoordinates.cs" />
+    <Compile Include="Game\World\Geometry\HexModel.cs" />
     <Compile Include="Game\World\Map.cs" />
     <Compile Include="Game\World\Terrain\Field.cs" />
     <Compile Include="Game\World\Terrain\Grass.cs" />
