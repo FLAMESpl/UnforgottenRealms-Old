@@ -21,6 +21,7 @@ namespace UnforgottenRealms.Game.World
 
         public bool ShowGrid { get; set; }
         public Vector2i Size { get; protected set; }
+        public Vector2f PixelSize => new Vector2f(Size.X * model.HorizontalSize, Size.Y * model.VerticalSize);
 
         public Field this[int column, int row]
         {
@@ -57,6 +58,7 @@ namespace UnforgottenRealms.Game.World
             Size = new Vector2i(10, 10);
             fields = new List<List<Field>>();
             grid = new List<List<VertexArray>>();
+            
             for (int i = 0; i < Size.X; i++)
             {
                 fields.Add(new List<Field>());
