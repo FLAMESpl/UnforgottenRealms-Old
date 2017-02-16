@@ -5,17 +5,17 @@ using UnforgottenRealms.Game.World.Geometry;
 
 namespace UnforgottenRealms.Game.World.Terrain
 {
-    public class Grass : Field
+    public class Water : Field
     {
-        public Grass(OffsetCoordinates position, HexModel model, ResourceManager resources) :
+        public Water(OffsetCoordinates position, HexModel model, ResourceManager resources) :
             base(
-                position: position, 
                 model: model,
                 movementCost: 1,
-                textureDescriptor: resources.Get<GameTilesets>().Terrain.Grass,
-                type: TerrainType.Land
+                position: position,
+                textureDescriptor: resources.Get<GameTilesets>().Terrain.Water,
+                type: TerrainType.Water
             )
-        { 
+        {
         }
     }
 }

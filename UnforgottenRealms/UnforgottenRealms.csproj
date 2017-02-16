@@ -61,13 +61,20 @@
     <Compile Include="Controllers\ControllerResult.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\NextController.cs" />
+    <Compile Include="Game\Graphics\TerrainTextureDescriptor.cs" />
+    <Compile Include="Game\Graphics\TerrainTileset.cs" />
+    <Compile Include="Game\Graphics\Tileset.cs" />
+    <Compile Include="Game\Graphics\GameTilesets.cs" />
     <Compile Include="Game\World\Coordinates\AxialCoordinates.cs" />
     <Compile Include="Game\World\Coordinates\CubicCoordinates.cs" />
     <Compile Include="Game\World\Coordinates\OffsetCoordinates.cs" />
     <Compile Include="Game\World\Geometry\HexModel.cs" />
     <Compile Include="Game\World\Map.cs" />
+    <Compile Include="Game\World\TerrainType.cs" />
+    <Compile Include="Game\World\Terrain\Desert.cs" />
     <Compile Include="Game\World\Terrain\Field.cs" />
     <Compile Include="Game\World\Terrain\Grass.cs" />
+    <Compile Include="Game\World\Terrain\Water.cs" />
     <Compile Include="Services\Components\GameSettingsComponentContainer.cs" />
     <Compile Include="Services\Components\GameSettingsPlayerColourButton.cs" />
     <Compile Include="Services\MainMenu\GameSettingsService.cs" />
@@ -95,7 +102,9 @@
       <Name>UnforgottenRealms.Gui</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Game\Units\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Baseclass.Contrib.Nuget.Output.1.0.0\build\net40\Baseclass.Contrib.Nuget.Output.targets" Condition="Exists('..\packages\Baseclass.Contrib.Nuget.Output.1.0.0\build\net40\Baseclass.Contrib.Nuget.Output.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

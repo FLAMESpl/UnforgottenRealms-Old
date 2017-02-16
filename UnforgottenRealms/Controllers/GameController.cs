@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnforgottenRealms.Common.Resources;
 using UnforgottenRealms.Common.Window;
+using UnforgottenRealms.Game.Graphics;
 using UnforgottenRealms.Game.World;
 using UnforgottenRealms.Gui.Components.Container;
 using UnforgottenRealms.Settings;
@@ -15,12 +17,14 @@ namespace UnforgottenRealms.Controllers
         private GameWindow window;
         private Map worldMap;
         private PageControl pages;
+        private ResourceManager resources;
 
         public GameController()
         {
+            InitializeResources();
             window = Window.GameWindowFactory.Initial();
             pages = new PageControl();
-            worldMap = new Map();
+            worldMap = new Map(resources);
         }
 
         public override ControllerResult Start(ControllerSettings settings)
@@ -43,6 +47,13 @@ namespace UnforgottenRealms.Controllers
                 Next = controllerResult,
                 Settings = null
             };
+        }
+
+        private void InitializeResources()
+        {
+            var tilesets = new GameTilesets();
+            resources = new ResourceManager();
+            resources.Add(tilesets);
         }
     }
 }

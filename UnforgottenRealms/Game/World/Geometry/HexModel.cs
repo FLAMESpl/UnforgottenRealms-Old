@@ -27,13 +27,14 @@ namespace UnforgottenRealms.Game.World.Geometry
             HorizontalSize = edgeLength * (float)Math.Sqrt(3);
             VerticalSize = edgeLength * 2;
 
+            var centringOffset = (edgeLength * 2 - HorizontalSize) / 2;
             ApexesOffsets = new Vector2f[] {
-                new Vector2f(0, edgeLength / 2),
-                new Vector2f(HorizontalSize / 2, 0),
-                new Vector2f(HorizontalSize, edgeLength / 2),
-                new Vector2f(HorizontalSize, edgeLength * 1.5f),
-                new Vector2f(HorizontalSize /2, VerticalSize),
-                new Vector2f(0, edgeLength * 1.5f)
+                new Vector2f(centringOffset, edgeLength / 2),
+                new Vector2f((HorizontalSize / 2) + centringOffset, 0),
+                new Vector2f(HorizontalSize + centringOffset, edgeLength / 2),
+                new Vector2f(HorizontalSize + centringOffset, edgeLength * 1.5f),
+                new Vector2f((HorizontalSize / 2) + centringOffset, VerticalSize),
+                new Vector2f(centringOffset, edgeLength * 1.5f)
             };
         }
 

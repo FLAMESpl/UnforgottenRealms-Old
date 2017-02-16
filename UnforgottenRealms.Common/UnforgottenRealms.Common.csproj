@@ -59,6 +59,9 @@
     <Compile Include="Enums\PlayerColour.cs" />
     <Compile Include="GameEnvironment.cs" />
     <Compile Include="Messaging\IEventDispatcher.cs" />
+    <Compile Include="Resources\IResource.cs" />
+    <Compile Include="Resources\ResourceException.cs" />
+    <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Utils\VectorExtensions.cs" />
     <Compile Include="Messaging\Bus.cs" />
     <Compile Include="Messaging\IEvent.cs" />
