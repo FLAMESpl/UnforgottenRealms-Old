@@ -1,5 +1,6 @@
 ﻿using SFML.Window;
 using System;
+using UnforgottenRealms.Game.World.Coordinates;
 
 namespace UnforgottenRealms.Game.World.Geometry
 {
@@ -15,6 +16,7 @@ namespace UnforgottenRealms.Game.World.Geometry
         };
 
         public Vector2f[] ApexesOffsets { get; private set; }
+        public Vector2f Size => new Vector2f(HorizontalSize, VerticalSize);
         public float EdgeLength { get; private set; }
         public float HorizontalSize { get; private set; }
         public float VerticalSize { get; private set; }
@@ -29,16 +31,32 @@ namespace UnforgottenRealms.Game.World.Geometry
 
             var centringOffset = (edgeLength * 2 - HorizontalSize) / 2;
             ApexesOffsets = new Vector2f[] {
-                new Vector2f(centringOffset, edgeLength / 2),
-                new Vector2f((HorizontalSize / 2) + centringOffset, 0),
-                new Vector2f(HorizontalSize + centringOffset, edgeLength / 2),
-                new Vector2f(HorizontalSize + centringOffset, edgeLength * 1.5f),
-                new Vector2f((HorizontalSize / 2) + centringOffset, VerticalSize),
-                new Vector2f(centringOffset, edgeLength * 1.5f)
+                new Vector2f(0 , edgeLength / 2),
+                new Vector2f(HorizontalSize / 2, 0),
+                new Vector2f(HorizontalSize, edgeLength / 2),
+                new Vector2f(HorizontalSize, edgeLength * 1.5f),
+                new Vector2f(HorizontalSize / 2, VerticalSize),
+                new Vector2f(0, edgeLength * 1.5f)
             };
         }
 
         public Vector2f GetCenter(Vector2f topLeftCorner) => new Vector2f(HorizontalSize / 2, VerticalSize / 2) + topLeftCorner;
+
+        public Vector2f GetTopLeftCorner(AxialCoordinates position)
+        {
+            OffsetCoordinates offsetCoords = position;
+            return new Vector2f(
+                (offsetCoords.Row & 1) * HorizontalSize / 2 + HorizontalSize * offsetCoords.Column,
+                offsetCoords.Row * (VerticalSize - EdgeLength / 2)
+            );
+        }
+
+        public Vector2f GetShiftedTopLeftCenter(AxialCoordinates position, Vector2f objectSize)
+        {
+            var topLeftCorner = GetTopLeftCorner(position);
+            var offset = new Vector2f(HorizontalSize / 2 - objectSize.X / 2, VerticalSize / 2 - objectSize.Y / 2);
+            return topLeftCorner += offset;
+        }
 
         public Vector2f[] GetApexesPositions(Vector2f topLeftCorner)
         {

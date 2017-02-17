@@ -1,6 +1,9 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
+using System.Collections.Generic;
+using System.Linq;
 using UnforgottenRealms.Game.Graphics;
+using UnforgottenRealms.Game.Objects.Units;
 using UnforgottenRealms.Game.World.Coordinates;
 using UnforgottenRealms.Game.World.Geometry;
 
@@ -14,6 +17,7 @@ namespace UnforgottenRealms.Game.World.Terrain
         public int MovementCost { get; }
         public AxialCoordinates Position { get; }
         public TerrainType Type { get; }
+        public IList<Unit> Units { get; }
 
         public Field(OffsetCoordinates position, HexModel model, TerrainTextureDescriptor textureDescriptor, int movementCost, TerrainType type)
         {
@@ -26,12 +30,17 @@ namespace UnforgottenRealms.Game.World.Terrain
                 ;
             texture = textureDescriptor.Texture;
             InitializeVertex(position, model, textureDescriptor);
+            Units = new List<Unit>();
         }
 
         public void Draw(RenderTarget target, RenderStates states)
         {
             states.Texture = texture;
             target.Draw(vertex, states);
+
+            var unit = Units.LastOrDefault();
+            if (unit != null)
+                target.Draw(unit, states);
         }
 
         private void InitializeVertex(OffsetCoordinates position, HexModel model, TerrainTextureDescriptor textureDescriptor)

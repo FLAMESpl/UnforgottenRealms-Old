@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnforgottenRealms.Common.Resources;
+using UnforgottenRealms.Game.Objects.Units;
+using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.World.Coordinates;
 using UnforgottenRealms.Game.World.Geometry;
 using UnforgottenRealms.Game.World.Terrain;
@@ -47,8 +49,8 @@ namespace UnforgottenRealms.Game.World
             {
                 for (int j = 0; j < Size.Y; j++)
                 {
-                    fields[i][j].Draw(target, states);
-                    grid[i][j].Draw(target, states);
+                    target.Draw(fields[i][j], states);
+                    target.Draw(grid[i][j], states);
                 }
             }
         }
@@ -58,6 +60,8 @@ namespace UnforgottenRealms.Game.World
             Size = new Vector2i(10, 10);
             fields = new List<List<Field>>();
             grid = new List<List<VertexArray>>();
+
+            var player = new Player(Common.Enums.PlayerColour.Red);
             
             for (int i = 0; i < Size.X; i++)
             {
@@ -87,6 +91,15 @@ namespace UnforgottenRealms.Game.World
                     grid[i].Add(vertex);
                 }
             }
+
+            var unitPosition = new OffsetCoordinates(0, 0);
+
+            this[unitPosition].Units.Add(new Archer(
+                position: unitPosition,
+                model: model,
+                owner: player,
+                resources: resources
+            ));
         }
     }
 }

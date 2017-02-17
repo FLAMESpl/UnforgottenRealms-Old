@@ -33,6 +33,12 @@ namespace UnforgottenRealms.Common.Utils
             }
         }
 
+        public static Color SetAlpha(this Color color, byte alpha)
+        {
+            color.A = alpha;
+            return color;
+        }
+
         public static PlayerColour Next(this PlayerColour colour)
         {
             int size = playerColours.Length;
