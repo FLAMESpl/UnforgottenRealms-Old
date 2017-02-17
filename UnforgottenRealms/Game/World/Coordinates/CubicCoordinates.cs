@@ -21,5 +21,10 @@
         {
             return new AxialCoordinates(position.X, position.Z);
         } 
+
+        public static implicit operator OffsetCoordinates(CubicCoordinates position)
+        {
+            return new OffsetCoordinates(position.X + (position.Z - (position.Z & 1)) / 2, position.Z);
+        }
     }
 }

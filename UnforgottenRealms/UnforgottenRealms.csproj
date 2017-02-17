@@ -61,6 +61,9 @@
     <Compile Include="Controllers\ControllerResult.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\NextController.cs" />
+    <Compile Include="Game\Actions\ActionController.cs" />
+    <Compile Include="Game\Actions\ActionResolver.cs" />
+    <Compile Include="Game\Actions\IdleActionResolver.cs" />
     <Compile Include="Game\Events\TurnChangedEventArgs.cs" />
     <Compile Include="Game\Events\ValueChangedEventArgs.cs" />
     <Compile Include="Game\Graphics\TerrainTextureDescriptor.cs" />
@@ -84,6 +87,7 @@
     <Compile Include="Game\World\Coordinates\CubicCoordinates.cs" />
     <Compile Include="Game\World\Coordinates\OffsetCoordinates.cs" />
     <Compile Include="Game\World\Geometry\HexModel.cs" />
+    <Compile Include="Game\World\Geometry\Pathfinding.cs" />
     <Compile Include="Game\World\Map.cs" />
     <Compile Include="Game\World\TerrainType.cs" />
     <Compile Include="Game\World\Terrain\Desert.cs" />

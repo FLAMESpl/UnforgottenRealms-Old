@@ -17,5 +17,6 @@ namespace UnforgottenRealms.Game.Objects
         }
 
         public abstract void Draw(RenderTarget target, RenderStates states);
+        public abstract void Select(bool isSelected);
     }
 }

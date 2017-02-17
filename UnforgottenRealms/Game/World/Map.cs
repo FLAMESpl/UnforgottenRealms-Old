@@ -1,10 +1,7 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnforgottenRealms.Common.Resources;
 using UnforgottenRealms.Game.Objects.Units;
 using UnforgottenRealms.Game.Players;
@@ -53,6 +50,22 @@ namespace UnforgottenRealms.Game.World
                     target.Draw(grid[i][j], states);
                 }
             }
+        }
+
+        public bool Contains(OffsetCoordinates position)
+        {
+            return position.Column < Size.X && position.Row < Size.Y && position.Column >= 0 && position.Row >= 0;
+        }
+
+        public AxialCoordinates Find(Vector2f pixelCoordinates)
+        {
+            var position = model.FindHex(pixelCoordinates);
+            if (Contains(position))
+                return position;
+            else
+                return null;
+
+            //return Contains(position) ? position : null;
         }
 
         public void Mock(IEnumerable<Player> players)

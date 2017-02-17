@@ -52,7 +52,19 @@ namespace UnforgottenRealms.Game.Objects.Units
             target.Draw(unitSprite, states);
         }
 
-        public Vector2f Scale(Vector2i original, Vector2f template)
+        public override void Select(bool isSelected)
+        {
+            byte newAlpha;
+
+            if (isSelected)
+                newAlpha = 155;
+            else
+                newAlpha = 255;
+
+            emblemSprite.Color.SetAlpha(newAlpha);
+        }
+
+        protected Vector2f Scale(Vector2i original, Vector2f template)
         {
             return new Vector2f(template.X / original.X, template.Y / original.Y);
         }

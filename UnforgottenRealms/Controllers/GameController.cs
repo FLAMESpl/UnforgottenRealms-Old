@@ -4,6 +4,7 @@ using UnforgottenRealms.Common.Enums;
 using UnforgottenRealms.Common.Resources;
 using UnforgottenRealms.Common.Window;
 using UnforgottenRealms.Game;
+using UnforgottenRealms.Game.Actions;
 using UnforgottenRealms.Game.Graphics;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.Views;
@@ -15,13 +16,14 @@ namespace UnforgottenRealms.Controllers
 {
     public class GameController : Controller
     {
+        private ActionController actionController;
+        private PageControl pages;
+        private List<Player> players = new List<Player>();
+        private ResourceManager resources;
+        private TurnCycle turnCycle;
         private GameWindow window;
         private Map worldMap;
-        private PageControl pages;
-        private ResourceManager resources;
         private WorldView worldView;
-        private List<Player> players = new List<Player>();
-        private TurnCycle turnCycle;
 
         public GameController()
         {
@@ -39,6 +41,7 @@ namespace UnforgottenRealms.Controllers
 
             InitializeGameState(gameSettings);
             RegisterHotkeys();
+            actionController = new ActionController(window, worldMap, worldView);
 
             while (window.IsOpen() && controllerResult == NextController.Game)
             {

@@ -12,6 +12,7 @@ namespace UnforgottenRealms.Game.Views
         private GameWindow window;
         private Map map;
 
+        public bool ScrollEnabled { get; set; } = true;
         public float ScrollSpeed { get; set; } = 0.25f;
         public float ScrollSenseDistance { get; set; } = 5;
 
@@ -21,7 +22,13 @@ namespace UnforgottenRealms.Game.Views
             this.map = map;
             this.view = window.DefaultView;
         }
-        
+
+        public Vector2f MapMousePosition(Vector2f pixelPosition)
+        {
+            var offset = new Vector2f(view.Center.X - window.Size.X / 2, view.Center.Y - window.Size.Y / 2);
+            return pixelPosition + offset;
+        }
+
         public void Center()
         {
             var size = map.PixelSize;
@@ -31,6 +38,9 @@ namespace UnforgottenRealms.Game.Views
 
         public void Scroll()
         {
+            if (!ScrollEnabled)
+                return;
+
             bool moved = false;
             var offset = new Vector2f();
             var mousePosition = Mouse.GetPosition(window);
@@ -61,7 +71,8 @@ namespace UnforgottenRealms.Game.Views
 
         public void Scroll(Direction direction)
         {
-            view.Move(direction.AsVector() * ScrollSpeed);
+            if (ScrollEnabled)
+                view.Move(direction.AsVector() * ScrollSpeed);
         }
 
         public void Draw(RenderTarget target, RenderStates states)
