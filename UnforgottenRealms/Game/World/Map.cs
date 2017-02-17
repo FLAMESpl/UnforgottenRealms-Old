@@ -53,7 +53,7 @@ namespace UnforgottenRealms.Game.World
             }
         }
 
-        public void MockMap()
+        public void Mock()
         {
             Size = new Vector2i(10, 10);
             fields = new List<List<Field>>();

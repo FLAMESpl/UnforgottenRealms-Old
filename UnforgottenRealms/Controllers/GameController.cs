@@ -1,8 +1,10 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
+using UnforgottenRealms.Common.Enums;
 using UnforgottenRealms.Common.Resources;
 using UnforgottenRealms.Common.Window;
 using UnforgottenRealms.Game.Graphics;
+using UnforgottenRealms.Game.Views;
 using UnforgottenRealms.Game.World;
 using UnforgottenRealms.Gui.Components.Container;
 using UnforgottenRealms.Settings;
@@ -15,8 +17,8 @@ namespace UnforgottenRealms.Controllers
         private Map worldMap;
         private PageControl pages;
         private ResourceManager resources;
-        private View worldView;
         private View guiView;
+        private WorldView worldView;
 
         public GameController()
         {
@@ -24,24 +26,24 @@ namespace UnforgottenRealms.Controllers
             window = Window.GameWindowFactory.Initial();
             pages = new PageControl();
             worldMap = new Map(resources);
-            worldView = window.DefaultView;
+            worldView = new WorldView(window, worldMap);
         }
 
         public override ControllerResult Start(ControllerSettings settings)
         {
             var gameSettings = (GameSettings)settings;
             var controllerResult = NextController.Game;
-            worldMap.MockMap();
 
+            worldMap.Mock();
+            RegisterHotkeys();
             while (window.IsOpen() && controllerResult == NextController.Game)
             {
-                Scroll();
+                worldView.Scroll();
 
+                window.Cycle();
                 window.DispatchEvents();
                 window.Clear();
-                window.SetView(worldView);
-                window.Draw(worldMap);
-                window.SetView(guiView);
+                window.Draw(worldView);
                 //window.Draw(pages?.Active);
                 window.Display();
             }
@@ -53,50 +55,23 @@ namespace UnforgottenRealms.Controllers
             };
         }
 
+        private void RegisterHotkeys()
+        {
+            window.OnKeyPress(Keyboard.Key.Space, worldView.Center);
+
+            window.OnKeyHold(Keyboard.Key.Left, () => worldView.Scroll(Direction.Left));
+            window.OnKeyHold(Keyboard.Key.Up, () => worldView.Scroll(Direction.Up));
+            window.OnKeyHold(Keyboard.Key.Right, () => worldView.Scroll(Direction.Right));
+            window.OnKeyHold(Keyboard.Key.Down, () => worldView.Scroll(Direction.Down));
+            window.OnKeyHold(Keyboard.Key.Add, () => worldView.ScrollSpeed += 0.001f);
+            window.OnKeyHold(Keyboard.Key.Subtract, () => worldView.ScrollSpeed -= 0.001f);
+        }
+
         private void InitializeResources()
         {
             var tilesets = new GameTilesets();
             resources = new ResourceManager();
             resources.Add(tilesets);
-        }
-
-        private void CenterWorld()
-        {
-            var size = worldMap.PixelSize;
-            var middle = size / 2;
-            worldView.Center = middle;
-        }
-
-        private void Scroll()
-        {
-            bool moved = false;
-            var offset = new Vector2f();
-            var mousePosition = Mouse.GetPosition(window);
-            var scrollSpeed = 1;
-            var scrollDistance = 5;
-            if (mousePosition.X < scrollDistance)
-            {
-                offset.X = -scrollSpeed;
-                moved = true;
-            }
-            else if (window.Size.X - mousePosition.X < scrollDistance)
-            {
-                offset.X = scrollSpeed;
-                moved = true;
-            }
-            if (mousePosition.Y < scrollDistance)
-            {
-                offset.Y = -scrollSpeed;
-                moved = true;
-            }
-            else if (window.Size.Y - mousePosition.Y < scrollDistance)
-            {
-                offset.Y = scrollSpeed;
-                moved = true;
-            }
-
-            if (moved)
-                worldView.Move(offset);
         }
     }
 }

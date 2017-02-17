@@ -65,6 +65,7 @@
     <Compile Include="Game\Graphics\TerrainTileset.cs" />
     <Compile Include="Game\Graphics\Tileset.cs" />
     <Compile Include="Game\Graphics\GameTilesets.cs" />
+    <Compile Include="Game\Views\WorldView.cs" />
     <Compile Include="Game\World\Coordinates\AxialCoordinates.cs" />
     <Compile Include="Game\World\Coordinates\CubicCoordinates.cs" />
     <Compile Include="Game\World\Coordinates\OffsetCoordinates.cs" />
