@@ -25,11 +25,11 @@ namespace UnforgottenRealms.Services.Components
                 {
                     Colour = playerColours[i],
                     Name = playerNames[i],
-                    Id = i
+                    Id = Math.Abs(textBoxes.Count - 1 - i)
                 };
             }
 
-            return players;
+            return players.OrderBy(p => p.Id).ToArray();
         }
 
         public void AddPlayerNameTextBox(GameSettingsService factory, int amount)

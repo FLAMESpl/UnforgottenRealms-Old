@@ -1,9 +1,11 @@
-﻿using SFML.Graphics;
-using SFML.Window;
+﻿using SFML.Window;
+using System.Collections.Generic;
 using UnforgottenRealms.Common.Enums;
 using UnforgottenRealms.Common.Resources;
 using UnforgottenRealms.Common.Window;
+using UnforgottenRealms.Game;
 using UnforgottenRealms.Game.Graphics;
+using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.Views;
 using UnforgottenRealms.Game.World;
 using UnforgottenRealms.Gui.Components.Container;
@@ -17,8 +19,9 @@ namespace UnforgottenRealms.Controllers
         private Map worldMap;
         private PageControl pages;
         private ResourceManager resources;
-        private View guiView;
         private WorldView worldView;
+        private List<Player> players = new List<Player>();
+        private TurnCycle turnCycle;
 
         public GameController()
         {
@@ -34,8 +37,9 @@ namespace UnforgottenRealms.Controllers
             var gameSettings = (GameSettings)settings;
             var controllerResult = NextController.Game;
 
-            worldMap.Mock();
+            InitializeGameState(gameSettings);
             RegisterHotkeys();
+
             while (window.IsOpen() && controllerResult == NextController.Game)
             {
                 worldView.Scroll();
@@ -57,14 +61,25 @@ namespace UnforgottenRealms.Controllers
 
         private void RegisterHotkeys()
         {
-            window.OnKeyPress(Keyboard.Key.Space, worldView.Center);
-
             window.OnKeyHold(Keyboard.Key.Left, () => worldView.Scroll(Direction.Left));
             window.OnKeyHold(Keyboard.Key.Up, () => worldView.Scroll(Direction.Up));
             window.OnKeyHold(Keyboard.Key.Right, () => worldView.Scroll(Direction.Right));
             window.OnKeyHold(Keyboard.Key.Down, () => worldView.Scroll(Direction.Down));
             window.OnKeyHold(Keyboard.Key.Add, () => worldView.ScrollSpeed += 0.001f);
             window.OnKeyHold(Keyboard.Key.Subtract, () => worldView.ScrollSpeed -= 0.001f);
+
+            window.OnKeyPress(Keyboard.Key.Space, worldView.Center);
+            window.OnKeyPress(Keyboard.Key.F9, turnCycle.Next);
+        }
+
+        private void InitializeGameState(GameSettings settings)
+        {
+            foreach (var playerMetadata in settings.Players)
+                players.Add(playerMetadata.CreatePlayer());
+
+            turnCycle = new TurnCycle(players);
+            turnCycle.First();
+            worldMap.Mock(players);
         }
 
         private void InitializeResources()

@@ -61,6 +61,7 @@
     <Compile Include="Controllers\ControllerResult.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\NextController.cs" />
+    <Compile Include="Game\Events\TurnChangedEventArgs.cs" />
     <Compile Include="Game\Events\ValueChangedEventArgs.cs" />
     <Compile Include="Game\Graphics\TerrainTextureDescriptor.cs" />
     <Compile Include="Game\Graphics\TerrainTileset.cs" />
@@ -73,9 +74,11 @@
     <Compile Include="Game\Objects\Units\Archer.cs" />
     <Compile Include="Game\Objects\Units\Unit.cs" />
     <Compile Include="Game\Players\Player.cs" />
+    <Compile Include="Game\Players\PlayerExtensions.cs" />
     <Compile Include="Game\Resources\Resource.cs" />
     <Compile Include="Game\Resources\ResourceSet.cs" />
     <Compile Include="Game\Resources\ResourceType.cs" />
+    <Compile Include="Game\TurnCycle.cs" />
     <Compile Include="Game\Views\WorldView.cs" />
     <Compile Include="Game\World\Coordinates\AxialCoordinates.cs" />
     <Compile Include="Game\World\Coordinates\CubicCoordinates.cs" />

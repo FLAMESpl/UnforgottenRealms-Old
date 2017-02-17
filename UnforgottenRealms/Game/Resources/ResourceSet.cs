@@ -4,7 +4,7 @@ namespace UnforgottenRealms.Game.Resources
 {
     public class ResourceSet
     {
-        private Dictionary<ResourceType, Resource> resources;
+        private Dictionary<ResourceType, Resource> resources = new Dictionary<ResourceType, Resource>();
 
         public IReadOnlyDictionary<ResourceType, Resource> Resources => resources;
 

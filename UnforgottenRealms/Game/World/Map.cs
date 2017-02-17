@@ -55,13 +55,11 @@ namespace UnforgottenRealms.Game.World
             }
         }
 
-        public void Mock()
+        public void Mock(IEnumerable<Player> players)
         {
             Size = new Vector2i(10, 10);
             fields = new List<List<Field>>();
             grid = new List<List<VertexArray>>();
-
-            var player = new Player(Common.Enums.PlayerColour.Red);
             
             for (int i = 0; i < Size.X; i++)
             {
@@ -97,7 +95,7 @@ namespace UnforgottenRealms.Game.World
             this[unitPosition].Units.Add(new Archer(
                 position: unitPosition,
                 model: model,
-                owner: player,
+                owner: players.First(),
                 resources: resources
             ));
         }
