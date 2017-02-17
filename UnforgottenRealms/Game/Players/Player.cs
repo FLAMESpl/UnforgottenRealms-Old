@@ -9,6 +9,7 @@ namespace UnforgottenRealms.Game.Players
     {
         private List<GameObject> objects = new List<GameObject>();
 
+        public bool Active { get; set; }
         public PlayerColour Colour { get; private set; }
         public string Name { get; private set; }
         public IEnumerable<GameObject> Objects => objects;

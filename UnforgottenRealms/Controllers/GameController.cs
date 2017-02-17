@@ -41,7 +41,7 @@ namespace UnforgottenRealms.Controllers
 
             InitializeGameState(gameSettings);
             RegisterHotkeys();
-            actionController = new ActionController(window, worldMap, worldView);
+            actionController = new ActionController(window, worldMap, turnCycle, worldView);
 
             while (window.IsOpen() && controllerResult == NextController.Game)
             {
@@ -51,13 +51,12 @@ namespace UnforgottenRealms.Controllers
                 window.DispatchEvents();
                 window.Clear();
                 window.Draw(worldView);
-                //window.Draw(pages?.Active);
                 window.Display();
             }
 
             return new ControllerResult
             {
-                Next = controllerResult,
+                Next = NextController.Exit,
                 Settings = null
             };
         }

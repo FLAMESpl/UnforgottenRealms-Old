@@ -1,6 +1,8 @@
 ﻿using SFML.Window;
 using UnforgottenRealms.Common;
+using UnforgottenRealms.Game.Events;
 using UnforgottenRealms.Game.Objects;
+using UnforgottenRealms.Game.Players;
 
 namespace UnforgottenRealms.Game.Actions
 {
@@ -16,5 +18,6 @@ namespace UnforgottenRealms.Game.Actions
         }
 
         public abstract void MousePressed(MouseButtonEventArgs eventArgs);
+        public abstract void TurnChanged(ValueChangedEventArgs<Player> eventArgs);
     }
 }

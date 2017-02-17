@@ -1,10 +1,11 @@
 ﻿using SFML.Window;
 using System.Linq;
 using UnforgottenRealms.Common;
-using UnforgottenRealms.Common.Window;
 using UnforgottenRealms.Game.Objects;
 using UnforgottenRealms.Game.Views;
 using UnforgottenRealms.Game.World;
+using UnforgottenRealms.Game.Events;
+using UnforgottenRealms.Game.Players;
 
 namespace UnforgottenRealms.Game.Actions
 {
@@ -28,9 +29,20 @@ namespace UnforgottenRealms.Game.Actions
             {
                 var newObject = worldMap[position].Units.FirstOrDefault();
                 selectedObject.Value?.Select(false);
+
+                if (newObject != null && !newObject.Owner.Active)
+                {
+                    newObject = null;
+                }
+
                 selectedObject.Value = newObject;
                 newObject?.Select(true);
             }
+        }
+
+        public override void TurnChanged(ValueChangedEventArgs<Player> eventArgs)
+        {
+            selectedObject.Value?.Select(false);
         }
     }
 }

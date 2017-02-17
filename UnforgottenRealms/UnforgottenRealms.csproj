@@ -64,7 +64,7 @@
     <Compile Include="Game\Actions\ActionController.cs" />
     <Compile Include="Game\Actions\ActionResolver.cs" />
     <Compile Include="Game\Actions\IdleActionResolver.cs" />
-    <Compile Include="Game\Events\TurnChangedEventArgs.cs" />
+    <Compile Include="Game\Events\RoundChangedEventArgs.cs" />
     <Compile Include="Game\Events\ValueChangedEventArgs.cs" />
     <Compile Include="Game\Graphics\TerrainTextureDescriptor.cs" />
     <Compile Include="Game\Graphics\TerrainTileset.cs" />

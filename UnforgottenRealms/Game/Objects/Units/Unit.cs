@@ -61,7 +61,8 @@ namespace UnforgottenRealms.Game.Objects.Units
             else
                 newAlpha = 255;
 
-            emblemSprite.Color.SetAlpha(newAlpha);
+            emblemSprite.Color = emblemSprite.Color.SetAlpha(newAlpha);
+            unitSprite.Color = unitSprite.Color.SetAlpha(newAlpha);
         }
 
         protected Vector2f Scale(Vector2i original, Vector2f template)
