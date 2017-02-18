@@ -15,7 +15,6 @@ namespace UnforgottenRealms.Game.World.Terrains
                 textureDescriptor: location.World.Resources.Get<GameTilesets>().Terrain.Desert
             )
         {
-
         }
     }
 }

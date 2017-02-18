@@ -66,6 +66,8 @@
     <Compile Include="Game\Actions\ActionResolverFactories.cs" />
     <Compile Include="Game\Actions\IdleActionResolver.cs" />
     <Compile Include="Game\Actions\ObjectActionResolver.cs" />
+    <Compile Include="Game\Events\ObjectCreatedEventArgs.cs" />
+    <Compile Include="Game\Events\ObjectDestroyedEventArgs.cs" />
     <Compile Include="Game\Events\RoundChangedEventArgs.cs" />
     <Compile Include="Game\Events\ValueChangedEventArgs.cs" />
     <Compile Include="Game\Graphics\TerrainTextureDescriptor.cs" />
@@ -90,6 +92,7 @@
     <Compile Include="Game\World\Coordinates\CubicCoordinates.cs" />
     <Compile Include="Game\World\Coordinates\OffsetCoordinates.cs" />
     <Compile Include="Game\World\Field.cs" />
+    <Compile Include="Game\World\FieldExtensions.cs" />
     <Compile Include="Game\World\Geometry\HexModel.cs" />
     <Compile Include="Game\World\Geometry\Pathfinding.cs" />
     <Compile Include="Game\World\Map.cs" />

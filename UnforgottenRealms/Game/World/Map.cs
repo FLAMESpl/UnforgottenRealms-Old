@@ -1,8 +1,10 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnforgottenRealms.Common.Resources;
+using UnforgottenRealms.Game.Events;
 using UnforgottenRealms.Game.Objects.Units;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.World.Coordinates;
@@ -13,6 +15,9 @@ namespace UnforgottenRealms.Game.World
 {
     public class Map : Drawable
     {
+        public event EventHandler<ObjectCreatedEventArgs> ObjectCreated;
+        public event EventHandler<ObjectDestroyedEventArgs> ObjectDestroyed;
+
         private Field[][] fields;
         private List<List<VertexArray>> grid;
 
@@ -22,6 +27,16 @@ namespace UnforgottenRealms.Game.World
         public bool ShowGrid { get; set; }
         public Vector2i Size { get; protected set; }
         public TurnCycle TurnCycle { get; }
+
+        public Map(ResourceManager resources, TurnCycle turnCycle)
+        {
+            Model = new HexModel(60);
+            Resources = resources;
+            TurnCycle = turnCycle;
+        }
+
+        public void OnObjectCreated(ObjectCreatedEventArgs args) => ObjectCreated?.Invoke(this, args);
+        public void OnObjectDestroyed(ObjectDestroyedEventArgs args) => ObjectDestroyed?.Invoke(this, args);
 
         public Field this[int column, int row]
         {
@@ -33,13 +48,6 @@ namespace UnforgottenRealms.Game.World
         {
             get { return fields[position.Column][position.Row]; }
             set { fields[position.Column][position.Row] = value; }
-        }
-
-        public Map(ResourceManager resources, TurnCycle turnCycle)
-        {
-            Model = new HexModel(60);
-            Resources = resources;
-            TurnCycle = turnCycle;
         }
 
         public void Draw(RenderTarget target, RenderStates states)

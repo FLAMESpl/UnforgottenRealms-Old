@@ -1,11 +1,12 @@
 ﻿using SFML.Graphics;
 using System.Collections.Generic;
+using System.Linq;
 using UnforgottenRealms.Game.Objects.Units;
 using UnforgottenRealms.Game.World.Terrains;
-using System.Linq;
 using UnforgottenRealms.Game.Objects.Improvements;
 using UnforgottenRealms.Game.World.Coordinates;
 using UnforgottenRealms.Game.Players;
+using UnforgottenRealms.Game.Events;
 
 namespace UnforgottenRealms.Game.World
 {
@@ -47,9 +48,16 @@ namespace UnforgottenRealms.Game.World
 
         public void Create(UnitFactory factory, Player owner)
         {
-            units.Add(factory.Invoke(
+            var unit = factory.Invoke(
                 location: this,
                 owner: owner
+            );
+
+            units.Add(unit);
+
+            World.OnObjectCreated(new ObjectCreatedEventArgs(
+                location: this,
+                @object: unit
             ));
         }
 
@@ -59,6 +67,29 @@ namespace UnforgottenRealms.Game.World
                 location: this,
                 owner: owner
             );
+
+            World.OnObjectCreated(new ObjectCreatedEventArgs(
+                location: this,
+                @object: Improvement
+            ));
+        }
+
+        public void Destroy(Unit unit)
+        {
+            units.Remove(unit);
+            World.OnObjectDestroyed(new ObjectDestroyedEventArgs(
+                location: this,
+                @object: unit
+            ));
+        }
+
+        public void Destroy()
+        {
+            Improvement = null;
+            World.OnObjectDestroyed(new ObjectDestroyedEventArgs(
+                location: this,
+                @object: Improvement
+            ));
         }
 
         public void Move(Unit unit)
