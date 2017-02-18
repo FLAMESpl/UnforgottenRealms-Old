@@ -94,10 +94,10 @@
     <Compile Include="Game\World\Geometry\Pathfinding.cs" />
     <Compile Include="Game\World\Map.cs" />
     <Compile Include="Game\World\TerrainType.cs" />
-    <Compile Include="Game\World\Terrain\Desert.cs" />
-    <Compile Include="Game\World\Terrain\AbstractTerrain.cs" />
-    <Compile Include="Game\World\Terrain\Grass.cs" />
-    <Compile Include="Game\World\Terrain\Water.cs" />
+    <Compile Include="Game\World\Terrains\Desert.cs" />
+    <Compile Include="Game\World\Terrains\Terrain.cs" />
+    <Compile Include="Game\World\Terrains\Grass.cs" />
+    <Compile Include="Game\World\Terrains\Water.cs" />
     <Compile Include="Gui\ContextPreview\IContextPreviewProvider.cs" />
     <Compile Include="Services\Components\GameSettingsComponentContainer.cs" />
     <Compile Include="Services\Components\GameSettingsPlayerColourButton.cs" />

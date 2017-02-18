@@ -35,7 +35,7 @@ namespace UnforgottenRealms.Game.Actions
             var position = worldMap.Find(mousePosition);
             if (position != null)
             {
-                if (position.IsEqualTo(selectedObject.Position))
+                if (position.IsEqualTo(selectedObject.Location.Position))
                 {
                     // TODO: unit cycling
                 }
@@ -44,7 +44,7 @@ namespace UnforgottenRealms.Game.Actions
                     if (eventArgs.Button == Mouse.Button.Left)
                         DeselectObject();
                     else if (eventArgs.Button == Mouse.Button.Right)
-                        selectedObject.PerformPrimaryAction(worldMap, position);
+                        selectedObject.PerformPrimaryAction(position);
                 }
             }
         }

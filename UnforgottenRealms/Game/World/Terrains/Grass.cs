@@ -1,15 +1,16 @@
 ﻿using UnforgottenRealms.Common.Resources;
 using UnforgottenRealms.Game.Graphics;
-using UnforgottenRealms.Game.World.Coordinates;
 using UnforgottenRealms.Game.World.Geometry;
 
-namespace UnforgottenRealms.Game.World.Terrain
+namespace UnforgottenRealms.Game.World.Terrains
 {
-    public class Grass : AbstractTerrain
+    public class Grass : Terrain
     {
-        public Grass(OffsetCoordinates position, HexModel model, ResourceManager resources) :
+        public static TerrainFactory Factory => (location, model, resources) => new Grass(location, model, resources);
+
+        public Grass(Field location, HexModel model, ResourceManager resources) :
             base(
-                position: position, 
+                location: location, 
                 model: model,
                 movementCost: 1,
                 textureDescriptor: resources.Get<GameTilesets>().Terrain.Grass,

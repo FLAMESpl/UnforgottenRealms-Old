@@ -7,20 +7,20 @@ using UnforgottenRealms.Game.Objects.Units;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.World.Coordinates;
 using UnforgottenRealms.Game.World.Geometry;
-using UnforgottenRealms.Game.World.Terrain;
+using UnforgottenRealms.Game.World.Terrains;
 
 namespace UnforgottenRealms.Game.World
 {
     public class Map : Drawable
     {
-        private List<List<Field>> fields;
+        private Field[][] fields;
         private List<List<VertexArray>> grid;
-        private ResourceManager resources;
-        private HexModel model;
 
+        public ResourceManager Resources { get; private set; }
+        public HexModel Model { get; protected set; }
         public bool ShowGrid { get; set; }
         public Vector2i Size { get; protected set; }
-        public Vector2f PixelSize => new Vector2f(Size.X * model.HorizontalSize, Size.Y * model.VerticalSize);
+        public Vector2f PixelSize => new Vector2f(Size.X * Model.HorizontalSize, Size.Y * Model.VerticalSize);
 
         public Field this[int column, int row]
         {
@@ -36,8 +36,8 @@ namespace UnforgottenRealms.Game.World
 
         public Map(ResourceManager resources)
         {
-            this.resources = resources;
-            this.model = new HexModel(60);
+            Resources = resources;
+            Model = new HexModel(60);
         }
 
         public void Draw(RenderTarget target, RenderStates states)
@@ -52,6 +52,18 @@ namespace UnforgottenRealms.Game.World
             }
         }
 
+        private void Place(OffsetCoordinates position, TerrainFactory terrainFactory)
+        {
+            var field = new Field(
+                world: this,
+                position: position
+            );
+
+            field.Create(terrainFactory);
+
+            this[position] = field;
+        }
+
         public bool Contains(OffsetCoordinates position)
         {
             return position.Column < Size.X && position.Row < Size.Y && position.Column >= 0 && position.Row >= 0;
@@ -59,7 +71,7 @@ namespace UnforgottenRealms.Game.World
 
         public AxialCoordinates Find(Vector2f pixelCoordinates)
         {
-            var position = model.FindHex(pixelCoordinates);
+            var position = Model.FindHex(pixelCoordinates);
             if (Contains(position))
                 return position;
             else
@@ -69,29 +81,28 @@ namespace UnforgottenRealms.Game.World
         public void Mock(IEnumerable<Player> players)
         {
             Size = new Vector2i(10, 10);
-            fields = new List<List<Field>>();
+            fields = new Field[Size.X][];
             grid = new List<List<VertexArray>>();
-            
+
             for (int i = 0; i < Size.X; i++)
             {
-                fields.Add(new List<Field>());
+                fields[i] = new Field[Size.Y];
                 grid.Add(new List<VertexArray>()); 
                 for (int j = 0; j < Size.Y; j++)
                 {
-                    Field field = null;
                     var position = new OffsetCoordinates(i, j);
                     if (i >= 3 && i <= 7 && j >= 2 && j <= 3)
-                        field = new Field(new Water(position, model, resources));
+                        Place(position, Water.Factory);
                     else if (i >= 4 && i <= 6 && j >= 4 && j <= 5)
-                        field = new Field(new Desert(position, model, resources));
+                        Place(position, Desert.Factory);
                     else
-                        field = new Field(new Grass(position, model, resources));
-                    fields[i].Add(field);
+                        Place(position, Grass.Factory);
 
-                    var apexes = model.GetApexesPositions(new Vector2f(
-                        position.Column * model.HorizontalSize + (model.HorizontalSize * 0.5f * (position.Row & 1)),
-                        position.Row * (model.VerticalSize - model.EdgeLength / 2)
+                    var apexes = Model.GetApexesPositions(new Vector2f(
+                        position.Column * Model.HorizontalSize + (Model.HorizontalSize * 0.5f * (position.Row & 1)),
+                        position.Row * (Model.VerticalSize - Model.EdgeLength / 2)
                     ));
+
                     var vertex = new VertexArray(PrimitiveType.LinesStrip);
                     var color = Color.Red;
                     for (uint k = 0; k < apexes.Length; k++)
@@ -101,14 +112,12 @@ namespace UnforgottenRealms.Game.World
                 }
             }
 
-            var unitPosition = new OffsetCoordinates(0, 0);
+            var unitPosition1 = new OffsetCoordinates(7, 7);
+            var unitPosition2 = new OffsetCoordinates(5, 7);
+            UnitFactory factory = (f, m, r, o) => new Archer(f, m, r, o);
 
-            this[unitPosition].Units.Add(new Archer(
-                position: unitPosition,
-                model: model,
-                owner: players.First(),
-                resources: resources
-            ));
+            this[unitPosition1].Create(factory, players.First());
+            this[unitPosition2].Create(factory, players.Skip(1).First());
         }
     }
 }

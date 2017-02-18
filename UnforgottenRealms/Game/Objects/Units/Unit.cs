@@ -1,5 +1,4 @@
-﻿using System;
-using SFML.Graphics;
+﻿using SFML.Graphics;
 using SFML.Window;
 using UnforgottenRealms.Common.Resources;
 using UnforgottenRealms.Common.Utils;
@@ -12,6 +11,10 @@ using System.Linq;
 
 namespace UnforgottenRealms.Game.Objects.Units
 {
+    public delegate Unit UnitFactory(Field location, HexModel model, ResourceManager resources, Player owner);
+    public delegate Archer ArcherFactory(Field location, HexModel model, ResourceManager resources, Player owner);
+
+
     public abstract class Unit : GameObject
     {
         private Vector2f unitSize;
@@ -22,9 +25,9 @@ namespace UnforgottenRealms.Game.Objects.Units
         public int Movement { get; private set; }
         public int MovementLeft { get; private set; }
 
-        public Unit(AxialCoordinates position, HexModel hexModel, TextureDescriptor textureDescriptor, ResourceManager resources, Player owner, int movement) : 
+        public Unit(Field location, HexModel hexModel, TextureDescriptor textureDescriptor, ResourceManager resources, Player owner, int movement) : 
             base(
-                  position: position,
+                  location: location,
                   hexModel: hexModel,
                   owner: owner
             )
@@ -35,6 +38,8 @@ namespace UnforgottenRealms.Game.Objects.Units
             MovementLeft = movement;
 
             var emblemTexure = resources.Get<GameTilesets>().Miscellaneous.Emblem;
+            var position = Location.Position;
+
             emblemSprite = new Sprite
             {
                 Color = owner.Colour.ToRGB(),
@@ -72,18 +77,17 @@ namespace UnforgottenRealms.Game.Objects.Units
             unitSprite.Color = unitSprite.Color.SetAlpha(newAlpha);
         }
 
-        public override void PerformPrimaryAction(Map map, AxialCoordinates targetPosition) => Move(map, targetPosition);
+        public override void PerformPrimaryAction(AxialCoordinates targetPosition) => Move(targetPosition);
 
-        protected virtual void Move(Map map, AxialCoordinates targetPosition)
+        protected virtual void Move(AxialCoordinates targetPosition)
         {
-            var targetedUnit = map[targetPosition].Units.FirstOrDefault();
-            if (targetedUnit == null)
+            var targetedField = Location.World[targetPosition];
+            if (!targetedField.Units.Any())
             {
-                map[Position].Units.Remove(this);
-                map[targetPosition].Units.Add(this);
+                targetedField.Move(this);
+                Location = targetedField;
                 emblemSprite.Position = HexModel.GetTopLeftCorner(targetPosition);
                 unitSprite.Position = HexModel.GetShiftedTopLeftCenter(targetPosition, unitSize);
-                Position = targetPosition;
             }
         }
 
