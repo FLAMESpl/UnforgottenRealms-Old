@@ -81,11 +81,11 @@ namespace UnforgottenRealms.Game.World
                     Field field = null;
                     var position = new OffsetCoordinates(i, j);
                     if (i >= 3 && i <= 7 && j >= 2 && j <= 3)
-                        field = new Water(position, model, resources);
+                        field = new Field(new Water(position, model, resources));
                     else if (i >= 4 && i <= 6 && j >= 4 && j <= 5)
-                        field = new Desert(position, model, resources);
+                        field = new Field(new Desert(position, model, resources));
                     else
-                        field = new Grass(position, model, resources);
+                        field = new Field(new Grass(position, model, resources));
                     fields[i].Add(field);
 
                     var apexes = model.GetApexesPositions(new Vector2f(

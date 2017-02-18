@@ -76,6 +76,7 @@
     <Compile Include="Game\Graphics\MiscellaneousTileset.cs" />
     <Compile Include="Game\Graphics\UnitsTileset.cs" />
     <Compile Include="Game\Objects\GameObject.cs" />
+    <Compile Include="Game\Objects\Improvements\Improvement.cs" />
     <Compile Include="Game\Objects\Units\Archer.cs" />
     <Compile Include="Game\Objects\Units\Unit.cs" />
     <Compile Include="Game\Players\Player.cs" />
@@ -88,12 +89,13 @@
     <Compile Include="Game\World\Coordinates\AxialCoordinates.cs" />
     <Compile Include="Game\World\Coordinates\CubicCoordinates.cs" />
     <Compile Include="Game\World\Coordinates\OffsetCoordinates.cs" />
+    <Compile Include="Game\World\Field.cs" />
     <Compile Include="Game\World\Geometry\HexModel.cs" />
     <Compile Include="Game\World\Geometry\Pathfinding.cs" />
     <Compile Include="Game\World\Map.cs" />
     <Compile Include="Game\World\TerrainType.cs" />
     <Compile Include="Game\World\Terrain\Desert.cs" />
-    <Compile Include="Game\World\Terrain\Field.cs" />
+    <Compile Include="Game\World\Terrain\AbstractTerrain.cs" />
     <Compile Include="Game\World\Terrain\Grass.cs" />
     <Compile Include="Game\World\Terrain\Water.cs" />
     <Compile Include="Gui\ContextPreview\IContextPreviewProvider.cs" />

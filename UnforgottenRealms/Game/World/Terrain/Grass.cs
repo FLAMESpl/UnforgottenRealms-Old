@@ -5,7 +5,7 @@ using UnforgottenRealms.Game.World.Geometry;
 
 namespace UnforgottenRealms.Game.World.Terrain
 {
-    public class Grass : Field
+    public class Grass : AbstractTerrain
     {
         public Grass(OffsetCoordinates position, HexModel model, ResourceManager resources) :
             base(

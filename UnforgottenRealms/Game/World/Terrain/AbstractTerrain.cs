@@ -9,7 +9,7 @@ using UnforgottenRealms.Game.World.Geometry;
 
 namespace UnforgottenRealms.Game.World.Terrain
 {
-    public abstract class Field : Drawable
+    public abstract class AbstractTerrain : Drawable
     {
         protected VertexArray vertex;
         private Texture texture;
@@ -19,7 +19,7 @@ namespace UnforgottenRealms.Game.World.Terrain
         public TerrainType Type { get; }
         public IList<Unit> Units { get; }
 
-        public Field(OffsetCoordinates position, HexModel model, TerrainTextureDescriptor textureDescriptor, int movementCost, TerrainType type)
+        public AbstractTerrain(OffsetCoordinates position, HexModel model, TerrainTextureDescriptor textureDescriptor, int movementCost, TerrainType type)
         {
             MovementCost = movementCost;
             Position = position;

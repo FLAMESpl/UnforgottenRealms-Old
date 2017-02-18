@@ -5,7 +5,7 @@ using UnforgottenRealms.Game.World.Geometry;
 
 namespace UnforgottenRealms.Game.World.Terrain
 {
-    public class Water : Field
+    public class Water : AbstractTerrain
     {
         public Water(OffsetCoordinates position, HexModel model, ResourceManager resources) :
             base(

@@ -5,7 +5,7 @@ using UnforgottenRealms.Game.World.Geometry;
 
 namespace UnforgottenRealms.Game.World.Terrain
 {
-    public class Desert : Field
+    public class Desert : AbstractTerrain
     {
         public Desert(OffsetCoordinates position, HexModel model, ResourceManager resources) : 
             base(
