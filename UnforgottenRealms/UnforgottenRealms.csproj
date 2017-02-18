@@ -63,7 +63,9 @@
     <Compile Include="Controllers\NextController.cs" />
     <Compile Include="Game\Actions\ActionController.cs" />
     <Compile Include="Game\Actions\ActionResolver.cs" />
+    <Compile Include="Game\Actions\ActionResolverFactories.cs" />
     <Compile Include="Game\Actions\IdleActionResolver.cs" />
+    <Compile Include="Game\Actions\ObjectActionResolver.cs" />
     <Compile Include="Game\Events\RoundChangedEventArgs.cs" />
     <Compile Include="Game\Events\ValueChangedEventArgs.cs" />
     <Compile Include="Game\Graphics\TerrainTextureDescriptor.cs" />

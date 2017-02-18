@@ -1,4 +1,6 @@
 ﻿using SFML.Window;
+using System;
+using System.Collections.Generic;
 using UnforgottenRealms.Common;
 using UnforgottenRealms.Common.Window;
 using UnforgottenRealms.Game.Events;
@@ -11,19 +13,31 @@ namespace UnforgottenRealms.Game.Actions
 {
     public class ActionController
     {
+        private AtomicReference<ActionResolverFactories> factories;
         private AtomicReference<ActionResolver> activeActionResolver;
-        private AtomicReference<GameObject> selectedObject;
         private GameWindow window;
 
         public ActionController(GameWindow window, Map worldMap, TurnCycle turnCycle, WorldView worldView)
         {
             this.window = window;
-            this.selectedObject = new AtomicReference<GameObject>();
-            this.activeActionResolver = new AtomicReference<ActionResolver>(new IdleActionResolver(
-                activeActionResolver: activeActionResolver, 
-                selectedObject: selectedObject,
-                worldMap: worldMap, 
-                worldView: worldView));
+            this.factories = new AtomicReference<ActionResolverFactories>();
+            this.factories.Value = new ActionResolverFactories(
+                idleActionResolverFactory: () => new IdleActionResolver(
+                    activeActionResolver: activeActionResolver,
+                    actionResolverFactories: factories,
+                    worldMap: worldMap,
+                    worldView: worldView
+                ),
+                objectActionResolverFactory: selectedObject => new ObjectActionResolver(
+                    activeActionResolver: activeActionResolver,
+                    actionResolverFactories: factories,
+                    selectedObject: selectedObject,
+                    worldMap: worldMap,
+                    worldView: worldView
+                )
+            );
+
+            this.activeActionResolver = new AtomicReference<ActionResolver>(factories.Value.IdleAction.Invoke());
 
             window.MouseButtonPressed += MouseButtonPressed;
             turnCycle.TurnChanged += TurnChanged;
