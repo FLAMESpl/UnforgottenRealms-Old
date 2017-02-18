@@ -1,5 +1,4 @@
-﻿using System;
-using SFML.Window;
+﻿using SFML.Window;
 using UnforgottenRealms.Game.Events;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Common;

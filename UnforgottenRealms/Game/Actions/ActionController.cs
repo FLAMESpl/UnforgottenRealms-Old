@@ -1,10 +1,7 @@
 ﻿using SFML.Window;
-using System;
-using System.Collections.Generic;
 using UnforgottenRealms.Common;
 using UnforgottenRealms.Common.Window;
 using UnforgottenRealms.Game.Events;
-using UnforgottenRealms.Game.Objects;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.Views;
 using UnforgottenRealms.Game.World;
@@ -21,6 +18,8 @@ namespace UnforgottenRealms.Game.Actions
         {
             this.window = window;
             this.factories = new AtomicReference<ActionResolverFactories>();
+            this.activeActionResolver = new AtomicReference<ActionResolver>();
+
             this.factories.Value = new ActionResolverFactories(
                 idleActionResolverFactory: () => new IdleActionResolver(
                     activeActionResolver: activeActionResolver,
@@ -37,7 +36,7 @@ namespace UnforgottenRealms.Game.Actions
                 )
             );
 
-            this.activeActionResolver = new AtomicReference<ActionResolver>(factories.Value.IdleAction.Invoke());
+            this.activeActionResolver.Value = factories.Value.IdleAction.Invoke();
 
             window.MouseButtonPressed += MouseButtonPressed;
             turnCycle.TurnChanged += TurnChanged;

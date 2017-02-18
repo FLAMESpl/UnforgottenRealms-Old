@@ -32,7 +32,7 @@ namespace UnforgottenRealms.Game.Actions
             {
                 var newObject = worldMap[position].Units.FirstOrDefault();
 
-                if (newObject != null && !newObject.Owner.Active)
+                if (newObject != null && newObject.Owner.Active)
                 {
                     newObject.Select(true);
                     activeActionResolver.Value = actionResolverFactories.Value.ObjectAction.Invoke(newObject);
