@@ -22,7 +22,8 @@ namespace UnforgottenRealms.Game.Graphics
             return new TerrainTextureDescriptor(
                 apexes: maskModel.GetApexesPositions(leftTop),
                 center: maskModel.GetCenter(leftTop),
-                texture: Texture
+                texture: Texture,
+                tileSize: tileSize
             );
         }
 

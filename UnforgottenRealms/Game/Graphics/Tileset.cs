@@ -24,7 +24,7 @@ namespace UnforgottenRealms.Game.Graphics
             var left = rowIndex * tileSize.X;
             var top = row * tileSize.Y;
             return new TextureDescriptor(
-                bounds: new IntRect(left, top, left + tileSize.X, top + tileSize.Y),
+                bounds: new IntRect(left, top, tileSize.X, tileSize.Y),
                 texture: Texture,
                 tileSize: tileSize
             );

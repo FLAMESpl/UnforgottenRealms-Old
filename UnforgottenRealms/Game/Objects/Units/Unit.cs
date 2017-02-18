@@ -38,7 +38,7 @@ namespace UnforgottenRealms.Game.Objects.Units
             var position = Location.Position;
             var hexModel = Location.World.Model;
             var resources = Location.World.Resources;
-            var emblemTexure = resources.Get<GameTilesets>().Miscellaneous.Emblem;
+            var emblemTexture = resources.Get<GameTilesets>().Miscellaneous.Emblem;
 
             unitSize = hexModel.Size / 2;
 
@@ -46,15 +46,15 @@ namespace UnforgottenRealms.Game.Objects.Units
             {
                 Color = owner.Colour.ToRGB(),
                 Position = hexModel.GetTopLeftCorner(position),
-                Scale = Scale(emblemTexure.TileSize, hexModel.Size),
-                Texture = emblemTexure.Texture,
-                TextureRect = emblemTexure.Bounds
+                Scale = emblemTexture.Scale(hexModel.Size),
+                Texture = emblemTexture.Texture,
+                TextureRect = emblemTexture.Bounds
             };
 
             unitSprite = new Sprite
             {
                 Position = hexModel.GetShiftedTopLeftCenter(position, unitSize),
-                Scale = Scale(textureDescriptor.TileSize, unitSize),
+                Scale = textureDescriptor.Scale(unitSize),
                 Texture = textureDescriptor.Texture,
                 TextureRect = textureDescriptor.Bounds
             };
@@ -94,11 +94,6 @@ namespace UnforgottenRealms.Game.Objects.Units
                 emblemSprite.Position = hexModel.GetTopLeftCorner(targetPosition);
                 unitSprite.Position = hexModel.GetShiftedTopLeftCenter(targetPosition, unitSize);
             }
-        }
-
-        protected Vector2f Scale(Vector2i original, Vector2f template)
-        {
-            return new Vector2f(template.X / original.X, template.Y / original.Y);
         }
 
         private void Refresh(object sender, RoundChangedEventArgs e)

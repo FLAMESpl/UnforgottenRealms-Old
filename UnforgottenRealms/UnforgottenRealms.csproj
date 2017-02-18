@@ -70,6 +70,8 @@
     <Compile Include="Game\Events\ObjectDestroyedEventArgs.cs" />
     <Compile Include="Game\Events\RoundChangedEventArgs.cs" />
     <Compile Include="Game\Events\ValueChangedEventArgs.cs" />
+    <Compile Include="Game\Graphics\ImprovementsTileset.cs" />
+    <Compile Include="Game\Graphics\ITextureDescriptor.cs" />
     <Compile Include="Game\Graphics\TerrainTextureDescriptor.cs" />
     <Compile Include="Game\Graphics\TerrainTileset.cs" />
     <Compile Include="Game\Graphics\TextureDescriptor.cs" />
@@ -78,6 +80,8 @@
     <Compile Include="Game\Graphics\MiscellaneousTileset.cs" />
     <Compile Include="Game\Graphics\UnitsTileset.cs" />
     <Compile Include="Game\Objects\GameObject.cs" />
+    <Compile Include="Game\Objects\GameObjectExtensions.cs" />
+    <Compile Include="Game\Objects\Improvements\Farm.cs" />
     <Compile Include="Game\Objects\Improvements\Improvement.cs" />
     <Compile Include="Game\Objects\Units\Archer.cs" />
     <Compile Include="Game\Objects\Units\Unit.cs" />

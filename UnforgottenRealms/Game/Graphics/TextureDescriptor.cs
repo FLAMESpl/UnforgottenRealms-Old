@@ -3,7 +3,7 @@ using SFML.Window;
 
 namespace UnforgottenRealms.Game.Graphics
 {
-    public class TextureDescriptor
+    public class TextureDescriptor : ITextureDescriptor
     {
         public IntRect Bounds { get; private set; }
         public Texture Texture { get; private set; }

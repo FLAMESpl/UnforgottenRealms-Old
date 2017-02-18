@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnforgottenRealms.Common.Resources;
 using UnforgottenRealms.Game.Events;
+using UnforgottenRealms.Game.Objects.Improvements;
 using UnforgottenRealms.Game.Objects.Units;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.World.Coordinates;
@@ -57,6 +58,13 @@ namespace UnforgottenRealms.Game.World
                 for (int j = 0; j < Size.Y; j++)
                 {
                     target.Draw(fields[i][j], states);
+                }
+            }
+
+            for (int i = 0; i < Size.X; i++)
+            {
+                for (int j = 0; j < Size.Y; j++)
+                {
                     target.Draw(grid[i][j], states);
                 }
             }
@@ -124,9 +132,14 @@ namespace UnforgottenRealms.Game.World
 
             var unitPosition1 = new OffsetCoordinates(7, 7);
             var unitPosition2 = new OffsetCoordinates(5, 7);
+            var improvementPosition = new OffsetCoordinates(6, 6);
 
-            this[unitPosition1].Create(Archer.Factory, players.First());
-            this[unitPosition2].Create(Archer.Factory, players.Skip(1).First());
+            var player1 = players.First();
+            var player2 = players.Skip(1).First();
+
+            this[unitPosition1].Create(Archer.Factory, player1);
+            this[unitPosition2].Create(Archer.Factory, player2);
+            this[improvementPosition].Create(Farm.Factory, player1);
         }
     }
 }

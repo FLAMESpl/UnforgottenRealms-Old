@@ -1,8 +1,8 @@
 ﻿using SFML.Graphics;
+using SFML.Window;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.World;
 using UnforgottenRealms.Game.World.Coordinates;
-using UnforgottenRealms.Game.World.Geometry;
 using UnforgottenRealms.Gui.ContextPreview;
 
 namespace UnforgottenRealms.Game.Objects
@@ -21,5 +21,9 @@ namespace UnforgottenRealms.Game.Objects
         public abstract void PerformPrimaryAction(AxialCoordinates targetPosition);
         public abstract void Draw(RenderTarget target, RenderStates states);
         public abstract void Select(bool isSelected);
+
+        protected virtual void Destroyed()
+        {
+        }
     }
 }
