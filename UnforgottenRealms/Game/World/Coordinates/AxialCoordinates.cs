@@ -15,6 +15,8 @@
             R = r;
         }
 
+        public bool IsEqualTo(AxialCoordinates other) => other.Q == Q && other.R == R;
+
         public static implicit operator CubicCoordinates(AxialCoordinates position)
         {
             return new CubicCoordinates(position.Q, -position.Q - position.R, position.R);

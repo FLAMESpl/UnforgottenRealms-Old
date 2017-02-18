@@ -11,7 +11,7 @@ namespace UnforgottenRealms.Game.Objects.Units
         public Archer(AxialCoordinates position, HexModel model, ResourceManager resources, Player owner) :
             base(
                 position: position,
-                model: model,
+                hexModel: model,
                 movement: 2,
                 resources: resources,
                 textureDescriptor: resources.Get<GameTilesets>().Units.Archer,

@@ -64,8 +64,6 @@ namespace UnforgottenRealms.Game.World
                 return position;
             else
                 return null;
-
-            //return Contains(position) ? position : null;
         }
 
         public void Mock(IEnumerable<Player> players)

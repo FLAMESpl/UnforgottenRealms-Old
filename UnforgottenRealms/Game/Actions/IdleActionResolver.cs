@@ -26,6 +26,9 @@ namespace UnforgottenRealms.Game.Actions
 
         public override void MousePressed(MouseButtonEventArgs eventArgs)
         {
+            if (eventArgs.Button != Mouse.Button.Left)
+                return;
+
             var mousePosition = worldView.MapMousePosition(new Vector2f(eventArgs.X, eventArgs.Y));
             var position = worldMap.Find(mousePosition);
             if (position != null)

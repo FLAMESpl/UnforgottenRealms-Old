@@ -17,6 +17,8 @@ namespace UnforgottenRealms.Game.World.Coordinates
             Row = row;
         }
 
+        public bool IsEqualTo(OffsetCoordinates other) => other.Column == Column && other.Row == Row;
+
         public static implicit operator AxialCoordinates(OffsetCoordinates position)
         {
             return new AxialCoordinates(position.Column - (position.Row - (position.Row & 1)) / 2, position.Row);

@@ -35,12 +35,26 @@ namespace UnforgottenRealms.Game.Actions
             var position = worldMap.Find(mousePosition);
             if (position != null)
             {
-                selectedObject.Select(false);
-                activeActionResolver.Value = actionResolverFactories.Value.IdleAction.Invoke();
+                if (position.IsEqualTo(selectedObject.Position))
+                {
+                    // TODO: unit cycling
+                }
+                else
+                {
+                    if (eventArgs.Button == Mouse.Button.Left)
+                        DeselectObject();
+                    else if (eventArgs.Button == Mouse.Button.Right)
+                        selectedObject.PerformPrimaryAction(worldMap, position);
+                }
             }
         }
 
         public override void TurnChanged(ValueChangedEventArgs<Player> eventArgs)
+        {
+            DeselectObject();
+        }
+
+        private void DeselectObject()
         {
             selectedObject.Select(false);
             activeActionResolver.Value = actionResolverFactories.Value.IdleAction.Invoke();

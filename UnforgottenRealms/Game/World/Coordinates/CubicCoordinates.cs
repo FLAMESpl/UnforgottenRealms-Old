@@ -17,6 +17,8 @@
             Z = z;
         }
 
+        public bool IsEqualTo(CubicCoordinates other) => other.X == X && other.Y == Y && other.Z == Z;
+
         public static implicit operator AxialCoordinates(CubicCoordinates position)
         {
             return new AxialCoordinates(position.X, position.Z);
