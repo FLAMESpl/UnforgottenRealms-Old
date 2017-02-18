@@ -30,7 +30,8 @@ namespace UnforgottenRealms.Controllers
             InitializeResources();
             window = Window.GameWindowFactory.Initial();
             pages = new PageControl();
-            worldMap = new Map(resources);
+            turnCycle = new TurnCycle();
+            worldMap = new Map(resources, turnCycle);
             worldView = new WorldView(window, worldMap);
         }
 
@@ -79,8 +80,7 @@ namespace UnforgottenRealms.Controllers
             foreach (var playerMetadata in settings.Players)
                 players.Add(playerMetadata.CreatePlayer());
 
-            turnCycle = new TurnCycle(players);
-            turnCycle.First();
+            turnCycle.Start(players);
             worldMap.Mock(players);
         }
 

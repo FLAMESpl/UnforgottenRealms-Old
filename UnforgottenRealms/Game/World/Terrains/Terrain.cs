@@ -1,13 +1,9 @@
 ﻿using SFML.Graphics;
-using SFML.Window;
-using UnforgottenRealms.Common.Resources;
 using UnforgottenRealms.Game.Graphics;
-using UnforgottenRealms.Game.World.Coordinates;
-using UnforgottenRealms.Game.World.Geometry;
 
 namespace UnforgottenRealms.Game.World.Terrains
 {
-    public delegate Terrain TerrainFactory(Field location, HexModel model, ResourceManager resources);
+    public delegate Terrain TerrainFactory(Field location);
 
     public abstract class Terrain : Drawable
     {
@@ -16,20 +12,14 @@ namespace UnforgottenRealms.Game.World.Terrains
 
         public Field Location { get; }
 
-        public int MovementCost { get; }
-        public TerrainType Type { get; }
+        public abstract int MovementCost { get; }
+        public abstract TerrainType Type { get; }
 
-        public Terrain(Field location, HexModel model, TerrainTextureDescriptor textureDescriptor, int movementCost, TerrainType type)
+        public Terrain(Field location, TerrainTextureDescriptor textureDescriptor)
         {
-            MovementCost = movementCost;
             Location = location;
-            Type = type;
-            if (this is Water)
-                ;
-            if (this is Desert)
-                ;
             texture = textureDescriptor.Texture;
-            InitializeVertex(location.Position, model, textureDescriptor);
+            InitializeVertex(textureDescriptor);
         }
 
         public void Draw(RenderTarget target, RenderStates states)
@@ -38,12 +28,14 @@ namespace UnforgottenRealms.Game.World.Terrains
             target.Draw(vertex, states);
         }
 
-        private void InitializeVertex(OffsetCoordinates position, HexModel model, TerrainTextureDescriptor textureDescriptor)
+        private void InitializeVertex(TerrainTextureDescriptor textureDescriptor)
         {
-            var topLeftCorner = new Vector2f(
+            var model = Location.World.Model;
+            var topLeftCorner = model.GetTopLeftCorner(Location.Position);
+            /*var topLeftCorner = new Vector2f(
                 position.Column * model.HorizontalSize + (model.HorizontalSize* 0.5f * (position.Row & 1)),
                 position.Row * (model.VerticalSize - model.EdgeLength / 2)
-            );
+            );*/
             
             var apexes = model.GetApexesPositions(topLeftCorner);
             var hexCenter = model.GetCenter(topLeftCorner);

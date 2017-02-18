@@ -1,20 +1,18 @@
-﻿using UnforgottenRealms.Common.Resources;
-using UnforgottenRealms.Game.Graphics;
-using UnforgottenRealms.Game.World.Geometry;
+﻿using UnforgottenRealms.Game.Graphics;
 
 namespace UnforgottenRealms.Game.World.Terrains
 {
     public class Water : Terrain
     {
-        public static TerrainFactory Factory => (location, model, resources) => new Water(location, model, resources);
+        public static TerrainFactory Factory => (location) => new Water(location);
 
-        public Water(Field location, HexModel model, ResourceManager resources) :
+        public override int MovementCost => 1;
+        public override TerrainType Type => TerrainType.Water;
+
+        public Water(Field location) :
             base(
-                model: model,
-                movementCost: 1,
                 location: location,
-                textureDescriptor: resources.Get<GameTilesets>().Terrain.Water,
-                type: TerrainType.Water
+                textureDescriptor: location.World.Resources.Get<GameTilesets>().Terrain.Water
             )
         {
         }

@@ -1,19 +1,16 @@
 ﻿using SFML.Graphics;
-using UnforgottenRealms.Common.Resources;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.World;
 using UnforgottenRealms.Game.World.Coordinates;
-using UnforgottenRealms.Game.World.Geometry;
 
 namespace UnforgottenRealms.Game.Objects.Improvements
 {
-    public delegate Improvement ImprovementFactory(Field location, HexModel model, ResourceManager resources, Player owner);
+    public delegate Improvement ImprovementFactory(Field location, Player owner);
 
     public class Improvement : GameObject
     {
-        public Improvement(Field location, HexModel hex, Player owner) : base(
+        public Improvement(Field location, Player owner) : base(
             location: location,
-            hexModel: hex,
             owner: owner)
         {
         }

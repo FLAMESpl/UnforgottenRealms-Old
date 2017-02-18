@@ -16,11 +16,12 @@ namespace UnforgottenRealms.Game.World
         private Field[][] fields;
         private List<List<VertexArray>> grid;
 
-        public ResourceManager Resources { get; private set; }
         public HexModel Model { get; protected set; }
+        public Vector2f PixelSize => new Vector2f(Size.X * Model.HorizontalSize, Size.Y * Model.VerticalSize);
+        public ResourceManager Resources { get; }
         public bool ShowGrid { get; set; }
         public Vector2i Size { get; protected set; }
-        public Vector2f PixelSize => new Vector2f(Size.X * Model.HorizontalSize, Size.Y * Model.VerticalSize);
+        public TurnCycle TurnCycle { get; }
 
         public Field this[int column, int row]
         {
@@ -34,10 +35,11 @@ namespace UnforgottenRealms.Game.World
             set { fields[position.Column][position.Row] = value; }
         }
 
-        public Map(ResourceManager resources)
+        public Map(ResourceManager resources, TurnCycle turnCycle)
         {
-            Resources = resources;
             Model = new HexModel(60);
+            Resources = resources;
+            TurnCycle = turnCycle;
         }
 
         public void Draw(RenderTarget target, RenderStates states)
@@ -114,10 +116,9 @@ namespace UnforgottenRealms.Game.World
 
             var unitPosition1 = new OffsetCoordinates(7, 7);
             var unitPosition2 = new OffsetCoordinates(5, 7);
-            UnitFactory factory = (f, m, r, o) => new Archer(f, m, r, o);
 
-            this[unitPosition1].Create(factory, players.First());
-            this[unitPosition2].Create(factory, players.Skip(1).First());
+            this[unitPosition1].Create(Archer.Factory, players.First());
+            this[unitPosition2].Create(Archer.Factory, players.Skip(1).First());
         }
     }
 }

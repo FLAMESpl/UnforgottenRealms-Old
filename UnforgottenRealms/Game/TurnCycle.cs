@@ -16,13 +16,9 @@ namespace UnforgottenRealms.Game
         public Player CurrentPlayer { get; private set; }
         public int Round { get; private set; }
 
-        public TurnCycle(IEnumerable<Player> players)
+        public void Start(IEnumerable<Player> players)
         {
             this.players = players;
-        }
-
-        public void First()
-        {
             CurrentPlayer = players.First();
             CurrentPlayer.Active = true;
             Round = 1;

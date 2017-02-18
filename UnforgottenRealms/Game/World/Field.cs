@@ -41,9 +41,7 @@ namespace UnforgottenRealms.Game.World
         public void Create(TerrainFactory factory)
         {
             Terrain = factory.Invoke(
-                location: this,
-                model: World.Model,
-                resources: World.Resources
+                location: this
             );
         }
 
@@ -51,9 +49,7 @@ namespace UnforgottenRealms.Game.World
         {
             units.Add(factory.Invoke(
                 location: this,
-                model: World.Model,
-                owner: owner,
-                resources: World.Resources
+                owner: owner
             ));
         }
 
@@ -61,9 +57,7 @@ namespace UnforgottenRealms.Game.World
         {
             Improvement = factory.Invoke(
                 location: this,
-                model: World.Model,
-                owner: owner,
-                resources: World.Resources
+                owner: owner
             );
         }
 

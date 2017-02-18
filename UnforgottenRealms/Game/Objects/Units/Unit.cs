@@ -1,19 +1,16 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
-using UnforgottenRealms.Common.Resources;
 using UnforgottenRealms.Common.Utils;
 using UnforgottenRealms.Game.Graphics;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.World;
 using UnforgottenRealms.Game.World.Coordinates;
-using UnforgottenRealms.Game.World.Geometry;
 using System.Linq;
+using UnforgottenRealms.Game.Events;
 
 namespace UnforgottenRealms.Game.Objects.Units
 {
-    public delegate Unit UnitFactory(Field location, HexModel model, ResourceManager resources, Player owner);
-    public delegate Archer ArcherFactory(Field location, HexModel model, ResourceManager resources, Player owner);
-
+    public delegate Unit UnitFactory(Field location, Player owner);
 
     public abstract class Unit : GameObject
     {
@@ -22,23 +19,28 @@ namespace UnforgottenRealms.Game.Objects.Units
         private Sprite unitSprite;
         private Sprite emblemSprite;
 
-        public int Movement { get; private set; }
-        public int MovementLeft { get; private set; }
+        public abstract int Movement { get; }
+        public abstract float Strength { get; }
+        public abstract float Health { get; }
 
-        public Unit(Field location, HexModel hexModel, TextureDescriptor textureDescriptor, ResourceManager resources, Player owner, int movement) : 
+        public int MovementLeft { get; protected set; }
+        public float HealthLeft { get; protected set; }
+
+        public Unit(Field location, TextureDescriptor textureDescriptor, Player owner) : 
             base(
                   location: location,
-                  hexModel: hexModel,
                   owner: owner
             )
         {
-            unitSize = hexModel.Size / 2;
+            MovementLeft = MovementLeft;
+            HealthLeft = Health;
 
-            Movement = movement;
-            MovementLeft = movement;
-
-            var emblemTexure = resources.Get<GameTilesets>().Miscellaneous.Emblem;
             var position = Location.Position;
+            var hexModel = Location.World.Model;
+            var resources = Location.World.Resources;
+            var emblemTexure = resources.Get<GameTilesets>().Miscellaneous.Emblem;
+
+            unitSize = hexModel.Size / 2;
 
             emblemSprite = new Sprite
             {
@@ -56,6 +58,8 @@ namespace UnforgottenRealms.Game.Objects.Units
                 Texture = textureDescriptor.Texture,
                 TextureRect = textureDescriptor.Bounds
             };
+
+            Location.World.TurnCycle.RoundChanged += Refresh;
         }
 
         public override void Draw(RenderTarget target, RenderStates states)
@@ -81,13 +85,14 @@ namespace UnforgottenRealms.Game.Objects.Units
 
         protected virtual void Move(AxialCoordinates targetPosition)
         {
+            var hexModel = Location.World.Model;
             var targetedField = Location.World[targetPosition];
             if (!targetedField.Units.Any())
             {
                 targetedField.Move(this);
                 Location = targetedField;
-                emblemSprite.Position = HexModel.GetTopLeftCorner(targetPosition);
-                unitSprite.Position = HexModel.GetShiftedTopLeftCenter(targetPosition, unitSize);
+                emblemSprite.Position = hexModel.GetTopLeftCorner(targetPosition);
+                unitSprite.Position = hexModel.GetShiftedTopLeftCenter(targetPosition, unitSize);
             }
         }
 
@@ -96,5 +101,9 @@ namespace UnforgottenRealms.Game.Objects.Units
             return new Vector2f(template.X / original.X, template.Y / original.Y);
         }
 
+        private void Refresh(object sender, RoundChangedEventArgs e)
+        {
+            MovementLeft = Movement;
+        }
     }
 }

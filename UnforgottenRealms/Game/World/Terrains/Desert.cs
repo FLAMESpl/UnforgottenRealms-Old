@@ -1,20 +1,18 @@
-﻿using UnforgottenRealms.Common.Resources;
-using UnforgottenRealms.Game.Graphics;
-using UnforgottenRealms.Game.World.Geometry;
+﻿using UnforgottenRealms.Game.Graphics;
 
 namespace UnforgottenRealms.Game.World.Terrains
 {
     public class Desert : Terrain
     {
-        public static TerrainFactory Factory => (location, model, resources) => new Desert(location, model, resources);
+        public static TerrainFactory Factory => (location) => new Desert(location);
 
-        public Desert(Field location, HexModel model, ResourceManager resources) : 
+        public override int MovementCost => 2;
+        public override TerrainType Type => TerrainType.Land;
+
+        public Desert(Field location) : 
             base(
-                model: model,
-                movementCost: 2,
                 location: location,
-                textureDescriptor: resources.Get<GameTilesets>().Terrain.Desert,
-                type: TerrainType.Land
+                textureDescriptor: location.World.Resources.Get<GameTilesets>().Terrain.Desert
             )
         {
 
