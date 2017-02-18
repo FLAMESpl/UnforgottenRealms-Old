@@ -1,5 +1,5 @@
 ﻿using SFML.Graphics;
-using SFML.Window;
+using UnforgottenRealms.Game.Events;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.World;
 using UnforgottenRealms.Game.World.Coordinates;
@@ -16,14 +16,21 @@ namespace UnforgottenRealms.Game.Objects
         {
             Location = location;
             Owner = owner;
+
+            Location.World.TurnCycle.RoundChanged += Refresh;
         }
 
         public abstract void PerformPrimaryAction(AxialCoordinates targetPosition);
         public abstract void Draw(RenderTarget target, RenderStates states);
         public abstract void Select(bool isSelected);
 
+        protected virtual void Refresh(object sender, RoundChangedEventArgs e)
+        {
+        }
+
         protected virtual void Destroyed()
         {
+            Location.World.TurnCycle.RoundChanged -= Refresh;
         }
     }
 }

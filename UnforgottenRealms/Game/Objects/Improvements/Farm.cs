@@ -1,5 +1,7 @@
-﻿using UnforgottenRealms.Game.Graphics;
+﻿using UnforgottenRealms.Game.Events;
+using UnforgottenRealms.Game.Graphics;
 using UnforgottenRealms.Game.Players;
+using UnforgottenRealms.Game.Resources;
 using UnforgottenRealms.Game.World;
 
 namespace UnforgottenRealms.Game.Objects.Improvements
@@ -8,6 +10,8 @@ namespace UnforgottenRealms.Game.Objects.Improvements
     {
         public static ImprovementFactory Factory => (location, owner) => new Farm(location, owner);
 
+        public int ProductionRate => 1;
+
         public Farm(Field location, Player owner) : 
             base(
                 improvementTexture: location.World.Resources.Get<GameTilesets>().Improvements.Farm,
@@ -15,6 +19,11 @@ namespace UnforgottenRealms.Game.Objects.Improvements
                 owner: owner
             )
         {
+        }
+
+        protected override void Refresh(object sender, RoundChangedEventArgs e)
+        {
+            Owner.Resources.Types[ResourceType.Wood].Amount += ProductionRate;
         }
     }
 }

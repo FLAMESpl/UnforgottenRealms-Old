@@ -6,7 +6,7 @@ namespace UnforgottenRealms.Game.Resources
     {
         private Dictionary<ResourceType, Resource> resources = new Dictionary<ResourceType, Resource>();
 
-        public IReadOnlyDictionary<ResourceType, Resource> Resources => resources;
+        public IReadOnlyDictionary<ResourceType, Resource> Types => resources;
 
         public ResourceSet(params Resource[] resources)
         {
@@ -16,13 +16,13 @@ namespace UnforgottenRealms.Game.Resources
 
         public static ResourceSet operator + (ResourceSet set, Resource resource)
         {
-            set.Resources[resource.Type].Amount += resource.Amount;
+            set.Types[resource.Type].Amount += resource.Amount;
             return set;
         }
 
         public static ResourceSet operator - (ResourceSet set, Resource resource)
         {
-            set.Resources[resource.Type].Amount -= resource.Amount;
+            set.Types[resource.Type].Amount -= resource.Amount;
             return set;
         }
     }

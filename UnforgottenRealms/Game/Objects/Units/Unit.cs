@@ -62,6 +62,11 @@ namespace UnforgottenRealms.Game.Objects.Units
             Location.World.TurnCycle.RoundChanged += Refresh;
         }
 
+        protected override void Destroyed()
+        {
+            Location.World.TurnCycle.RoundChanged -= Refresh;
+        }
+
         public override void Draw(RenderTarget target, RenderStates states)
         {
             target.Draw(emblemSprite, states);
@@ -96,7 +101,7 @@ namespace UnforgottenRealms.Game.Objects.Units
             }
         }
 
-        private void Refresh(object sender, RoundChangedEventArgs e)
+        protected override void Refresh(object sender, RoundChangedEventArgs e)
         {
             MovementLeft = Movement;
         }
