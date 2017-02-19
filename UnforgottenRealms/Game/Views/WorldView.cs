@@ -20,7 +20,7 @@ namespace UnforgottenRealms.Game.Views
         {
             this.window = window;
             this.map = map;
-            this.view = window.DefaultView;
+            this.view = new View(window.DefaultView);
         }
 
         public Vector2f MapMousePosition(Vector2f pixelPosition)

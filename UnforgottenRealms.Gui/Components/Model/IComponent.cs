@@ -18,6 +18,7 @@ namespace UnforgottenRealms.Gui.Components.Model
         Vector2f Position { get; set; }
         Vector2f Size { get; }
 
-        void SetFocus(bool focues);
+        void Invalidate();
+        void SetFocus(bool focus);
     }
 }

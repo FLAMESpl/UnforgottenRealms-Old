@@ -9,7 +9,6 @@ using UnforgottenRealms.Game.Graphics;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.Views;
 using UnforgottenRealms.Game.World;
-using UnforgottenRealms.Gui.Components.Container;
 using UnforgottenRealms.Settings;
 
 namespace UnforgottenRealms.Controllers
@@ -17,7 +16,7 @@ namespace UnforgottenRealms.Controllers
     public class GameController : Controller
     {
         private ActionController actionController;
-        private PageControl pages;
+        private GuiView guiView;
         private List<Player> players = new List<Player>();
         private ResourceManager resources;
         private TurnCycle turnCycle;
@@ -29,7 +28,6 @@ namespace UnforgottenRealms.Controllers
         {
             InitializeResources();
             window = Window.GameWindowFactory.Initial();
-            pages = new PageControl();
             turnCycle = new TurnCycle();
             worldMap = new Map(resources, turnCycle);
             worldView = new WorldView(window, worldMap);
@@ -42,7 +40,6 @@ namespace UnforgottenRealms.Controllers
 
             InitializeGameState(gameSettings);
             RegisterHotkeys();
-            actionController = new ActionController(window, worldMap, turnCycle, worldView);
 
             while (window.IsOpen() && controllerResult == NextController.Game)
             {
@@ -52,6 +49,7 @@ namespace UnforgottenRealms.Controllers
                 window.DispatchEvents();
                 window.Clear();
                 window.Draw(worldView);
+                window.Draw(guiView);
                 window.Display();
             }
 
@@ -80,8 +78,10 @@ namespace UnforgottenRealms.Controllers
             foreach (var playerMetadata in settings.Players)
                 players.Add(playerMetadata.CreatePlayer());
 
+            guiView = new GuiView(window, resources, turnCycle);
             turnCycle.Start(players);
             worldMap.Mock(players);
+            actionController = new ActionController(window, worldMap, turnCycle, worldView);
         }
 
         private void InitializeResources()

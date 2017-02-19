@@ -45,6 +45,7 @@ namespace UnforgottenRealms.Gui.Components.Container
         {
             component.Container = this;
             _components.Add(component);
+            component.Invalidate();
         }
 
         public void Clear()

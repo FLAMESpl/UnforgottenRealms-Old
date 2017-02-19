@@ -10,8 +10,8 @@ namespace UnforgottenRealms.Services.MainMenu
     public class GameSettingsService
     {
         private const string PLAYER_NAME_TEXT = "PLAYER";
-        private const int PLAYER_NAME_MAX_LENGTH = 20;
-        private const float PLAYER_NAME_WIDTH = 200;
+        private const int PLAYER_NAME_MAX_LENGTH = 12;
+        private const float PLAYER_NAME_WIDTH = 230;
         private const string PLAYER_NUMBER_CAPTION = "NUMBER OF PLAYERS";
         private const float PLAYER_NUMBER_WIDTH = 280;
         private const int DEFAULT_PLAYER_NUMBER = 2;
@@ -39,7 +39,6 @@ namespace UnforgottenRealms.Services.MainMenu
         {
             var frame = new Frame
             {
-
                 Shape = new RectangleShape
                 {
                     FillColor = BackgroundColor,

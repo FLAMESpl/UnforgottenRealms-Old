@@ -22,26 +22,13 @@ namespace UnforgottenRealms.Gui.Components.Model
         public event EventHandler<MouseButtonEventArgs> MouseClick;
         public event EventHandler<MouseMoveEventArgs> MouseEnter;
         public event EventHandler<MouseMoveEventArgs> MouseLeave;
-
-        private IComponentContainer _container;
+        
         private Vector2f _position;
         private Vector2f _textPosition;
         private Text _text;
         private Shape _shape;
 
-        public IComponentContainer Container
-        {
-            get
-            {
-                return _container;
-            }
-            set
-            {
-                _container = value;
-                if (Shape != null)
-                    Position = _position;
-            }
-        }
+        public IComponentContainer Container { get; set; }
         public bool ContainsCursor { get; protected set; }
         public bool HasFocus { get; protected set; }
 
@@ -59,9 +46,9 @@ namespace UnforgottenRealms.Gui.Components.Model
                 if (Container != null && Shape != null)
                 {
                     Shape.Position = Container.Position + value;
-                    TextPosition = _textPosition;
                 }
                 _position = value;
+                TextPosition = _textPosition;
             }
         }
 
@@ -76,9 +63,11 @@ namespace UnforgottenRealms.Gui.Components.Model
             }
             set
             {
+                if (Text != null && Container != null)
+                {
+                    Text.Position = value + Position + Container.Position;
+                }
                 _textPosition = value;
-                if (Text != null && Shape != null)
-                    Text.Position = value + Shape.Position;
             }
         }
         public Text Text { get; set; }
@@ -98,6 +87,11 @@ namespace UnforgottenRealms.Gui.Components.Model
 
             if (Text != null)
                 target.Draw(Text, states);
+        }
+
+        public virtual void Invalidate()
+        {
+            Position = _position;
         }
 
         public virtual void Handle(FocusGranted @event)

@@ -22,6 +22,7 @@ namespace UnforgottenRealms.Game
             CurrentPlayer = players.First();
             CurrentPlayer.Active = true;
             Round = 1;
+            OnTurnChanged(new ValueChangedEventArgs<Player>(CurrentPlayer, null));
         }
 
         public void Next()

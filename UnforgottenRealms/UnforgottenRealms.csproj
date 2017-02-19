@@ -70,6 +70,7 @@
     <Compile Include="Game\Events\ObjectDestroyedEventArgs.cs" />
     <Compile Include="Game\Events\RoundChangedEventArgs.cs" />
     <Compile Include="Game\Events\ValueChangedEventArgs.cs" />
+    <Compile Include="Game\Graphics\GuiTileset.cs" />
     <Compile Include="Game\Graphics\ImprovementsTileset.cs" />
     <Compile Include="Game\Graphics\ITextureDescriptor.cs" />
     <Compile Include="Game\Graphics\TerrainTextureDescriptor.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Game\Resources\ResourceSet.cs" />
     <Compile Include="Game\Resources\ResourceType.cs" />
     <Compile Include="Game\TurnCycle.cs" />
+    <Compile Include="Game\Views\GuiView.cs" />
     <Compile Include="Game\Views\WorldView.cs" />
     <Compile Include="Game\World\Coordinates\AxialCoordinates.cs" />
     <Compile Include="Game\World\Coordinates\CubicCoordinates.cs" />
@@ -105,7 +107,11 @@
     <Compile Include="Game\World\Terrains\Terrain.cs" />
     <Compile Include="Game\World\Terrains\Grass.cs" />
     <Compile Include="Game\World\Terrains\Water.cs" />
+    <Compile Include="Gui\Components\ActivePlayerLabel.cs" />
+    <Compile Include="Gui\Components\CurrentRoundLabel.cs" />
+    <Compile Include="Gui\Components\ResourceAmountLabel.cs" />
     <Compile Include="Gui\ContextPreview\IContextPreviewProvider.cs" />
+    <Compile Include="Gui\GuiBuilders.cs" />
     <Compile Include="Services\Components\GameSettingsComponentContainer.cs" />
     <Compile Include="Services\Components\GameSettingsPlayerColourButton.cs" />
     <Compile Include="Services\MainMenu\GameSettingsService.cs" />
