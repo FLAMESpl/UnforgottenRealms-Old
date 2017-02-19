@@ -9,6 +9,7 @@ using UnforgottenRealms.Game.Objects.Improvements;
 using UnforgottenRealms.Game.Objects.Units;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.World.Coordinates;
+using UnforgottenRealms.Game.World.Deposits;
 using UnforgottenRealms.Game.World.Geometry;
 using UnforgottenRealms.Game.World.Terrains;
 
@@ -111,7 +112,9 @@ namespace UnforgottenRealms.Game.World
                 for (int j = 0; j < Size.Y; j++)
                 {
                     var position = new OffsetCoordinates(i, j);
-                    if (i == 5 && j == 2)
+                    if (i == 8 && j >= 7 && j <= 9)
+                        Place(position, Hill.Factory);
+                    else if (i == 5 && j == 2)
                         Place(position, Grass.Factory);
                     else if (i >= 3 && i <= 7 && j >= 1 && j <= 3)
                         Place(position, Water.Factory);
@@ -137,6 +140,7 @@ namespace UnforgottenRealms.Game.World
             var unitPosition1 = new OffsetCoordinates(7, 7);
             var unitPosition2 = new OffsetCoordinates(5, 7);
             var improvementPosition = new OffsetCoordinates(6, 6);
+            var depositPosition = new OffsetCoordinates(8, 8);
 
             var player1 = players.First();
             var player2 = players.Skip(1).First();
@@ -144,6 +148,7 @@ namespace UnforgottenRealms.Game.World
             this[unitPosition1].Create(Archer.Factory, player1);
             this[unitPosition2].Create(Archer.Factory, player2);
             this[improvementPosition].Create(Farm.Factory, player1);
+            this[depositPosition].Create(Iron.Factory);
         }
     }
 }

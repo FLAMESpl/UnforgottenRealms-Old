@@ -10,16 +10,16 @@ using UnforgottenRealms.Game.Events;
 using System;
 using UnforgottenRealms.Gui.ContextPreview;
 using UnforgottenRealms.Common.Utils;
+using UnforgottenRealms.Game.World.Deposits;
 
 namespace UnforgottenRealms.Game.World
 {
     public class Field : Drawable, IContextInfoSubject
     {
-        public RectangleShape sh = null;
-
         private Lazy<List<Field>> neighbours;
         private List<Unit> units = new List<Unit>();
 
+        public Deposit Deposit { get; private set; }
         public Improvement Improvement { get; private set; }
         public Terrain Terrain { get; private set; }
         public IEnumerable<Unit> Units => units;
@@ -58,13 +58,20 @@ namespace UnforgottenRealms.Game.World
             if (unit != null)
                 target.Draw(unit, states);
 
-            if (sh != null)
-                target.Draw(sh, states);
+            if (Deposit != null)
+                target.Draw(Deposit, states);
         }
 
         public void Create(TerrainFactory factory)
         {
             Terrain = factory.Invoke(
+                location: this
+            );
+        }
+
+        public void Create(DepositFactory factory)
+        {
+            Deposit = factory.Invoke(
                 location: this
             );
         }
@@ -126,12 +133,13 @@ namespace UnforgottenRealms.Game.World
             improvement.Location.Improvement = improvement;
         }
 
-        public IEnumerable<ContextInfoContent> GetContextViewContent()
+        public IEnumerable<ContextInfoContent> GetContextInfoContent()
         {
             return EnumerableExtensions.Stream(
-                units?.SelectMany(u => u.GetContextViewContent()), 
-                Improvement?.GetContextViewContent(),
-                Terrain?.GetContextViewContent()
+                units?.SelectMany(u => u.GetContextInfoContent()), 
+                Improvement?.GetContextInfoContent(),
+                Terrain?.GetContextInfoContent(),
+                Deposit?.GetContextInfoContent()
             );
         }
     }

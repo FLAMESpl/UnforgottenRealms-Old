@@ -52,7 +52,7 @@ namespace UnforgottenRealms.Game.Views
             var position = model.FindHex(mousePosition);
             if (world.Contains(position))
             {
-                var contextInfoContent = world[position].GetContextViewContent();
+                var contextInfoContent = world[position].GetContextInfoContent();
                 contextInfo.SetContent(contextInfoContent);
             }
             Thread.Sleep(100);

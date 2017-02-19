@@ -4,6 +4,7 @@ namespace UnforgottenRealms.Game.Graphics
 {
     public class GameTilesets : IResource
     {
+        public DepositTileset Deposits { get; }
         public GuiTileset Gui { get; }
         public ImprovementsTileset Improvements { get; }
         public MiscellaneousTileset Miscellaneous { get; }
@@ -17,6 +18,7 @@ namespace UnforgottenRealms.Game.Graphics
             Terrain = new TerrainTileset(FilePath("fields"));
             Units = new UnitsTileset(FilePath("units"));
             Improvements = new ImprovementsTileset(FilePath("imps"));
+            Deposits = new DepositTileset(FilePath("deps"));
         }
 
         private string FilePath(string fileName) => $".\\gfx\\{fileName}.png";

@@ -49,7 +49,7 @@ namespace UnforgottenRealms.Game.World.Terrains
             vertex.Append(new Vertex(apexes[0], textureDescriptor.Apexes[0]));
         }
 
-        public IEnumerable<ContextInfoContent> GetContextViewContent()
+        public IEnumerable<ContextInfoContent> GetContextInfoContent()
         {
             yield return new ContextInfoContent(GetContextInfoLines());
         }

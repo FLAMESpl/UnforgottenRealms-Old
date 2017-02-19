@@ -145,7 +145,7 @@ namespace UnforgottenRealms.Game.Objects.Units
             MovementLeft = Movement;
         }
 
-        public override IEnumerable<ContextInfoContent> GetContextViewContent()
+        public override IEnumerable<ContextInfoContent> GetContextInfoContent()
         {
             yield return new ContextInfoContent(GetContextViewLines());
         }

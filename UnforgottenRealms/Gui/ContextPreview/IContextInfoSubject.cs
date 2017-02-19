@@ -4,6 +4,6 @@ namespace UnforgottenRealms.Gui.ContextPreview
 {
     public interface IContextInfoSubject
     {
-        IEnumerable<ContextInfoContent> GetContextViewContent();
+        IEnumerable<ContextInfoContent> GetContextInfoContent();
     }
 }

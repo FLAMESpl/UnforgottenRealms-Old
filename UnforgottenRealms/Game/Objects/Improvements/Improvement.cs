@@ -56,7 +56,7 @@ namespace UnforgottenRealms.Game.Objects.Improvements
         {
         }
 
-        public override IEnumerable<ContextInfoContent> GetContextViewContent()
+        public override IEnumerable<ContextInfoContent> GetContextInfoContent()
         {
             yield return new ContextInfoContent(GetContextViewLines());
         }

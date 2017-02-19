@@ -22,7 +22,7 @@ namespace UnforgottenRealms.Game.Objects
         }
 
         public abstract void Draw(RenderTarget target, RenderStates states);
-        public abstract IEnumerable<ContextInfoContent> GetContextViewContent();
+        public abstract IEnumerable<ContextInfoContent> GetContextInfoContent();
         public abstract void PerformPrimaryAction(Field target);
         public abstract void Select(bool isSelected);
 

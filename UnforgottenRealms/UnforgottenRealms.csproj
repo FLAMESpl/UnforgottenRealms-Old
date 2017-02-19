@@ -74,6 +74,7 @@
     <Compile Include="Game\Events\ObjectDestroyedEventArgs.cs" />
     <Compile Include="Game\Events\RoundChangedEventArgs.cs" />
     <Compile Include="Game\Events\ValueChangedEventArgs.cs" />
+    <Compile Include="Game\Graphics\DepositTileset.cs" />
     <Compile Include="Game\Graphics\GuiTileset.cs" />
     <Compile Include="Game\Graphics\ImprovementsTileset.cs" />
     <Compile Include="Game\Graphics\ITextureDescriptor.cs" />
@@ -101,6 +102,8 @@
     <Compile Include="Game\World\Coordinates\AxialCoordinates.cs" />
     <Compile Include="Game\World\Coordinates\CubicCoordinates.cs" />
     <Compile Include="Game\World\Coordinates\OffsetCoordinates.cs" />
+    <Compile Include="Game\World\Deposits\Deposit.cs" />
+    <Compile Include="Game\World\Deposits\Iron.cs" />
     <Compile Include="Game\World\Field.cs" />
     <Compile Include="Game\World\FieldExtensions.cs" />
     <Compile Include="Game\World\Geometry\HexModel.cs" />
@@ -108,6 +111,7 @@
     <Compile Include="Game\World\Geometry\FrontierElement.cs" />
     <Compile Include="Game\World\Geometry\PathfindingResult.cs" />
     <Compile Include="Game\World\Map.cs" />
+    <Compile Include="Game\World\Terrains\Hill.cs" />
     <Compile Include="Game\World\TerrainType.cs" />
     <Compile Include="Game\World\Terrains\Desert.cs" />
     <Compile Include="Game\World\Terrains\Terrain.cs" />
