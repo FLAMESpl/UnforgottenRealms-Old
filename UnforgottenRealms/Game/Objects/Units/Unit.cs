@@ -4,7 +4,6 @@ using UnforgottenRealms.Common.Utils;
 using UnforgottenRealms.Game.Graphics;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.World;
-using UnforgottenRealms.Game.World.Coordinates;
 using System.Linq;
 using UnforgottenRealms.Game.Events;
 using UnforgottenRealms.Game.World.Geometry;
@@ -24,7 +23,13 @@ namespace UnforgottenRealms.Game.Objects.Units
         public abstract float Strength { get; }
         public abstract float Health { get; }
 
-        public int MovementLeft { get; protected set; }
+        private int movementLeft;
+        public int MovementLeft
+        {
+            get { return movementLeft; }
+            set { movementLeft = value > 0 ? value : 0; }
+        }
+
         public float HealthLeft { get; protected set; }
 
         public Unit(Field location, TextureDescriptor textureDescriptor, Player owner) : 
@@ -33,7 +38,7 @@ namespace UnforgottenRealms.Game.Objects.Units
                   owner: owner
             )
         {
-            MovementLeft = MovementLeft;
+            MovementLeft = Movement;
             HealthLeft = Health;
 
             var position = Location.Position;
@@ -107,15 +112,28 @@ namespace UnforgottenRealms.Game.Objects.Units
 
         protected virtual void Move(Field target)
         {
+            if (MovementLeft == 0)
+                return;
+
             var hexModel = Location.World.Model;
             var pathfindingResult = this.FindPath(target);
 
             if (pathfindingResult.Success)
             {
-                target.Move(this);
-                Location = target;
-                emblemSprite.Position = hexModel.GetTopLeftCorner(target.Position);
-                unitSprite.Position = hexModel.GetShiftedTopLeftCenter(target.Position, unitSize);
+                var current = Location;
+                foreach (var step in pathfindingResult.Path)
+                {
+                    if (MovementLeft == 0)
+                        break;
+
+                    MovementLeft -= MovementCost(current, step);
+                    current = step;
+                }
+
+                current.Move(this);
+                Location = current;
+                emblemSprite.Position = hexModel.GetTopLeftCorner(current.Position);
+                unitSprite.Position = hexModel.GetShiftedTopLeftCenter(current.Position, unitSize);
             }
         }
 

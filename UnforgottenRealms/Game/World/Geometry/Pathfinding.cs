@@ -4,6 +4,7 @@ using SFML.Graphics;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnforgottenRealms.Game.Objects.Units;
 using UnforgottenRealms.Game.World.Coordinates;
 
@@ -109,7 +110,7 @@ namespace UnforgottenRealms.Game.World.Geometry
             } while (current != null);
 
             path.Reverse();
-            return path;
+            return path.Skip(1);
         }
     }
 }
