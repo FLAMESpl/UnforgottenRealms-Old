@@ -7,6 +7,7 @@ namespace UnforgottenRealms.Game.World.Terrains
         public static TerrainFactory Factory => (location) => new Water(location);
 
         public override int MovementCost => 1;
+        public override string Name => "WATER";
         public override TerrainType Type => TerrainType.Water;
 
         public Water(Field location) :

@@ -7,6 +7,9 @@ using UnforgottenRealms.Game.World;
 using System.Linq;
 using UnforgottenRealms.Game.Events;
 using UnforgottenRealms.Game.World.Geometry;
+using System;
+using System.Collections.Generic;
+using UnforgottenRealms.Gui.ContextPreview;
 
 namespace UnforgottenRealms.Game.Objects.Units
 {
@@ -140,6 +143,19 @@ namespace UnforgottenRealms.Game.Objects.Units
         protected override void Refresh(object sender, RoundChangedEventArgs e)
         {
             MovementLeft = Movement;
+        }
+
+        public override IEnumerable<ContextInfoContent> GetContextViewContent()
+        {
+            yield return new ContextInfoContent(GetContextViewLines());
+        }
+
+        protected virtual IEnumerable<ContextInfoLine> GetContextViewLines()
+        {
+            yield return new ContextInfoLine(Owner.Colour.ToRGB(), Name);
+            yield return new ContextInfoLine(Color.Black, $"HP: {HealthLeft}/{Health}");
+            yield return new ContextInfoLine(Color.Black, $"STR: {Strength}");
+            yield return new ContextInfoLine(Color.Black, $"MOVE: {MovementLeft}/{Movement}");
         }
     }
 }

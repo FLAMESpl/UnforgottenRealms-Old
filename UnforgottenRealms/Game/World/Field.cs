@@ -8,10 +8,12 @@ using UnforgottenRealms.Game.World.Coordinates;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.Events;
 using System;
+using UnforgottenRealms.Gui.ContextPreview;
+using UnforgottenRealms.Common.Utils;
 
 namespace UnforgottenRealms.Game.World
 {
-    public class Field : Drawable
+    public class Field : Drawable, IContextInfoSubject
     {
         public RectangleShape sh = null;
 
@@ -122,6 +124,15 @@ namespace UnforgottenRealms.Game.World
         public void Move(Improvement improvement)
         {
             improvement.Location.Improvement = improvement;
+        }
+
+        public IEnumerable<ContextInfoContent> GetContextViewContent()
+        {
+            return EnumerableExtensions.Stream(
+                units?.SelectMany(u => u.GetContextViewContent()), 
+                Improvement?.GetContextViewContent(),
+                Terrain?.GetContextViewContent()
+            );
         }
     }
 }

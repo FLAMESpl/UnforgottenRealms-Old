@@ -7,6 +7,7 @@ namespace UnforgottenRealms.Game.World.Terrains
         public static TerrainFactory Factory => (location) => new Grass(location);
 
         public override int MovementCost => 1;
+        public override string Name => "GRASS";
         public override TerrainType Type => TerrainType.Land;
 
         public Grass(Field location) :

@@ -116,7 +116,10 @@
     <Compile Include="Gui\Components\ActivePlayerLabel.cs" />
     <Compile Include="Gui\Components\CurrentRoundLabel.cs" />
     <Compile Include="Gui\Components\ResourceAmountLabel.cs" />
-    <Compile Include="Gui\ContextPreview\IContextPreviewProvider.cs" />
+    <Compile Include="Gui\ContextPreview\ContextInfo.cs" />
+    <Compile Include="Gui\ContextPreview\ContextInfoContent.cs" />
+    <Compile Include="Gui\ContextPreview\ContextInfoLine.cs" />
+    <Compile Include="Gui\ContextPreview\IContextInfoSubject.cs" />
     <Compile Include="Gui\GuiBuilders.cs" />
     <Compile Include="Services\Components\GameSettingsComponentContainer.cs" />
     <Compile Include="Services\Components\GameSettingsPlayerColourButton.cs" />

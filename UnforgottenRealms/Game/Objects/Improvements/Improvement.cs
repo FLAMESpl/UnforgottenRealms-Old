@@ -1,17 +1,18 @@
-﻿using SFML.Graphics;
+﻿using System.Collections.Generic;
+using SFML.Graphics;
 using SFML.Window;
 using UnforgottenRealms.Common.Utils;
 using UnforgottenRealms.Game.Graphics;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.World;
-using UnforgottenRealms.Game.World.Coordinates;
 using UnforgottenRealms.Game.World.Geometry;
+using UnforgottenRealms.Gui.ContextPreview;
 
 namespace UnforgottenRealms.Game.Objects.Improvements
 {
     public delegate Improvement ImprovementFactory(Field location, Player owner);
 
-    public class Improvement : GameObject
+    public abstract class Improvement : GameObject
     {
         private Sprite improvementSprite;
         private Sprite flagSprite;
@@ -53,6 +54,16 @@ namespace UnforgottenRealms.Game.Objects.Improvements
 
         public override void Select(bool isSelected)
         {
+        }
+
+        public override IEnumerable<ContextInfoContent> GetContextViewContent()
+        {
+            yield return new ContextInfoContent(GetContextViewLines());
+        }
+
+        protected virtual IEnumerable<ContextInfoLine> GetContextViewLines()
+        {
+            yield return new ContextInfoLine(Owner.Colour.ToRGB(), Name);
         }
 
         protected virtual Vector2f FlagOffset(HexModel model) => new Vector2f(0, -model.VerticalSize / 2);

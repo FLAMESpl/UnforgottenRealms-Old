@@ -1,11 +1,13 @@
-﻿using SFML.Graphics;
+﻿using System.Collections.Generic;
+using SFML.Graphics;
 using UnforgottenRealms.Game.Graphics;
+using UnforgottenRealms.Gui.ContextPreview;
 
 namespace UnforgottenRealms.Game.World.Terrains
 {
     public delegate Terrain TerrainFactory(Field location);
 
-    public abstract class Terrain : Drawable
+    public abstract class Terrain : Drawable, IContextInfoSubject
     {
         protected VertexArray vertex;
         private Texture texture;
@@ -13,6 +15,7 @@ namespace UnforgottenRealms.Game.World.Terrains
         public Field Location { get; }
 
         public abstract int MovementCost { get; }
+        public abstract string Name { get; }
         public abstract TerrainType Type { get; }
 
         public Terrain(Field location, TerrainTextureDescriptor textureDescriptor)
@@ -32,10 +35,6 @@ namespace UnforgottenRealms.Game.World.Terrains
         {
             var model = Location.World.Model;
             var topLeftCorner = model.GetTopLeftCorner(Location.Position);
-            /*var topLeftCorner = new Vector2f(
-                position.Column * model.HorizontalSize + (model.HorizontalSize* 0.5f * (position.Row & 1)),
-                position.Row * (model.VerticalSize - model.EdgeLength / 2)
-            );*/
             
             var apexes = model.GetApexesPositions(topLeftCorner);
             var hexCenter = model.GetCenter(topLeftCorner);
@@ -48,6 +47,16 @@ namespace UnforgottenRealms.Game.World.Terrains
                 vertex.Append(new Vertex(apexes[i], textureDescriptor.Apexes[i]));
             }
             vertex.Append(new Vertex(apexes[0], textureDescriptor.Apexes[0]));
+        }
+
+        public IEnumerable<ContextInfoContent> GetContextViewContent()
+        {
+            yield return new ContextInfoContent(GetContextInfoLines());
+        }
+
+        protected virtual IEnumerable<ContextInfoLine> GetContextInfoLines()
+        {
+            yield return new ContextInfoLine(Color.Black, Name);
         }
     }
 }

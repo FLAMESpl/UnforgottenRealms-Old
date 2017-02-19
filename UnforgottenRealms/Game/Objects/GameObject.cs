@@ -1,14 +1,15 @@
 ﻿using SFML.Graphics;
+using System.Collections.Generic;
 using UnforgottenRealms.Game.Events;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.World;
-using UnforgottenRealms.Game.World.Coordinates;
 using UnforgottenRealms.Gui.ContextPreview;
 
 namespace UnforgottenRealms.Game.Objects
 {
-    public abstract class GameObject : Drawable, IContextPreviewProvider
+    public abstract class GameObject : Drawable, IContextInfoSubject
     {
+        public abstract string Name { get; }
         public Field Location { get; protected set; }
         public Player Owner { get; protected set; }
 
@@ -20,8 +21,9 @@ namespace UnforgottenRealms.Game.Objects
             Location.World.TurnCycle.RoundChanged += Refresh;
         }
 
-        public abstract void PerformPrimaryAction(Field target);
         public abstract void Draw(RenderTarget target, RenderStates states);
+        public abstract IEnumerable<ContextInfoContent> GetContextViewContent();
+        public abstract void PerformPrimaryAction(Field target);
         public abstract void Select(bool isSelected);
 
         protected virtual void Refresh(object sender, RoundChangedEventArgs e)

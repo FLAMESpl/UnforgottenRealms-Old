@@ -78,7 +78,7 @@ namespace UnforgottenRealms.Controllers
             foreach (var playerMetadata in settings.Players)
                 players.Add(playerMetadata.CreatePlayer());
 
-            guiView = new GuiView(window, resources, turnCycle);
+            guiView = new GuiView(window, resources, worldMap, worldView);
             turnCycle.Start(players);
             worldMap.Mock(players);
             actionController = new ActionController(window, worldMap, turnCycle, worldView);

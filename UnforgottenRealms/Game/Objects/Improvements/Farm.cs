@@ -10,6 +10,7 @@ namespace UnforgottenRealms.Game.Objects.Improvements
     {
         public static ImprovementFactory Factory => (location, owner) => new Farm(location, owner);
 
+        public override string Name => "FARM";
         public int ProductionRate => 1;
 
         public Farm(Field location, Player owner) : 
