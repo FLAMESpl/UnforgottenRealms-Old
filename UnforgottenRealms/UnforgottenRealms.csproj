@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="C5, Version=2.4.5947.17248, Culture=neutral, PublicKeyToken=282361b99ded7e8e, processorArchitecture=MSIL">
+      <HintPath>..\packages\C5.2.4.5947.17249\lib\net45\C5.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="sfmlnet-audio-2, Version=2.1.0.0, Culture=neutral, processorArchitecture=x86">
       <HintPath>..\packages\SFML.Net.2.1.5\lib\sfmlnet-audio-2.dll</HintPath>
       <Private>True</Private>
@@ -101,6 +105,8 @@
     <Compile Include="Game\World\FieldExtensions.cs" />
     <Compile Include="Game\World\Geometry\HexModel.cs" />
     <Compile Include="Game\World\Geometry\Pathfinding.cs" />
+    <Compile Include="Game\World\Geometry\FrontierElement.cs" />
+    <Compile Include="Game\World\Geometry\PathfindingResult.cs" />
     <Compile Include="Game\World\Map.cs" />
     <Compile Include="Game\World\TerrainType.cs" />
     <Compile Include="Game\World\Terrains\Desert.cs" />

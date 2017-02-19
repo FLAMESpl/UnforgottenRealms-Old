@@ -7,6 +7,7 @@ using UnforgottenRealms.Game.World;
 using UnforgottenRealms.Game.World.Coordinates;
 using System.Linq;
 using UnforgottenRealms.Game.Events;
+using UnforgottenRealms.Game.World.Geometry;
 
 namespace UnforgottenRealms.Game.Objects.Units
 {
@@ -86,18 +87,35 @@ namespace UnforgottenRealms.Game.Objects.Units
             unitSprite.Color = unitSprite.Color.SetAlpha(newAlpha);
         }
 
-        public override void PerformPrimaryAction(AxialCoordinates targetPosition) => Move(targetPosition);
+        public override void PerformPrimaryAction(Field target) => Move(target);
 
-        protected virtual void Move(AxialCoordinates targetPosition)
+        public virtual int MovementCost(Field from, Field to)
+        {
+            if (to.Units.Any())
+                return Pathfinding.Unreachable;
+
+            switch (to.Terrain.Type)
+            {
+                default:
+                case TerrainType.Impassable:
+                case TerrainType.Water:
+                    return Pathfinding.Unreachable;
+                case TerrainType.Land:
+                    return to.Terrain.MovementCost;
+            }
+        }
+
+        protected virtual void Move(Field target)
         {
             var hexModel = Location.World.Model;
-            var targetedField = Location.World[targetPosition];
-            if (!targetedField.Units.Any())
+            var pathfindingResult = this.FindPath(target);
+
+            if (pathfindingResult.Success)
             {
-                targetedField.Move(this);
-                Location = targetedField;
-                emblemSprite.Position = hexModel.GetTopLeftCorner(targetPosition);
-                unitSprite.Position = hexModel.GetShiftedTopLeftCenter(targetPosition, unitSize);
+                target.Move(this);
+                Location = target;
+                emblemSprite.Position = hexModel.GetTopLeftCorner(target.Position);
+                unitSprite.Position = hexModel.GetShiftedTopLeftCenter(target.Position, unitSize);
             }
         }
 

@@ -20,7 +20,7 @@ namespace UnforgottenRealms.Game.Objects
             Location.World.TurnCycle.RoundChanged += Refresh;
         }
 
-        public abstract void PerformPrimaryAction(AxialCoordinates targetPosition);
+        public abstract void PerformPrimaryAction(Field target);
         public abstract void Draw(RenderTarget target, RenderStates states);
         public abstract void Select(bool isSelected);
 

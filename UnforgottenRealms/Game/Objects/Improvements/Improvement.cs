@@ -47,7 +47,7 @@ namespace UnforgottenRealms.Game.Objects.Improvements
             target.Draw(improvementSprite, states);
         }
 
-        public override void PerformPrimaryAction(AxialCoordinates targetPosition)
+        public override void PerformPrimaryAction(Field target)
         {
         }
 

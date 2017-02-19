@@ -44,7 +44,7 @@ namespace UnforgottenRealms.Game.Actions
                     if (eventArgs.Button == Mouse.Button.Left)
                         DeselectObject();
                     else if (eventArgs.Button == Mouse.Button.Right)
-                        selectedObject.PerformPrimaryAction(position);
+                        selectedObject.PerformPrimaryAction(worldMap[position]);
                 }
             }
         }

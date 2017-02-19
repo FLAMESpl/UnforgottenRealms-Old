@@ -7,17 +7,22 @@ using UnforgottenRealms.Game.Objects.Improvements;
 using UnforgottenRealms.Game.World.Coordinates;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.Events;
+using System;
 
 namespace UnforgottenRealms.Game.World
 {
     public class Field : Drawable
     {
+        public RectangleShape sh = null;
+
+        private Lazy<List<Field>> neighbours;
         private List<Unit> units = new List<Unit>();
 
         public Improvement Improvement { get; private set; }
         public Terrain Terrain { get; private set; }
         public IEnumerable<Unit> Units => units;
 
+        public IEnumerable<Field> Neighbours => neighbours.Value;
         public AxialCoordinates Position { get; private set; }
         public Map World { get; private set; }
 
@@ -25,6 +30,19 @@ namespace UnforgottenRealms.Game.World
         {
             Position = position;
             World = world;
+            
+            neighbours = new Lazy<List<Field>>(() =>
+            {
+                var neighbours = new List<Field>();
+                var neighboursOffsets = World.Model.Neighbours;
+                for (int i = 0; i < 6; i++)
+                {
+                    var neighbourPosition = position + neighboursOffsets[i];
+                    if (world.Contains(neighbourPosition))
+                        neighbours.Add(world[position + neighboursOffsets[i]]);
+                }
+                return neighbours;
+            });
         }
 
         public void Draw(RenderTarget target, RenderStates states)
@@ -37,6 +55,9 @@ namespace UnforgottenRealms.Game.World
             var unit = Units.FirstOrDefault();
             if (unit != null)
                 target.Draw(unit, states);
+
+            if (sh != null)
+                target.Draw(sh, states);
         }
 
         public void Create(TerrainFactory factory)

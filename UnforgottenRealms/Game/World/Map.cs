@@ -51,6 +51,8 @@ namespace UnforgottenRealms.Game.World
             set { fields[position.Column][position.Row] = value; }
         }
 
+
+
         public void Draw(RenderTarget target, RenderStates states)
         {
             for (int i = 0; i < Size.X; i++)
@@ -109,7 +111,9 @@ namespace UnforgottenRealms.Game.World
                 for (int j = 0; j < Size.Y; j++)
                 {
                     var position = new OffsetCoordinates(i, j);
-                    if (i >= 3 && i <= 7 && j >= 2 && j <= 3)
+                    if (i == 5 && j == 2)
+                        Place(position, Grass.Factory);
+                    else if (i >= 3 && i <= 7 && j >= 1 && j <= 3)
                         Place(position, Water.Factory);
                     else if (i >= 4 && i <= 6 && j >= 4 && j <= 5)
                         Place(position, Desert.Factory);
