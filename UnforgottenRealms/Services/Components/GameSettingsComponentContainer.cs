@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnforgottenRealms.Common.Definitions;
 using UnforgottenRealms.Gui.Components.Container;
 using UnforgottenRealms.Gui.Components.ShapeBased;
 using UnforgottenRealms.Services.MainMenu;

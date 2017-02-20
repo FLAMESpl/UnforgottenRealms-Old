@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnforgottenRealms.Game.Events;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.World;
-using UnforgottenRealms.Gui.ContextPreview;
+using UnforgottenRealms.Game.Gui.ContextPreview;
 
 namespace UnforgottenRealms.Game.Objects
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace UnforgottenRealms.Gui.ContextPreview
+namespace UnforgottenRealms.Game.Gui.ContextPreview
 {
     public interface IContextInfoSubject
     {

@@ -7,7 +7,7 @@ using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.Resources;
 using UnforgottenRealms.Gui.Components.ShapeBased;
 
-namespace UnforgottenRealms.Gui.Components
+namespace UnforgottenRealms.Game.Gui.Components
 {
     public class ResourceAmountLabel : Label
     {

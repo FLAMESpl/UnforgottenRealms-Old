@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AtomicReference.cs" />
+    <Compile Include="Definitions\PlayerMetadata.cs" />
     <Compile Include="Enums\Direction.cs" />
     <Compile Include="Enums\PlayerColour.cs" />
     <Compile Include="GameEnvironment.cs" />

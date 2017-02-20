@@ -5,12 +5,12 @@ using UnforgottenRealms.Common.Window;
 using UnforgottenRealms.Game;
 using UnforgottenRealms.Game.Graphics;
 using UnforgottenRealms.Game.Resources;
-using UnforgottenRealms.Gui.Components;
+using UnforgottenRealms.Game.Gui.Components;
 using UnforgottenRealms.Gui.Components.Container;
 using UnforgottenRealms.Gui.Components.ImageBased;
 using UnforgottenRealms.Gui.Components.ShapeBased;
 
-namespace UnforgottenRealms.Gui
+namespace UnforgottenRealms.Game.Gui
 {
     public static class GuiBuilders
     {

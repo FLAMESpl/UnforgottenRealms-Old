@@ -1,4 +1,4 @@
-﻿using UnforgottenRealms.Settings;
+﻿using UnforgottenRealms.Common.Definitions;
 
 namespace UnforgottenRealms.Game.Players
 {

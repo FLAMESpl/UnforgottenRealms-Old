@@ -6,9 +6,9 @@ using UnforgottenRealms.Common.Resources;
 using UnforgottenRealms.Common.Window;
 using UnforgottenRealms.Game.World;
 using UnforgottenRealms.Game.World.Geometry;
-using UnforgottenRealms.Gui;
 using UnforgottenRealms.Gui.Components.Container;
-using UnforgottenRealms.Gui.ContextPreview;
+using UnforgottenRealms.Game.Gui.ContextPreview;
+using UnforgottenRealms.Game.Gui;
 
 namespace UnforgottenRealms.Game.Views
 {

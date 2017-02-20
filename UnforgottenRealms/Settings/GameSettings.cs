@@ -1,4 +1,6 @@
-﻿namespace UnforgottenRealms.Settings
+﻿using UnforgottenRealms.Common.Definitions;
+
+namespace UnforgottenRealms.Settings
 {
     public class GameSettings : ControllerSettings
     {

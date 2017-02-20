@@ -4,7 +4,7 @@ using SFML.Window;
 using UnforgottenRealms.Common.Utils;
 using System.Linq;
 
-namespace UnforgottenRealms.Gui.ContextPreview
+namespace UnforgottenRealms.Game.Gui.ContextPreview
 {
     public class ContextInfo : Drawable
     {

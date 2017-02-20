@@ -1,6 +1,6 @@
 ﻿using SFML.Graphics;
 
-namespace UnforgottenRealms.Gui.ContextPreview
+namespace UnforgottenRealms.Game.Gui.ContextPreview
 {
     public class ContextInfoLine
     {

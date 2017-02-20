@@ -9,7 +9,7 @@ using UnforgottenRealms.Game.Events;
 using UnforgottenRealms.Game.World.Geometry;
 using System;
 using System.Collections.Generic;
-using UnforgottenRealms.Gui.ContextPreview;
+using UnforgottenRealms.Game.Gui.ContextPreview;
 
 namespace UnforgottenRealms.Game.Objects.Units
 {

@@ -1,6 +1,6 @@
 ﻿using UnforgottenRealms.Common.Enums;
 
-namespace UnforgottenRealms.Settings
+namespace UnforgottenRealms.Common.Definitions
 {
     public class PlayerMetadata
     {

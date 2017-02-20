@@ -2,7 +2,7 @@
 using System.Linq;
 using UnforgottenRealms.Common.Utils;
 
-namespace UnforgottenRealms.Gui.ContextPreview
+namespace UnforgottenRealms.Game.Gui.ContextPreview
 {
     public class ContextInfoContent
     {

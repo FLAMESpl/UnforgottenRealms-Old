@@ -5,7 +5,7 @@ using UnforgottenRealms.Game;
 using UnforgottenRealms.Game.Events;
 using UnforgottenRealms.Gui.Components.ShapeBased;
 
-namespace UnforgottenRealms.Gui.Components
+namespace UnforgottenRealms.Game.Gui.Components
 {
     public class CurrentRoundLabel : Label
     {
