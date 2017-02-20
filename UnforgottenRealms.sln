@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnforgottenRealms.Common", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnforgottenRealms.Game", "UnforgottenRealms.Game\UnforgottenRealms.Game.csproj", "{98C08693-47F7-42B6-B05A-44F696B703D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnforgottenRealms.Editor", "UnforgottenRealms.Editor\UnforgottenRealms.Editor.csproj", "{CDD61B98-BE87-4B00-B7E6-41FFEF92C195}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{98C08693-47F7-42B6-B05A-44F696B703D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98C08693-47F7-42B6-B05A-44F696B703D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98C08693-47F7-42B6-B05A-44F696B703D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDD61B98-BE87-4B00-B7E6-41FFEF92C195}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDD61B98-BE87-4B00-B7E6-41FFEF92C195}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDD61B98-BE87-4B00-B7E6-41FFEF92C195}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDD61B98-BE87-4B00-B7E6-41FFEF92C195}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
