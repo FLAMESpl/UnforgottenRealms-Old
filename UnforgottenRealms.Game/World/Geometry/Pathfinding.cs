@@ -1,12 +1,11 @@
 ﻿using C5;
 using SFML.Audio;
-using SFML.Graphics;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnforgottenRealms.Common.Geometry.Coordinates;
 using UnforgottenRealms.Game.Objects.Units;
-using UnforgottenRealms.Game.World.Coordinates;
 
 namespace UnforgottenRealms.Game.World.Geometry
 {

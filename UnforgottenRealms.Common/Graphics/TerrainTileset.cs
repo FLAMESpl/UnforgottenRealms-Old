@@ -1,5 +1,5 @@
 ﻿using SFML.Window;
-using UnforgottenRealms.Game.World.Geometry;
+using UnforgottenRealms.Common.Geometry;
 
 namespace UnforgottenRealms.Game.Graphics
 {

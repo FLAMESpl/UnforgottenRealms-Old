@@ -1,4 +1,4 @@
-﻿namespace UnforgottenRealms.Game.World.Coordinates
+﻿namespace UnforgottenRealms.Common.Geometry.Coordinates
 {
     public class CubicCoordinates
     {

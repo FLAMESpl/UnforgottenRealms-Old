@@ -8,7 +8,7 @@ using UnforgottenRealms.Game.Events;
 using UnforgottenRealms.Game.Objects.Improvements;
 using UnforgottenRealms.Game.Objects.Units;
 using UnforgottenRealms.Game.Players;
-using UnforgottenRealms.Game.World.Coordinates;
+using UnforgottenRealms.Common.Geometry.Coordinates;
 using UnforgottenRealms.Game.World.Deposits;
 using UnforgottenRealms.Game.World.Geometry;
 using UnforgottenRealms.Game.World.Terrains;

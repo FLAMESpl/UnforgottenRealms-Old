@@ -2,7 +2,7 @@
 using System;
 using UnforgottenRealms.Common.Geometry.Coordinates;
 
-namespace UnforgottenRealms.Game.World.Geometry
+namespace UnforgottenRealms.Common.Geometry
 {
     public class HexModel
     {

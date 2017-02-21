@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System;
 
-namespace UnforgottenRealms.Game.World.Coordinates
+namespace UnforgottenRealms.Common.Geometry.Coordinates
 {
     public class AxialCoordinates
     {

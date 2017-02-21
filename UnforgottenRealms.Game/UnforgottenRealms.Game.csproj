@@ -65,17 +65,9 @@
     <Compile Include="Events\ObjectDestroyedEventArgs.cs" />
     <Compile Include="Events\RoundChangedEventArgs.cs" />
     <Compile Include="Events\ValueChangedEventArgs.cs" />
-    <Compile Include="Graphics\DepositTileset.cs" />
     <Compile Include="Graphics\GameTilesets.cs" />
     <Compile Include="Graphics\GuiTileset.cs" />
-    <Compile Include="Graphics\ImprovementsTileset.cs" />
-    <Compile Include="Graphics\ITextureDescriptor.cs" />
     <Compile Include="Graphics\MiscellaneousTileset.cs" />
-    <Compile Include="Graphics\TerrainTextureDescriptor.cs" />
-    <Compile Include="Graphics\TerrainTileset.cs" />
-    <Compile Include="Graphics\TextureDescriptor.cs" />
-    <Compile Include="Graphics\Tileset.cs" />
-    <Compile Include="Graphics\UnitsTileset.cs" />
     <Compile Include="Gui\Components\ActivePlayerLabel.cs" />
     <Compile Include="Gui\Components\CurrentRoundLabel.cs" />
     <Compile Include="Gui\Components\ResourceAmountLabel.cs" />
@@ -99,9 +91,6 @@
     <Compile Include="TurnCycle.cs" />
     <Compile Include="Views\GuiView.cs" />
     <Compile Include="Views\WorldView.cs" />
-    <Compile Include="World\Coordinates\AxialCoordinates.cs" />
-    <Compile Include="World\Coordinates\CubicCoordinates.cs" />
-    <Compile Include="World\Coordinates\OffsetCoordinates.cs" />
     <Compile Include="World\Deposits\Deposit.cs" />
     <Compile Include="World\Deposits\Iron.cs" />
     <Compile Include="World\Field.cs" />
@@ -131,6 +120,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

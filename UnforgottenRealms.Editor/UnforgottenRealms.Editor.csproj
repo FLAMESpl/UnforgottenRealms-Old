@@ -90,6 +90,7 @@
     <Compile Include="Forms\World.Designer.cs">
       <DependentUpon>World.cs</DependentUpon>
     </Compile>
+    <Compile Include="Graphics\EditorTilesets.cs" />
     <Compile Include="Palette\PaletteContent.cs" />
     <Compile Include="Palette\TerrainPalette.cs" />
     <Compile Include="Program.cs" />

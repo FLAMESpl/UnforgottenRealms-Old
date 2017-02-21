@@ -4,7 +4,7 @@ using System.Linq;
 using UnforgottenRealms.Game.Objects.Units;
 using UnforgottenRealms.Game.World.Terrains;
 using UnforgottenRealms.Game.Objects.Improvements;
-using UnforgottenRealms.Game.World.Coordinates;
+using UnforgottenRealms.Common.Geometry.Coordinates;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.Events;
 using System;

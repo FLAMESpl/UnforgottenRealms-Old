@@ -1,6 +1,6 @@
 ﻿using SFML.Window;
 
-namespace UnforgottenRealms.Game.World.Coordinates
+namespace UnforgottenRealms.Common.Geometry.Coordinates
 {
     public class OffsetCoordinates
     {
