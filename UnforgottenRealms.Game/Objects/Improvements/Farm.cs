@@ -24,7 +24,7 @@ namespace UnforgottenRealms.Game.Objects.Improvements
 
         protected override void Refresh(object sender, RoundChangedEventArgs e)
         {
-            Owner.Resources.Types[ResourceType.Wood].Amount += ProductionRate;
+            Owner.Resources.Types[ResourceType.Food].Amount += ProductionRate;
         }
     }
 }

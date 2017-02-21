@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using SFML.Graphics;
+using System;
 using System.Windows.Forms;
 
 namespace UnforgottenRealms.Editor
@@ -14,9 +12,19 @@ namespace UnforgottenRealms.Editor
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            var form = new Forms.Main();
+            var renderwindow = form.InitializeSfml();
+
+            form.Show();
+            
+            while (form.Visible) 
+            {
+                Application.DoEvents(); 
+                renderwindow.DispatchEvents(); 
+                renderwindow.Clear(Color.Yellow);
+                renderwindow.Draw(form);
+                renderwindow.Display();
+            }
         }
     }
 }
