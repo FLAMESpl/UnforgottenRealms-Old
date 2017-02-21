@@ -27,5 +27,17 @@ namespace UnforgottenRealms.Editor.Forms
         {
             
         }
+
+        private void worldToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var worldOptionsDialog = new World();
+            worldOptionsDialog.ShowDialog();
+        }
+
+        private void playersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var playersOptionDialog = new Players();
+            playersOptionDialog.ShowDialog();
+        }
     }
 }
