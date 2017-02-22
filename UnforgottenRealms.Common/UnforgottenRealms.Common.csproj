@@ -56,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AtomicReference.cs" />
+    <Compile Include="Definitions\Entity\IDeposit.cs" />
+    <Compile Include="Definitions\Entity\IEntity.cs" />
+    <Compile Include="Definitions\Entity\IField.cs" />
+    <Compile Include="Definitions\Entity\IImprovement.cs" />
+    <Compile Include="Definitions\Entity\ITerrain.cs" />
+    <Compile Include="Definitions\Entity\IUnit.cs" />
     <Compile Include="Definitions\PlayerMetadata.cs" />
     <Compile Include="Enums\Direction.cs" />
     <Compile Include="Enums\PlayerColour.cs" />
@@ -90,9 +96,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Definitions\Entity\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Baseclass.Contrib.Nuget.Output.1.0.0\build\net40\Baseclass.Contrib.Nuget.Output.targets" Condition="Exists('..\packages\Baseclass.Contrib.Nuget.Output.1.0.0\build\net40\Baseclass.Contrib.Nuget.Output.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
