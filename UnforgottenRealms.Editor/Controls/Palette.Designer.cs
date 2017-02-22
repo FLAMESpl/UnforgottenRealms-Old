@@ -30,7 +30,7 @@
         {
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.labelPaletteName = new System.Windows.Forms.Label();
-            this.listView = new System.Windows.Forms.ListView();
+            this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -39,7 +39,7 @@
             this.tableLayoutPanel.ColumnCount = 1;
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel.Controls.Add(this.labelPaletteName, 0, 0);
-            this.tableLayoutPanel.Controls.Add(this.listView, 0, 1);
+            this.tableLayoutPanel.Controls.Add(this.flowLayoutPanel, 0, 1);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
@@ -60,14 +60,16 @@
             this.labelPaletteName.Text = "Palette";
             this.labelPaletteName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // listView
+            // flowLayoutPanel
             // 
-            this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView.Location = new System.Drawing.Point(3, 23);
-            this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(168, 254);
-            this.listView.TabIndex = 1;
-            this.listView.UseCompatibleStateImageBehavior = false;
+            this.flowLayoutPanel.AutoScroll = true;
+            this.flowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel.Location = new System.Drawing.Point(3, 23);
+            this.flowLayoutPanel.Name = "flowLayoutPanel";
+            this.flowLayoutPanel.Size = new System.Drawing.Size(168, 254);
+            this.flowLayoutPanel.TabIndex = 1;
+            this.flowLayoutPanel.WrapContents = false;
             // 
             // Palette
             // 
@@ -86,6 +88,6 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
         private System.Windows.Forms.Label labelPaletteName;
-        private System.Windows.Forms.ListView listView;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
     }
 }

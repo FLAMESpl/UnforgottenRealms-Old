@@ -40,13 +40,14 @@
             this.worldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.drawingSurface = new UnforgottenRealms.Editor.Controls.DrawingSurface(this.components);
-            this.palette = new UnforgottenRealms.Editor.Controls.Palette();
             this.toolTerrain = new System.Windows.Forms.ToolStripButton();
+            this.toolDeposits = new System.Windows.Forms.ToolStripButton();
             this.toolUnits = new System.Windows.Forms.ToolStripButton();
             this.toolImprovements = new System.Windows.Forms.ToolStripButton();
-            this.toolDeposits = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.imagesTerrainPalette = new System.Windows.Forms.ImageList(this.components);
+            this.drawingSurface = new UnforgottenRealms.Editor.Controls.DrawingSurface(this.components);
+            this.palette = new UnforgottenRealms.Editor.Controls.Palette();
             this.tableLayout.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -55,7 +56,7 @@
             // tableLayout
             // 
             this.tableLayout.ColumnCount = 2;
-            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 139F));
             this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayout.Controls.Add(this.drawingSurface, 1, 0);
             this.tableLayout.Controls.Add(this.palette, 0, 0);
@@ -118,14 +119,14 @@
             // worldToolStripMenuItem
             // 
             this.worldToolStripMenuItem.Name = "worldToolStripMenuItem";
-            this.worldToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.worldToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.worldToolStripMenuItem.Text = "World";
             this.worldToolStripMenuItem.Click += new System.EventHandler(this.worldToolStripMenuItem_Click);
             // 
             // playersToolStripMenuItem
             // 
             this.playersToolStripMenuItem.Name = "playersToolStripMenuItem";
-            this.playersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.playersToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.playersToolStripMenuItem.Text = "Players";
             this.playersToolStripMenuItem.Click += new System.EventHandler(this.playersToolStripMenuItem_Click);
             // 
@@ -144,23 +145,6 @@
             this.toolStrip.TabIndex = 2;
             this.toolStrip.Text = "toolStrip1";
             // 
-            // drawingSurface
-            // 
-            this.drawingSurface.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.drawingSurface.Location = new System.Drawing.Point(123, 3);
-            this.drawingSurface.Name = "drawingSurface";
-            this.drawingSurface.Size = new System.Drawing.Size(323, 245);
-            this.drawingSurface.TabIndex = 2;
-            this.drawingSurface.Text = "drawingSurface";
-            // 
-            // palette
-            // 
-            this.palette.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.palette.Location = new System.Drawing.Point(3, 3);
-            this.palette.Name = "palette";
-            this.palette.Size = new System.Drawing.Size(114, 245);
-            this.palette.TabIndex = 3;
-            // 
             // toolTerrain
             // 
             this.toolTerrain.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -169,6 +153,16 @@
             this.toolTerrain.Name = "toolTerrain";
             this.toolTerrain.Size = new System.Drawing.Size(23, 22);
             this.toolTerrain.Text = "toolTerrain";
+            this.toolTerrain.Click += new System.EventHandler(this.toolTerrain_Click);
+            // 
+            // toolDeposits
+            // 
+            this.toolDeposits.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolDeposits.Image = ((System.Drawing.Image)(resources.GetObject("toolDeposits.Image")));
+            this.toolDeposits.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolDeposits.Name = "toolDeposits";
+            this.toolDeposits.Size = new System.Drawing.Size(23, 22);
+            this.toolDeposits.Text = "toolStripButton4";
             // 
             // toolUnits
             // 
@@ -188,19 +182,41 @@
             this.toolImprovements.Size = new System.Drawing.Size(23, 22);
             this.toolImprovements.Text = "toolStripButton3";
             // 
-            // toolDeposits
-            // 
-            this.toolDeposits.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolDeposits.Image = ((System.Drawing.Image)(resources.GetObject("toolDeposits.Image")));
-            this.toolDeposits.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolDeposits.Name = "toolDeposits";
-            this.toolDeposits.Size = new System.Drawing.Size(23, 22);
-            this.toolDeposits.Text = "toolStripButton4";
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // imagesTerrainPalette
+            // 
+            this.imagesTerrainPalette.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imagesTerrainPalette.ImageStream")));
+            this.imagesTerrainPalette.TransparentColor = System.Drawing.Color.Transparent;
+            this.imagesTerrainPalette.Images.SetKeyName(0, "desert.png");
+            this.imagesTerrainPalette.Images.SetKeyName(1, "forest.png");
+            this.imagesTerrainPalette.Images.SetKeyName(2, "grass.png");
+            this.imagesTerrainPalette.Images.SetKeyName(3, "hill.png");
+            this.imagesTerrainPalette.Images.SetKeyName(4, "mountain.png");
+            this.imagesTerrainPalette.Images.SetKeyName(5, "water.png");
+            // 
+            // drawingSurface
+            // 
+            this.drawingSurface.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.drawingSurface.Location = new System.Drawing.Point(142, 3);
+            this.drawingSurface.Name = "drawingSurface";
+            this.drawingSurface.Size = new System.Drawing.Size(304, 245);
+            this.drawingSurface.TabIndex = 2;
+            this.drawingSurface.Text = "drawingSurface";
+            // 
+            // palette
+            // 
+            this.palette.ActiveColor = System.Drawing.SystemColors.ActiveCaption;
+            this.palette.BrushesMargin = new System.Drawing.Size(6, 6);
+            this.palette.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.palette.IdleColor = System.Drawing.SystemColors.Control;
+            this.palette.Location = new System.Drawing.Point(3, 3);
+            this.palette.Name = "palette";
+            this.palette.Size = new System.Drawing.Size(133, 245);
+            this.palette.TabIndex = 3;
             // 
             // Main
             // 
@@ -242,5 +258,6 @@
         private System.Windows.Forms.ToolStripButton toolUnits;
         private System.Windows.Forms.ToolStripButton toolImprovements;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ImageList imagesTerrainPalette;
     }
 }

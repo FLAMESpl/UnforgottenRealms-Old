@@ -8,5 +8,6 @@ namespace UnforgottenRealms.Editor.Level
 {
     public class Map
     {
+
     }
 }

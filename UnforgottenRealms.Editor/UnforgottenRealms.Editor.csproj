@@ -97,7 +97,6 @@
     <Compile Include="Level\Terrain.cs" />
     <Compile Include="Level\Unit.cs" />
     <Compile Include="Palette\PaletteContent.cs" />
-    <Compile Include="Palette\TerrainPalette.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\Palette.resx">

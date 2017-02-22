@@ -8,11 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UnforgottenRealms.Editor.Palette;
 
 namespace UnforgottenRealms.Editor.Forms
 {
     public partial class Main : Form, Drawable
     {
+        Players playersOptionDialog = new Players();
+        World worldOptionsDialog = new World();
+
         public Main()
         {
             InitializeComponent();
@@ -30,14 +34,17 @@ namespace UnforgottenRealms.Editor.Forms
 
         private void worldToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var worldOptionsDialog = new World();
             worldOptionsDialog.ShowDialog();
         }
 
         private void playersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var playersOptionDialog = new Players();
             playersOptionDialog.ShowDialog();
+        }
+
+        private void toolTerrain_Click(object sender, EventArgs e)
+        {
+            palette.LoadContent(new PaletteContent(imagesTerrainPalette, new Size(20, 20)));
         }
     }
 }
