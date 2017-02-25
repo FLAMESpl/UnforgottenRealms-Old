@@ -30,7 +30,7 @@ namespace UnforgottenRealms.Editor.Level
             Improvement = factory.Invoke(this, ownerId);
         }
 
-        public void Create(TerrainMetadata metadata) => Terrain = metadata.IsEmpty ? null : new Terrain(this, metadata);
+        public void Create(TerrainMetadata metadata) => Terrain = new Terrain(this, metadata);
 
         public void Create(UnitFactory factory, int ownerId)
         {

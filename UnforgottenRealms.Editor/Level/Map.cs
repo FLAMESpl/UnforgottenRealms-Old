@@ -41,6 +41,7 @@ namespace UnforgottenRealms.Editor.Level
                 for (int j = 0; j < size.Y; j++)
                 {
                     fields[i].Add(CreateField(i, j));
+                    fields[i][j].Create(TerrainMetadata.Empty);
                 }
             }
         }

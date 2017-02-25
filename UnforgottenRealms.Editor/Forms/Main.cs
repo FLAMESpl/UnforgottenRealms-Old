@@ -23,7 +23,6 @@ namespace UnforgottenRealms.Editor.Forms
         private ResourceManager resources;
         private GameWindow window;
         private Map world;
-        private Color clearColor = new Color(50, 50, 200);
 
         private ImageBrushPair[] terrainBrushes = null;
 
@@ -40,7 +39,7 @@ namespace UnforgottenRealms.Editor.Forms
             DrawOnSurface();
             editorView.Set();
 
-            window.Clear(clearColor);
+            window.Clear();
             window.Draw(world);
             window.Display();
         }

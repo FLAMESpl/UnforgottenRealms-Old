@@ -1,7 +1,7 @@
 ﻿using SFML.Graphics;
+using SFML.Window;
+using System;
 using UnforgottenRealms.Common.Definitions.Entity;
-using UnforgottenRealms.Common.Graphics;
-using UnforgottenRealms.Editor.Palette;
 
 namespace UnforgottenRealms.Editor.Level
 {
@@ -9,6 +9,7 @@ namespace UnforgottenRealms.Editor.Level
 
     public class Terrain : ITerrain, Drawable
     {
+        private Color nullTextureColor = new Color(50, 50, 200);
         private Texture texture;
         private VertexArray vertex;
 
@@ -17,8 +18,13 @@ namespace UnforgottenRealms.Editor.Level
         public Terrain(Field location, TerrainMetadata metadata)
         {
             Metadata = metadata;
-            texture = metadata.TextureDescriptor.Texture;
+            texture = metadata.TextureDescriptor?.Texture;
 
+            InitializeVertex(location);
+        }
+
+        protected virtual void InitializeVertex(Field location)
+        {
             var model = location.World.Model;
             var topLeftCorner = model.GetTopLeftCorner(location.Position);
 
@@ -27,12 +33,30 @@ namespace UnforgottenRealms.Editor.Level
 
             vertex = new VertexArray(PrimitiveType.TrianglesFan);
 
-            vertex.Append(new Vertex(hexCenter, metadata.TextureDescriptor.Center));
+            if (Metadata.IsEmpty)
+                CreateVertexWithoutTexture(apexes, hexCenter);
+            else
+                CreateVertexWithTexture(apexes, hexCenter);
+        }
+
+        private void CreateVertexWithTexture(Vector2f[] apexes, Vector2f center)
+        {
+            vertex.Append(new Vertex(center, Metadata.TextureDescriptor.Center));
             for (uint i = 0; i < 6; i++)
             {
-                vertex.Append(new Vertex(apexes[i], metadata.TextureDescriptor.Apexes[i]));
+                vertex.Append(new Vertex(apexes[i], Metadata.TextureDescriptor.Apexes[i]));
             }
-            vertex.Append(new Vertex(apexes[0], metadata.TextureDescriptor.Apexes[0]));
+            vertex.Append(new Vertex(apexes[0], Metadata.TextureDescriptor.Apexes[0]));
+        }
+
+        private void CreateVertexWithoutTexture(Vector2f[] apexes, Vector2f center)
+        {
+            vertex.Append(new Vertex(center, nullTextureColor));
+            for (uint i = 0; i < 6; i++)
+            {
+                vertex.Append(new Vertex(apexes[i], nullTextureColor));
+            }
+            vertex.Append(new Vertex(apexes[0], nullTextureColor));
         }
 
         public void Draw(RenderTarget target, RenderStates states)
