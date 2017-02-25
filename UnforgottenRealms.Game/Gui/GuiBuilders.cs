@@ -9,6 +9,7 @@ using UnforgottenRealms.Game.Gui.Components;
 using UnforgottenRealms.Gui.Components.Container;
 using UnforgottenRealms.Gui.Components.ImageBased;
 using UnforgottenRealms.Gui.Components.ShapeBased;
+using UnforgottenRealms.Common.Graphics;
 
 namespace UnforgottenRealms.Game.Gui
 {

@@ -5,10 +5,10 @@ using System.Threading;
 using UnforgottenRealms.Common.Resources;
 using UnforgottenRealms.Common.Window;
 using UnforgottenRealms.Game.World;
-using UnforgottenRealms.Game.World.Geometry;
 using UnforgottenRealms.Gui.Components.Container;
 using UnforgottenRealms.Game.Gui.ContextPreview;
 using UnforgottenRealms.Game.Gui;
+using UnforgottenRealms.Common.Geometry;
 
 namespace UnforgottenRealms.Game.Views
 {

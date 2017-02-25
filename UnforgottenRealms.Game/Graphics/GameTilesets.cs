@@ -1,4 +1,5 @@
-﻿using UnforgottenRealms.Common.Resources;
+﻿using UnforgottenRealms.Common.Graphics;
+using UnforgottenRealms.Common.Resources;
 
 namespace UnforgottenRealms.Game.Graphics
 {

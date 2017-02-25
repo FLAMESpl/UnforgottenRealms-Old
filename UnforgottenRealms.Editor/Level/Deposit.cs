@@ -1,13 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SFML.Graphics;
 using UnforgottenRealms.Common.Definitions.Entity;
 
 namespace UnforgottenRealms.Editor.Level
 {
-    public class Deposit : IDeposit
+    public delegate Deposit DepositFactory(Field location);
+
+    public class Deposit : IDeposit, Drawable
     {
+        public void Draw(RenderTarget target, RenderStates states)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

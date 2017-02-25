@@ -1,6 +1,8 @@
 ﻿using SFML.Graphics;
+using SFML.Window;
 using System.ComponentModel;
 using System.Windows.Forms;
+using View = SFML.Graphics.View;
 
 namespace UnforgottenRealms.Editor.Controls
 {
@@ -23,7 +25,13 @@ namespace UnforgottenRealms.Editor.Controls
         public RenderWindow InitializeSfml()
         {
             RenderWindow = new RenderWindow(Handle);
+            RenderWindow.Resized += OnSfmlClientResize;
             return RenderWindow;
+        }
+
+        protected void OnSfmlClientResize(object sender, SizeEventArgs e)
+        {
+            RenderWindow.SetView(new View(new FloatRect(0, 0, e.Width, e.Height)));
         }
 
         protected override void OnPaint(PaintEventArgs e)

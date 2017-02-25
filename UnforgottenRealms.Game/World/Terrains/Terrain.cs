@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using SFML.Graphics;
-using UnforgottenRealms.Game.Graphics;
 using UnforgottenRealms.Game.Gui.ContextPreview;
+using UnforgottenRealms.Common.Graphics;
 
 namespace UnforgottenRealms.Game.World.Terrains
 {

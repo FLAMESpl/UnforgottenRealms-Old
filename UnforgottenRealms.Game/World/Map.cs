@@ -10,8 +10,8 @@ using UnforgottenRealms.Game.Objects.Units;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Common.Geometry.Coordinates;
 using UnforgottenRealms.Game.World.Deposits;
-using UnforgottenRealms.Game.World.Geometry;
 using UnforgottenRealms.Game.World.Terrains;
+using UnforgottenRealms.Common.Geometry;
 
 namespace UnforgottenRealms.Game.World
 {

@@ -60,6 +60,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\BrushButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\BrushButton.Designer.cs">
+      <DependentUpon>BrushButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DrawingSurface.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -78,25 +84,33 @@
     <Compile Include="Forms\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Players.cs">
+    <Compile Include="Forms\PlayersOptions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Players.Designer.cs">
-      <DependentUpon>Players.cs</DependentUpon>
+    <Compile Include="Forms\PlayersOptions.Designer.cs">
+      <DependentUpon>PlayersOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\World.cs">
+    <Compile Include="Forms\WorldOptions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\World.Designer.cs">
-      <DependentUpon>World.cs</DependentUpon>
+    <Compile Include="Forms\WorldOptions.Designer.cs">
+      <DependentUpon>WorldOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="Graphics\EditorTilesets.cs" />
+    <Compile Include="Helpers\VectorExtensions.cs" />
     <Compile Include="Level\Deposit.cs" />
+    <Compile Include="Level\IEntityMetadata.cs" />
+    <Compile Include="Level\Field.cs" />
     <Compile Include="Level\Improvement.cs" />
     <Compile Include="Level\Map.cs" />
     <Compile Include="Level\Terrain.cs" />
+    <Compile Include="Level\TerrainMetadata.cs" />
     <Compile Include="Level\Unit.cs" />
+    <Compile Include="Palette\Brush.cs" />
+    <Compile Include="Palette\ImageBrushPair.cs" />
     <Compile Include="Palette\PaletteContent.cs" />
+    <Compile Include="Palette\Probe.cs" />
+    <Compile Include="Palette\TerrainBrush.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\Palette.resx">

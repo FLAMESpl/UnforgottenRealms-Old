@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace UnforgottenRealms.Editor.Forms
 {
-    public partial class Players : Form
+    public partial class PlayersOptions : Form
     {
-        public Players()
+        public PlayersOptions()
         {
             InitializeComponent();
         }

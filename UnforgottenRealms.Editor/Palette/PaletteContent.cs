@@ -1,17 +1,16 @@
-﻿using System.Drawing;
-using System.Windows.Forms;
+﻿using System.Collections.Generic;
 
 namespace UnforgottenRealms.Editor.Palette
 {
     public class PaletteContent
     {
-        public ImageList Images { get; }
-        public Size Size { get; }
+        public IEnumerable<ImageBrushPair> Images { get; }
+        public Probe Probe { get; }
 
-        public PaletteContent(ImageList images, Size size)
+        public PaletteContent(IEnumerable<ImageBrushPair> images, Probe probe)   
         {
             Images = images;
-            Size = size;
+            Probe = probe;
         }
     }
 }

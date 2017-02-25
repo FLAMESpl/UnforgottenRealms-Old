@@ -10,6 +10,7 @@ using UnforgottenRealms.Game.World.Geometry;
 using System;
 using System.Collections.Generic;
 using UnforgottenRealms.Game.Gui.ContextPreview;
+using UnforgottenRealms.Common.Graphics;
 
 namespace UnforgottenRealms.Game.Objects.Units
 {

@@ -1,4 +1,5 @@
 ﻿using SFML.Window;
+using UnforgottenRealms.Common.Graphics;
 using UnforgottenRealms.Game.Graphics;
 
 namespace UnforgottenRealms.Game.Objects

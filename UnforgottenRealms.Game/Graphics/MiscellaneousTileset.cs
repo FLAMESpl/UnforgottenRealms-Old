@@ -1,4 +1,6 @@
-﻿namespace UnforgottenRealms.Game.Graphics
+﻿using UnforgottenRealms.Common.Graphics;
+
+namespace UnforgottenRealms.Game.Graphics
 {
     public class MiscellaneousTileset : Tileset
     {

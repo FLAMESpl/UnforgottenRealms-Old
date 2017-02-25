@@ -1,6 +1,6 @@
 ﻿using SFML.Window;
 
-namespace UnforgottenRealms.Game.Graphics
+namespace UnforgottenRealms.Common.Graphics
 {
     public class DepositTileset : Tileset
     {

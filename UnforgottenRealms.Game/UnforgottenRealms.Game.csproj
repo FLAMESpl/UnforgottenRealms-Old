@@ -96,7 +96,6 @@
     <Compile Include="World\Field.cs" />
     <Compile Include="World\FieldExtensions.cs" />
     <Compile Include="World\Geometry\FrontierElement.cs" />
-    <Compile Include="World\Geometry\HexModel.cs" />
     <Compile Include="World\Geometry\Pathfinding.cs" />
     <Compile Include="World\Geometry\PathfindingResult.cs" />
     <Compile Include="World\Map.cs" />

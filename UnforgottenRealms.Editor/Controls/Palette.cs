@@ -1,51 +1,56 @@
-﻿using System.Drawing;
-using System.Data;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using UnforgottenRealms.Editor.Level;
 using UnforgottenRealms.Editor.Palette;
-using System;
 
 namespace UnforgottenRealms.Editor.Controls
 {
     public partial class Palette : UserControl
     {
-        private PictureBox selected = null;
+        private List<BrushButton> brushButtons = null;
+        private Probe probe = null;
+        private BrushButton selected = null;
 
         public Size BrushesMargin { get; set; } = new Size(6, 6);
-        public Color IdleColor { get; set; } = SystemColors.Control;
-        public Color ActiveColor { get; set; } = SystemColors.ActiveCaption;
 
         public Palette()
         {
             InitializeComponent();
         }
 
+        public void PaintField(Field field) => selected?.Brush.Paint(field);
+        public void PickField(Field field) => ChangeBrush(brushButtons.Where(x => probe.Pick(field) == x.Brush.EntityMetadata.EntityId).Single());
+
         public void LoadContent(PaletteContent content)
         {
             flowLayoutPanel.Controls.Clear();
+            probe = content.Probe;
+            brushButtons = new List<BrushButton>();
 
-            foreach (var image in content.Images.Images.Cast<Image>())
+            foreach (var image in content.Images)
             {
-                var picture = new PictureBox()
+                var picture = new BrushButton()
                 {
-                    BackColor = IdleColor,
-                    Image = image,
-                    Size = image.Size + BrushesMargin,
+                    ActiveColor = SystemColors.ActiveCaption,
+                    Brush = image.Brush,
+                    IdleColor = SystemColors.Control,
+                    Image = image.Image,
+                    Size = image.Image.Size + BrushesMargin,
                     SizeMode = PictureBoxSizeMode.CenterImage
                 };
-                picture.Click += ChangeBrush;
+                picture.Click += (s, e) => ChangeBrush(s as BrushButton);
+                brushButtons.Add(picture);
                 flowLayoutPanel.Controls.Add(picture);
             }
         }
 
-        private void ChangeBrush(object sender, EventArgs e)
+        private void ChangeBrush(BrushButton brushButton)
         {
-            if (selected != null)
-                selected.BackColor = IdleColor;
-
-            var pictureBox = sender as PictureBox;
-            pictureBox.BackColor = ActiveColor;
-            selected = pictureBox;
+            selected?.Deactivate();
+            selected = brushButton;
+            selected?.Activate();
         }
     }
 }

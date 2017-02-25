@@ -1,7 +1,7 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
 
-namespace UnforgottenRealms.Game.Graphics
+namespace UnforgottenRealms.Common.Graphics
 {
     public class TerrainTextureDescriptor : ITextureDescriptor
     {

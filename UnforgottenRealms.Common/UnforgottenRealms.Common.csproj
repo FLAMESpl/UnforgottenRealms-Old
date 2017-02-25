@@ -56,6 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AtomicReference.cs" />
+    <Compile Include="Definitions\Entity\EntityClass.cs" />
+    <Compile Include="Definitions\Entity\EntityId.cs" />
     <Compile Include="Definitions\Entity\IDeposit.cs" />
     <Compile Include="Definitions\Entity\IEntity.cs" />
     <Compile Include="Definitions\Entity\IField.cs" />

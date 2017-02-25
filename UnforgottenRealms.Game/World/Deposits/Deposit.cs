@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnforgottenRealms.Game.Graphics;
 using UnforgottenRealms.Game.Objects;
 using UnforgottenRealms.Game.Gui.ContextPreview;
+using UnforgottenRealms.Common.Graphics;
 
 namespace UnforgottenRealms.Game.World.Deposits
 {

@@ -14,6 +14,7 @@ namespace UnforgottenRealms.Editor
         {
             var form = new Forms.Main();
             var renderwindow = form.InitializeSfml();
+            var clearColor = new Color(50, 50, 200);
 
             form.Show();
             
@@ -21,7 +22,7 @@ namespace UnforgottenRealms.Editor
             {
                 Application.DoEvents(); 
                 renderwindow.DispatchEvents(); 
-                renderwindow.Clear(Color.Yellow);
+                renderwindow.Clear(clearColor);
                 renderwindow.Draw(form);
                 renderwindow.Display();
             }

@@ -1,5 +1,5 @@
-﻿using UnforgottenRealms.Common.Resources;
-using UnforgottenRealms.Game.Graphics;
+﻿using UnforgottenRealms.Common.Graphics;
+using UnforgottenRealms.Common.Resources;
 
 namespace UnforgottenRealms.Editor.Graphics
 {
@@ -12,10 +12,10 @@ namespace UnforgottenRealms.Editor.Graphics
 
         public EditorTilesets()
         {
-            Deposits = new DepositTileset("deps");
-            Improvements = new ImprovementsTileset("imps");
-            Terrain = new TerrainTileset("terrain");
-            Units = new UnitsTileset("units");
+            Deposits = new DepositTileset(GetPath("deps"));
+            Improvements = new ImprovementsTileset(GetPath("imps"));
+            Terrain = new TerrainTileset(GetPath("terrain"));
+            Units = new UnitsTileset(GetPath("units"));
         }
 
         private string GetPath(string fileName) => $".\\gfx\\{fileName}.png";

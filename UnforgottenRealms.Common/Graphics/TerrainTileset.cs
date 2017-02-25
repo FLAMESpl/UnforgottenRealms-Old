@@ -1,7 +1,7 @@
 ﻿using SFML.Window;
 using UnforgottenRealms.Common.Geometry;
 
-namespace UnforgottenRealms.Game.Graphics
+namespace UnforgottenRealms.Common.Graphics
 {
     public class TerrainTileset : Tileset
     {

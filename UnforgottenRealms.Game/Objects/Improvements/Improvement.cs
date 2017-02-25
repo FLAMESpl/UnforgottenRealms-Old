@@ -7,6 +7,8 @@ using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.World;
 using UnforgottenRealms.Game.World.Geometry;
 using UnforgottenRealms.Game.Gui.ContextPreview;
+using UnforgottenRealms.Common.Graphics;
+using UnforgottenRealms.Common.Geometry;
 
 namespace UnforgottenRealms.Game.Objects.Improvements
 {

@@ -191,12 +191,13 @@
             // 
             this.imagesTerrainPalette.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imagesTerrainPalette.ImageStream")));
             this.imagesTerrainPalette.TransparentColor = System.Drawing.Color.Transparent;
-            this.imagesTerrainPalette.Images.SetKeyName(0, "desert.png");
-            this.imagesTerrainPalette.Images.SetKeyName(1, "forest.png");
-            this.imagesTerrainPalette.Images.SetKeyName(2, "grass.png");
-            this.imagesTerrainPalette.Images.SetKeyName(3, "hill.png");
+            this.imagesTerrainPalette.Images.SetKeyName(0, "none.png");
+            this.imagesTerrainPalette.Images.SetKeyName(1, "grass.png");
+            this.imagesTerrainPalette.Images.SetKeyName(2, "desert.png");
+            this.imagesTerrainPalette.Images.SetKeyName(3, "water.png");
             this.imagesTerrainPalette.Images.SetKeyName(4, "mountain.png");
-            this.imagesTerrainPalette.Images.SetKeyName(5, "water.png");
+            this.imagesTerrainPalette.Images.SetKeyName(5, "hill.png");
+            this.imagesTerrainPalette.Images.SetKeyName(6, "forest.png");
             // 
             // drawingSurface
             // 
@@ -206,13 +207,12 @@
             this.drawingSurface.Size = new System.Drawing.Size(304, 245);
             this.drawingSurface.TabIndex = 2;
             this.drawingSurface.Text = "drawingSurface";
+            this.drawingSurface.Click += new System.EventHandler(this.drawingSurface_Click);
             // 
             // palette
             // 
-            this.palette.ActiveColor = System.Drawing.SystemColors.ActiveCaption;
             this.palette.BrushesMargin = new System.Drawing.Size(6, 6);
             this.palette.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.palette.IdleColor = System.Drawing.SystemColors.Control;
             this.palette.Location = new System.Drawing.Point(3, 3);
             this.palette.Name = "palette";
             this.palette.Size = new System.Drawing.Size(133, 245);
