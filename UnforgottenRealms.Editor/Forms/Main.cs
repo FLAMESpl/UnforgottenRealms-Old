@@ -13,21 +13,25 @@ using UnforgottenRealms.Common.Definitions.Entity;
 using UnforgottenRealms.Common.Geometry;
 using UnforgottenRealms.Common.Graphics;
 using UnforgottenRealms.Common.Resources;
+using UnforgottenRealms.Common.Window;
 using UnforgottenRealms.Editor.Graphics;
 using UnforgottenRealms.Editor.Helpers;
 using UnforgottenRealms.Editor.Level;
 using UnforgottenRealms.Editor.Palette;
 using Brush = UnforgottenRealms.Editor.Palette.Brush;
+using Color = SFML.Graphics.Color;
 
 namespace UnforgottenRealms.Editor.Forms
 {
-    public partial class Main : Form, Drawable
+    public partial class Main : Form
     {
         private PlayersOptions playersOptionDialog = new PlayersOptions();
         private WorldOptions worldOptionsDialog = new WorldOptions();
         private HexModel model = null;
         private ResourceManager resources;
+        private GameWindow window;
         private Map world;
+        private Color clearColor = new Color(50, 50, 200);
 
         private ImageBrushPair[] terrainBrushes = null;
 
@@ -36,7 +40,18 @@ namespace UnforgottenRealms.Editor.Forms
             InitializeComponent();
         }
 
-        public RenderWindow InitializeSfml()
+        public void Process()
+        {
+            window.DispatchEvents();
+
+            DrawOnSurface();
+
+            window.Clear(clearColor);
+            window.Draw(world);
+            window.Display();
+        }
+
+        public void InitializeSfml()
         {
             model = new HexModel(40);
             resources = new ResourceManager();
@@ -47,13 +62,8 @@ namespace UnforgottenRealms.Editor.Forms
             world.Create(new Vector2i(10, 10));
 
             CreateTerrainBrushes(tilesets.Terrain);
-            
-            return drawingSurface.InitializeSfml();
-        }
 
-        public void Draw(RenderTarget target, RenderStates states)
-        {
-            target.Draw(world, states);
+            window = drawingSurface.InitializeSfml();
         }
 
         private void worldToolStripMenuItem_Click(object sender, EventArgs e) => worldOptionsDialog.ShowDialog();
@@ -62,18 +72,22 @@ namespace UnforgottenRealms.Editor.Forms
         private void LoadPaletteContent(ImageList images) => palette.LoadContent(new PaletteContent(terrainBrushes, Probe.Terrain));
         private void toolTerrain_Click(object sender, EventArgs e) => LoadPaletteContent(imagesTerrainPalette);
 
-        private void drawingSurface_Click(object sender, EventArgs e)
+        private void DrawOnSurface()
         {
-            var eventArgs = e as MouseEventArgs;
-            var mousePosition = eventArgs.Location.ToFloatVector();
+            var mousePosition = Mouse.GetPosition(window);
+            var mouseLeftButtonPressed = Mouse.IsButtonPressed(Mouse.Button.Left);
+            var mouseRightButtonPressed = Mouse.IsButtonPressed(Mouse.Button.Right);
 
-            var position = model.FindHex(mousePosition);
+            if (!mouseLeftButtonPressed && !mouseRightButtonPressed || !window.Contains(mousePosition))
+                return;
+
+            var position = model.FindHex(new Vector2f(mousePosition.X, mousePosition.Y));
             if (!world.Contains(position))
                 return;
 
-            if (eventArgs.Button == MouseButtons.Left)
+            if (mouseLeftButtonPressed)
                 palette.PaintField(world[position]);
-            else if (eventArgs.Button == MouseButtons.Right)
+            else if (mouseRightButtonPressed)
                 palette.PickField(world[position]);
         }
 

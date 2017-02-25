@@ -2,13 +2,14 @@
 using SFML.Window;
 using System.ComponentModel;
 using System.Windows.Forms;
+using UnforgottenRealms.Common.Window;
 using View = SFML.Graphics.View;
 
 namespace UnforgottenRealms.Editor.Controls
 {
     public partial class DrawingSurface : Control
     {
-        public RenderWindow RenderWindow { get; protected set; }
+        public GameWindow RenderWindow { get; protected set; }
 
         public DrawingSurface()
         {
@@ -22,9 +23,9 @@ namespace UnforgottenRealms.Editor.Controls
             InitializeComponent();
         }
 
-        public RenderWindow InitializeSfml()
+        public GameWindow InitializeSfml()
         {
-            RenderWindow = new RenderWindow(Handle);
+            RenderWindow = new GameWindow(Handle);
             RenderWindow.Resized += OnSfmlClientResize;
             return RenderWindow;
         }

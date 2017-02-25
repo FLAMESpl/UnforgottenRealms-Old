@@ -29,7 +29,7 @@ namespace UnforgottenRealms.Editor.Level
             Resources = resources;
         }
 
-        public bool Contains(OffsetCoordinates position) => position.Column < Size.X && position.Row < Size.Y;
+        public bool Contains(OffsetCoordinates position) => position.Column >= 0 && position.Row >= 0 && position.Column < Size.X && position.Row < Size.Y;
 
         public void Create(Vector2i size)
         {

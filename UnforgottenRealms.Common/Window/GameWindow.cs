@@ -14,6 +14,8 @@ namespace UnforgottenRealms.Common.Window
 
         public bool Acknowledge() => true;
 
+        public GameWindow(IntPtr handle) : base (handle) { }
+
         public GameWindow(VideoMode video, string title, Styles styles, ContextSettings settings) 
             : base(video, title, styles, settings)
         {
@@ -21,6 +23,8 @@ namespace UnforgottenRealms.Common.Window
             Bus = new Bus();
             Bus.Subscribe(this);
         }
+
+        public bool Contains(Vector2i point) => point.X > 0 && point.Y > 0 && point.X < Size.X && point.Y < Size.Y;
 
         public void Cycle() => cycleActions.ForEach(c => c.Invoke());
 

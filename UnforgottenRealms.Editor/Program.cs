@@ -13,18 +13,13 @@ namespace UnforgottenRealms.Editor
         static void Main()
         {
             var form = new Forms.Main();
-            var renderwindow = form.InitializeSfml();
-            var clearColor = new Color(50, 50, 200);
-
+            form.InitializeSfml();
             form.Show();
-            
-            while (form.Visible) 
+
+            while (form.Visible)
             {
-                Application.DoEvents(); 
-                renderwindow.DispatchEvents(); 
-                renderwindow.Clear(clearColor);
-                renderwindow.Draw(form);
-                renderwindow.Display();
+                Application.DoEvents();
+                form.Process();
             }
         }
     }

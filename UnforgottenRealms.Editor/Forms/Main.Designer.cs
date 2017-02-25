@@ -207,7 +207,6 @@
             this.drawingSurface.Size = new System.Drawing.Size(304, 245);
             this.drawingSurface.TabIndex = 2;
             this.drawingSurface.Text = "drawingSurface";
-            this.drawingSurface.Click += new System.EventHandler(this.drawingSurface_Click);
             // 
             // palette
             // 
