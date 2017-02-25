@@ -1,30 +1,22 @@
-﻿using SFML.Graphics;
-using SFML.Window;
+﻿using SFML.Window;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using UnforgottenRealms.Common.Definitions.Entity;
+using UnforgottenRealms.Common.Enums;
 using UnforgottenRealms.Common.Geometry;
 using UnforgottenRealms.Common.Graphics;
 using UnforgottenRealms.Common.Resources;
 using UnforgottenRealms.Common.Window;
 using UnforgottenRealms.Editor.Graphics;
-using UnforgottenRealms.Editor.Helpers;
 using UnforgottenRealms.Editor.Level;
 using UnforgottenRealms.Editor.Palette;
-using Brush = UnforgottenRealms.Editor.Palette.Brush;
 using Color = SFML.Graphics.Color;
 
 namespace UnforgottenRealms.Editor.Forms
 {
     public partial class Main : Form
     {
+        private EditorView editorView;
         private PlayersOptions playersOptionDialog = new PlayersOptions();
         private WorldOptions worldOptionsDialog = new WorldOptions();
         private HexModel model = null;
@@ -43,8 +35,10 @@ namespace UnforgottenRealms.Editor.Forms
         public void Process()
         {
             window.DispatchEvents();
+            window.Cycle();
 
             DrawOnSurface();
+            editorView.Set();
 
             window.Clear(clearColor);
             window.Draw(world);
@@ -58,12 +52,20 @@ namespace UnforgottenRealms.Editor.Forms
             world = new Map(model, resources);
 
             var tilesets = new EditorTilesets();
+            CreateTerrainBrushes(tilesets.Terrain);
 
             world.Create(new Vector2i(10, 10));
 
-            CreateTerrainBrushes(tilesets.Terrain);
-
             window = drawingSurface.InitializeSfml();
+            editorView = new EditorView(window);
+
+            window.OnKeyPress(Keyboard.Key.Space, () => editorView.Return());
+            window.OnKeyHold(Keyboard.Key.Left, () => editorView.Scroll(Direction.Left));
+            window.OnKeyHold(Keyboard.Key.Right, () => editorView.Scroll(Direction.Right));
+            window.OnKeyHold(Keyboard.Key.Up, () => editorView.Scroll(Direction.Up));
+            window.OnKeyHold(Keyboard.Key.Down, () => editorView.Scroll(Direction.Down));
+            window.OnKeyHold(Keyboard.Key.Add, editorView.IncrementScrollSpeed);
+            window.OnKeyHold(Keyboard.Key.Subtract, editorView.DecrementScrollSpeed);
         }
 
         private void worldToolStripMenuItem_Click(object sender, EventArgs e) => worldOptionsDialog.ShowDialog();
@@ -81,7 +83,7 @@ namespace UnforgottenRealms.Editor.Forms
             if (!mouseLeftButtonPressed && !mouseRightButtonPressed || !window.Contains(mousePosition))
                 return;
 
-            var position = model.FindHex(new Vector2f(mousePosition.X, mousePosition.Y));
+            var position = model.FindHex(editorView.MapMousePosition(new Vector2f(mousePosition.X, mousePosition.Y)));
             if (!world.Contains(position))
                 return;
 

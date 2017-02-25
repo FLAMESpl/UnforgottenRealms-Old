@@ -2,6 +2,7 @@
 using SFML.Window;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnforgottenRealms.Common.Messaging;
 
 namespace UnforgottenRealms.Common.Window

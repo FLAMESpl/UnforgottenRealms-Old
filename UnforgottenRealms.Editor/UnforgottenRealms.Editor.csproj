@@ -99,6 +99,7 @@
     <Compile Include="Graphics\EditorTilesets.cs" />
     <Compile Include="Helpers\VectorExtensions.cs" />
     <Compile Include="Level\Deposit.cs" />
+    <Compile Include="Level\EditorView.cs" />
     <Compile Include="Level\IEntityMetadata.cs" />
     <Compile Include="Level\Field.cs" />
     <Compile Include="Level\Improvement.cs" />
