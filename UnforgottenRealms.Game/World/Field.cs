@@ -62,6 +62,8 @@ namespace UnforgottenRealms.Game.World
                 target.Draw(Deposit, states);
         }
 
+        public bool IsNeighbour(Field field) => Neighbours.Contains(field);
+
         public void Create(TerrainFactory factory)
         {
             Terrain = factory.Invoke(

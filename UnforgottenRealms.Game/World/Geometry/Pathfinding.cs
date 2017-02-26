@@ -1,21 +1,16 @@
 ﻿using C5;
-using SFML.Audio;
-using SFML.Window;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnforgottenRealms.Common.Geometry.Coordinates;
+using UnforgottenRealms.Game.Objects;
 using UnforgottenRealms.Game.Objects.Units;
 
 namespace UnforgottenRealms.Game.World.Geometry
 {
     public static class Pathfinding
     {
-        public static readonly int Unreachable = -1;
-
         public static PathfindingResult FindPath(this Unit unit, Field destination)
         {
-            if (unit.Location == destination || unit.MovementCost(unit.Location, destination) == Unreachable)
+            if (unit.Location == destination)
                 return new PathfindingResult(null, false);
 
             var counter = 0;
@@ -41,9 +36,11 @@ namespace UnforgottenRealms.Game.World.Geometry
 
                 foreach(var neighbour in current.Field.Neighbours)
                 {
-                    var newCost = unit.MovementCost(current.Field, neighbour);
-                    if (newCost == Unreachable)
+                    var movement = unit.MovementAvailability(current.Field, neighbour);
+                    if (movement.Type != MovementType.Free)
                         continue;
+
+                    var newCost = movement.Cost;
                     newCost += costSoFar[current.Field];
 
                     if (!costSoFar.ContainsKey(neighbour) || newCost < costSoFar[neighbour])

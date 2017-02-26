@@ -22,10 +22,20 @@ namespace UnforgottenRealms.Game.Objects.Units
 
         private Sprite unitSprite;
         private Sprite emblemSprite;
-
+        
+        public abstract int Combats { get; }
         public abstract int Movement { get; }
         public abstract float Strength { get; }
         public abstract float Health { get; }
+
+        public int CombatsLeft { get; protected set; }
+
+        private float healthLeft;
+        public float HealthLeft
+        {
+            get { return healthLeft; }
+            set { healthLeft = value > 0 ? value : 0; }
+        }
 
         private int movementLeft;
         public int MovementLeft
@@ -34,14 +44,13 @@ namespace UnforgottenRealms.Game.Objects.Units
             set { movementLeft = value > 0 ? value : 0; }
         }
 
-        public float HealthLeft { get; protected set; }
-
         public Unit(Field location, TextureDescriptor textureDescriptor, Player owner) : 
             base(
                   location: location,
                   owner: owner
             )
         {
+            CombatsLeft = Combats;
             MovementLeft = Movement;
             HealthLeft = Health;
 
@@ -72,15 +81,46 @@ namespace UnforgottenRealms.Game.Objects.Units
             Location.World.TurnCycle.RoundChanged += Refresh;
         }
 
-        protected override void Destroyed()
-        {
-            Location.World.TurnCycle.RoundChanged -= Refresh;
-        }
-
         public override void Draw(RenderTarget target, RenderStates states)
         {
             target.Draw(emblemSprite, states);
             target.Draw(unitSprite, states);
+        }
+
+        public override IEnumerable<ContextInfoContent> GetContextInfoContent()
+        {
+            yield return new ContextInfoContent(GetContextViewLines());
+        }
+
+        public virtual float EffectiveStrengthAgainst(Unit against) => Strength * HealthLeft / Health;
+
+        public override void PerformPrimaryAction(Field target)
+        {
+            if (target.Units.Any(u => u.Owner != Owner) && Location.IsNeighbour(target))
+                Attack(target);
+            else
+                Move(target);
+        }
+
+        public virtual MovementAvailibility MovementAvailability(Field from, Field to)
+        {
+            var type = to.Units.Any() ? MovementType.Occupied : MovementType.Free;
+
+            switch (to.Terrain.Type)
+            {
+                default:
+                case TerrainType.Impassable:
+                case TerrainType.Water:
+                    return new MovementAvailibility(
+                        cost: 0,
+                        type: MovementType.Unreachable
+                    );
+                case TerrainType.Land:
+                    return new MovementAvailibility(
+                        cost: to.Terrain.MovementCost,
+                        type: type
+                    );
+            }
         }
 
         public override void Select(bool isSelected)
@@ -96,27 +136,53 @@ namespace UnforgottenRealms.Game.Objects.Units
             unitSprite.Color = unitSprite.Color.SetAlpha(newAlpha);
         }
 
-        public override void PerformPrimaryAction(Field target) => Move(target);
-
-        public virtual int MovementCost(Field from, Field to)
+        protected virtual void Attack(Field target)
         {
-            if (to.Units.Any())
-                return Pathfinding.Unreachable;
+            if (MovementLeft == 0 || CombatsLeft == 0 || MovementAvailability(Location, target).Type == MovementType.Unreachable)
+                return;
 
-            switch (to.Terrain.Type)
+            CombatsLeft--;
+
+            var foe = target.Units.MaxBy(u => u.EffectiveStrengthAgainst(this));
+            var strengthRatio = EffectiveStrengthAgainst(foe) / EffectiveStrengthAgainst(this);
+            var damage = Damage(strengthRatio);
+            var counterDamage = CounterDamage(strengthRatio, damage);
+
+            if (strengthRatio >= 1)
             {
-                default:
-                case TerrainType.Impassable:
-                case TerrainType.Water:
-                    return Pathfinding.Unreachable;
-                case TerrainType.Land:
-                    return to.Terrain.MovementCost;
+                HealthLeft -= counterDamage;
+                foe.HealthLeft -= damage;
+            }
+            else
+            {
+                HealthLeft -= damage;
+                foe.HealthLeft -= counterDamage;
+            }
+
+            if (foe.HealthLeft == 0)
+            {
+                foe.Destroy();
+                Move(target);
+                if (HealthLeft == 0)
+                    HealthLeft = 1;
+            }
+            else if (HealthLeft == 0)
+            {
+                this.Destroy();
+            }
+            else
+            {
+                MovementLeft -= MovementAvailability(Location, target).Cost;
             }
         }
 
+        protected virtual float CounterDamage(float strengthRatio, float damage) => damage / ((float)Math.Pow(strengthRatio, 2) * 2 - strengthRatio * 4 + 3);
+
+        protected virtual float Damage(float strengthRatio) => (float)Math.Pow(strengthRatio, 2) * 10 - strengthRatio * 10 + 30;
+
         protected virtual void Move(Field target)
         {
-            if (MovementLeft == 0)
+            if (MovementLeft == 0 || MovementAvailability(Location, target).Type != MovementType.Free)
                 return;
 
             var hexModel = Location.World.Model;
@@ -130,7 +196,7 @@ namespace UnforgottenRealms.Game.Objects.Units
                     if (MovementLeft == 0)
                         break;
 
-                    MovementLeft -= MovementCost(current, step);
+                    MovementLeft -= MovementAvailability(current, step).Cost;
                     current = step;
                 }
 
@@ -141,14 +207,15 @@ namespace UnforgottenRealms.Game.Objects.Units
             }
         }
 
-        protected override void Refresh(object sender, RoundChangedEventArgs e)
+        protected override void Destroyed()
         {
-            MovementLeft = Movement;
+            Location.World.TurnCycle.RoundChanged -= Refresh;
         }
 
-        public override IEnumerable<ContextInfoContent> GetContextInfoContent()
+        protected override void Refresh(object sender, RoundChangedEventArgs e)
         {
-            yield return new ContextInfoContent(GetContextViewLines());
+            CombatsLeft = Combats;
+            MovementLeft = Movement;
         }
 
         protected virtual IEnumerable<ContextInfoLine> GetContextViewLines()

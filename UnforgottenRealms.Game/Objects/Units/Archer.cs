@@ -8,6 +8,7 @@ namespace UnforgottenRealms.Game.Objects.Units
     {
         public static UnitFactory Factory => (location, owner) => new Archer(location, owner);
 
+        public override int Combats => 1;
         public override float Health => 100;
         public override int Movement => 2;
         public override string Name => "ARCHER";

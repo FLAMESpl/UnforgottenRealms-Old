@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace UnforgottenRealms.Common.Utils
 {
@@ -25,6 +27,24 @@ namespace UnforgottenRealms.Common.Utils
                 yield return item;
             foreach (var item in second)
                 yield return item;
+        }
+
+        public static T MaxBy<T>(this IEnumerable<T> collection, Func<T, float> selector)
+        {
+            var maximumElement = collection.First();
+            var maximum = selector.Invoke(maximumElement);
+
+            foreach (var item in collection.Skip(1))
+            {
+                var value = selector.Invoke(item);
+                if (value > maximum)
+                {
+                    maximumElement = item;
+                    maximum = value;
+                }
+            }
+
+            return maximumElement;
         }
 
         public static IEnumerable<T> Stream<T>(params IEnumerable<T>[] enumerables)

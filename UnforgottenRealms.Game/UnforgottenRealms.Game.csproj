@@ -80,6 +80,8 @@
     <Compile Include="Objects\GameObjectExtensions.cs" />
     <Compile Include="Objects\Improvements\Farm.cs" />
     <Compile Include="Objects\Improvements\Improvement.cs" />
+    <Compile Include="Objects\MovementAvailibility.cs" />
+    <Compile Include="Objects\MovementType.cs" />
     <Compile Include="Objects\Units\Archer.cs" />
     <Compile Include="Objects\Units\Unit.cs" />
     <Compile Include="Players\Player.cs" />
