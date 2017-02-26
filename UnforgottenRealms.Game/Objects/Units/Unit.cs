@@ -1,32 +1,32 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnforgottenRealms.Common.Utils;
 using UnforgottenRealms.Game.Graphics;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.World;
-using System.Linq;
 using UnforgottenRealms.Game.Events;
 using UnforgottenRealms.Game.World.Geometry;
-using System;
-using System.Collections.Generic;
 using UnforgottenRealms.Game.Gui.ContextPreview;
 using UnforgottenRealms.Common.Graphics;
 
 namespace UnforgottenRealms.Game.Objects.Units
 {
+    public delegate float StrengthModifier(Unit attacker, Unit foe);
     public delegate Unit UnitFactory(Field location, Player owner);
 
     public abstract class Unit : GameObject
     {
         private Vector2f unitSize;
-
         private Sprite unitSprite;
         private Sprite emblemSprite;
         
         public abstract int Combats { get; }
+        public abstract float Health { get; }
         public abstract int Movement { get; }
         public abstract float Strength { get; }
-        public abstract float Health { get; }
 
         public int CombatsLeft { get; protected set; }
 
@@ -44,7 +44,9 @@ namespace UnforgottenRealms.Game.Objects.Units
             set { movementLeft = value > 0 ? value : 0; }
         }
 
-        public Unit(Field location, TextureDescriptor textureDescriptor, Player owner) : 
+        public IList<StrengthModifier> StrengthModifiers { get; } = new List<StrengthModifier>();
+
+        public Unit(Field location, Tile textureDescriptor, Player owner) : 
             base(
                   location: location,
                   owner: owner
@@ -92,7 +94,15 @@ namespace UnforgottenRealms.Game.Objects.Units
             yield return new ContextInfoContent(GetContextViewLines());
         }
 
-        public virtual float EffectiveStrengthAgainst(Unit against) => Strength * HealthLeft / Health;
+        public virtual float EffectiveStrengthAgainst(Unit against)
+        {
+            var effective = Strength * HealthLeft / Health;
+            foreach (var strengthModifier in StrengthModifiers)
+            {
+                effective *= strengthModifier.Invoke(this, against);
+            }
+            return effective;
+        }
 
         public override void PerformPrimaryAction(Field target)
         {
@@ -141,44 +151,58 @@ namespace UnforgottenRealms.Game.Objects.Units
             if (MovementLeft == 0 || CombatsLeft == 0 || MovementAvailability(Location, target).Type == MovementType.Unreachable)
                 return;
 
-            CombatsLeft--;
+            SpendCombat();
 
-            var foe = target.Units.MaxBy(u => u.EffectiveStrengthAgainst(this));
+            var foe = target.Units.StrongestOpponent(this);
             var strengthRatio = EffectiveStrengthAgainst(foe) / EffectiveStrengthAgainst(this);
-            var damage = Damage(strengthRatio);
-            var counterDamage = CounterDamage(strengthRatio, damage);
+            var damage = DamageAmount(strengthRatio);
+            var counterDamage = CounterDamageAmount(strengthRatio, damage);
+
+            int dealtDamage;
+            int receivedDamage;
 
             if (strengthRatio >= 1)
             {
-                HealthLeft -= counterDamage;
-                foe.HealthLeft -= damage;
+                receivedDamage = (int)counterDamage;
+                dealtDamage = (int)damage;
             }
             else
             {
-                HealthLeft -= damage;
-                foe.HealthLeft -= counterDamage;
+                receivedDamage = (int)damage;
+                dealtDamage = (int)counterDamage;
             }
 
-            if (foe.HealthLeft == 0)
-            {
-                foe.Destroy();
+            var enemyDestroyed = foe.Damage(dealtDamage);
+            Damage(receivedDamage, enemyDestroyed);
+
+            if (enemyDestroyed)
                 Move(target);
-                if (HealthLeft == 0)
-                    HealthLeft = 1;
-            }
-            else if (HealthLeft == 0)
-            {
-                this.Destroy();
-            }
             else
-            {
-                MovementLeft -= MovementAvailability(Location, target).Cost;
-            }
+                SpendMovement(MovementAvailability(Location, target).Cost);
         }
 
-        protected virtual float CounterDamage(float strengthRatio, float damage) => damage / ((float)Math.Pow(strengthRatio, 2) * 2 - strengthRatio * 4 + 3);
+        public virtual float CounterDamageAmount(float strengthRatio, float damage) => damage / ((float)Math.Pow(strengthRatio, 2) * 2 - strengthRatio * 4 + 3);
 
-        protected virtual float Damage(float strengthRatio) => (float)Math.Pow(strengthRatio, 2) * 10 - strengthRatio * 10 + 30;
+        public virtual float DamageAmount(float strengthRatio) => (float)Math.Pow(strengthRatio, 2) * 10 - strengthRatio * 10 + 30;
+
+        public virtual bool Damage(int amount, bool keepAlive = false)
+        {
+            HealthLeft -= amount;
+            var died = HealthLeft == 0;
+
+            if (died)
+            {
+                if (keepAlive)
+                    HealthLeft = 1;
+                else
+                    this.Destroy();
+            }
+            return died;
+        }
+
+        public virtual void SpendCombat() => CombatsLeft--;
+
+        public virtual void SpendMovement(int amount) => MovementLeft -= amount;
 
         protected virtual void Move(Field target)
         {
@@ -196,7 +220,7 @@ namespace UnforgottenRealms.Game.Objects.Units
                     if (MovementLeft == 0)
                         break;
 
-                    MovementLeft -= MovementAvailability(current, step).Cost;
+                    SpendMovement(MovementAvailability(current, step).Cost);
                     current = step;
                 }
 

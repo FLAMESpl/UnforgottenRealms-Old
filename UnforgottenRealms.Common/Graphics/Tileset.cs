@@ -17,13 +17,13 @@ namespace UnforgottenRealms.Common.Graphics
             tileCountPerRow = (int)Texture.Size.X / tileSize.X;
         }
 
-        public TextureDescriptor Get(int index)
+        public Tile Get(int index)
         {
             var row = index / tileCountPerRow;
             var rowIndex = index % tileCountPerRow;
             var left = rowIndex * tileSize.X;
             var top = row * tileSize.Y;
-            return new TextureDescriptor(
+            return new Tile(
                 bounds: new IntRect(left, top, tileSize.X, tileSize.Y),
                 texture: Texture,
                 tileSize: tileSize

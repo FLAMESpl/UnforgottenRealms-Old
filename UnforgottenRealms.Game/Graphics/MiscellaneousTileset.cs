@@ -8,7 +8,7 @@ namespace UnforgottenRealms.Game.Graphics
         {
         }
 
-        public TextureDescriptor Emblem => Get(0);
-        public TextureDescriptor Flag => Get(1);
+        public Tile Emblem => Get(0);
+        public Tile Flag => Get(1);
     }
 }

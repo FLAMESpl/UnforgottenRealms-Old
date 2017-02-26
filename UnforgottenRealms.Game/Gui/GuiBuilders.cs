@@ -61,7 +61,7 @@ namespace UnforgottenRealms.Game.Gui
             bottomFrame.Components.Add(currentRoundLabel);
         }
 
-        private static void AddResourcePicture(this IComponentContainer container, ResourceType resourceType, TextureDescriptor textureDescriptor, TurnCycle turnCycle, Vector2f startPosition, int order)
+        private static void AddResourcePicture(this IComponentContainer container, ResourceType resourceType, Tile textureDescriptor, TurnCycle turnCycle, Vector2f startPosition, int order)
         {
             var offset = new Vector2f(150, 0) * order;
 

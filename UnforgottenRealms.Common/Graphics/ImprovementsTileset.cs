@@ -8,13 +8,13 @@ namespace UnforgottenRealms.Common.Graphics
         {
         }
 
-        public TextureDescriptor Farm => Get(0);
-        public TextureDescriptor Barracks => Get(1);
-        public TextureDescriptor LumberjacksHut => Get(2);
-        public TextureDescriptor IronMine => Get(3);
-        public TextureDescriptor GemsMine => Get(4);
-        public TextureDescriptor Stable => Get(5);
-        public TextureDescriptor Shipyard => Get(6);
-        public TextureDescriptor DragonLair => Get(7);
+        public Tile Farm => Get(0);
+        public Tile Barracks => Get(1);
+        public Tile LumberjacksHut => Get(2);
+        public Tile IronMine => Get(3);
+        public Tile GemsMine => Get(4);
+        public Tile Stable => Get(5);
+        public Tile Shipyard => Get(6);
+        public Tile DragonLair => Get(7);
     }
 }

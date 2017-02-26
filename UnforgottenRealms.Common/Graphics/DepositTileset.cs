@@ -8,8 +8,8 @@ namespace UnforgottenRealms.Common.Graphics
         {
         }
 
-        public TextureDescriptor Iron => Get(0);
-        public TextureDescriptor Gems => Get(1);
-        public TextureDescriptor Pearls => Get(2);
+        public Tile Iron => Get(0);
+        public Tile Gems => Get(1);
+        public Tile Pearls => Get(2);
     }
 }

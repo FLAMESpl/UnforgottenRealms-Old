@@ -12,14 +12,14 @@ namespace UnforgottenRealms.Common.Graphics
             maskModel = new HexModel(tileSize.X / 2);
         }
 
-        public new TerrainTextureDescriptor Get(int index)
+        public new TextureTile Get(int index)
         {
             var row = index / tileCountPerRow;
             var rowIndex = index % tileCountPerRow;
             var left = rowIndex * tileSize.X;
             var top = row * tileSize.Y;
             var leftTop = new Vector2f(left, top);
-            return new TerrainTextureDescriptor(
+            return new TextureTile(
                 apexes: maskModel.GetApexesPositions(leftTop),
                 center: maskModel.GetCenter(leftTop),
                 texture: Texture,
@@ -27,11 +27,11 @@ namespace UnforgottenRealms.Common.Graphics
             );
         }
 
-        public TerrainTextureDescriptor Grass => Get(0);
-        public TerrainTextureDescriptor Desert => Get(1);
-        public TerrainTextureDescriptor Water => Get(2);
-        public TerrainTextureDescriptor Mountain => Get(3);
-        public TerrainTextureDescriptor Hill => Get(4);
-        public TerrainTextureDescriptor Forest => Get(5);
+        public TextureTile Grass => Get(0);
+        public TextureTile Desert => Get(1);
+        public TextureTile Water => Get(2);
+        public TextureTile Mountain => Get(3);
+        public TextureTile Hill => Get(4);
+        public TextureTile Forest => Get(5);
     }
 }

@@ -74,10 +74,10 @@
     <Compile Include="Geometry\HexModel.cs" />
     <Compile Include="Graphics\DepositTileset.cs" />
     <Compile Include="Graphics\ImprovementsTileset.cs" />
-    <Compile Include="Graphics\ITextureDescriptor.cs" />
-    <Compile Include="Graphics\TerrainTextureDescriptor.cs" />
+    <Compile Include="Graphics\ITile.cs" />
+    <Compile Include="Graphics\TextureTile.cs" />
     <Compile Include="Graphics\TerrainTileset.cs" />
-    <Compile Include="Graphics\TextureDescriptor.cs" />
+    <Compile Include="Graphics\Tile.cs" />
     <Compile Include="Graphics\Tileset.cs" />
     <Compile Include="Graphics\UnitsTileset.cs" />
     <Compile Include="Messaging\IEventDispatcher.cs" />

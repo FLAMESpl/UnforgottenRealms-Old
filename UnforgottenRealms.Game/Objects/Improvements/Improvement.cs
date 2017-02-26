@@ -19,7 +19,7 @@ namespace UnforgottenRealms.Game.Objects.Improvements
         private Sprite improvementSprite;
         private Sprite flagSprite;
 
-        public Improvement(Field location, TextureDescriptor improvementTexture, Player owner) : base(
+        public Improvement(Field location, Tile improvementTexture, Player owner) : base(
             location: location,
             owner: owner)
         {

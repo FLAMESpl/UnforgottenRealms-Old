@@ -112,7 +112,9 @@ namespace UnforgottenRealms.Game.World
                 for (int j = 0; j < Size.Y; j++)
                 {
                     var position = new OffsetCoordinates(i, j);
-                    if (i == 8 && j >= 7 && j <= 9)
+                    if (i == 7 && j == 8)
+                        Place(position, Forest.Factory);
+                    else if (i == 8 && j >= 7 && j <= 9)
                         Place(position, Hill.Factory);
                     else if (i == 5 && j == 2)
                         Place(position, Grass.Factory);

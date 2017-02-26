@@ -1,4 +1,5 @@
 ﻿using UnforgottenRealms.Game.Graphics;
+using UnforgottenRealms.Game.Objects.Abilities;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.World;
 
@@ -14,6 +15,8 @@ namespace UnforgottenRealms.Game.Objects.Units
         public override string Name => "ARCHER";
         public override float Strength => 7;
 
+        private RangedAttack rangedAttack;
+
         public Archer(Field location, Player owner) :
             base(
                 location: location,
@@ -21,7 +24,17 @@ namespace UnforgottenRealms.Game.Objects.Units
                 owner: owner
             )
         {
+            rangedAttack = (RangedAttack)GrantAbility(RangedAttack.Factory(this));
+        }
 
+        protected override void Attack(Field target)
+        {
+            if (MovementLeft == 0 || CombatsLeft == 0)
+                return;
+
+            var foe = target.Units.StrongestOpponent(this);
+
+            rangedAttack.Perform(foe);
         }
     }
 }

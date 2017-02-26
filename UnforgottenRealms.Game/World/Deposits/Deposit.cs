@@ -16,7 +16,7 @@ namespace UnforgottenRealms.Game.World.Deposits
         public Field Location { get; private set; }
         public abstract string Name { get; }
 
-        public Deposit(Field location, TextureDescriptor textureDescriptor)
+        public Deposit(Field location, Tile textureDescriptor)
         {
             Location = location;
 

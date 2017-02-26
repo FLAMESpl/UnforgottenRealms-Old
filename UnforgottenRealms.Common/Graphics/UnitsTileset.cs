@@ -8,12 +8,12 @@ namespace UnforgottenRealms.Common.Graphics
         {
         }
 
-        public TextureDescriptor Archer => Get(0);
-        public TextureDescriptor Swordsman => Get(1);
-        public TextureDescriptor Worker => Get(2);
-        public TextureDescriptor Ship => Get(3);
-        public TextureDescriptor Horseman => Get(4);
-        public TextureDescriptor Dragon => Get(5);
+        public Tile Archer => Get(0);
+        public Tile Swordsman => Get(1);
+        public Tile Worker => Get(2);
+        public Tile Ship => Get(3);
+        public Tile Horseman => Get(4);
+        public Tile Dragon => Get(5);
     }
 }
 

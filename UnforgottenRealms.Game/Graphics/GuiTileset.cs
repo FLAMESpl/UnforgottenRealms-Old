@@ -9,10 +9,10 @@ namespace UnforgottenRealms.Game.Graphics
         {
         }
 
-        public TextureDescriptor Food => Get(0);
-        public TextureDescriptor Wood => Get(1);
-        public TextureDescriptor Iron => Get(2);
-        public TextureDescriptor Gems => Get(3);
-        public TextureDescriptor Grid => Get(4);
+        public Tile Food => Get(0);
+        public Tile Wood => Get(1);
+        public Tile Iron => Get(2);
+        public Tile Gems => Get(3);
+        public Tile Grid => Get(4);
     }
 }

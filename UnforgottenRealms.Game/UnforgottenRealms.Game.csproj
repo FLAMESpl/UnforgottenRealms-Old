@@ -76,6 +76,10 @@
     <Compile Include="Gui\ContextPreview\ContextInfoLine.cs" />
     <Compile Include="Gui\ContextPreview\IContextInfoSubject.cs" />
     <Compile Include="Gui\GuiBuilders.cs" />
+    <Compile Include="Objects\Abilities\Ability.cs" />
+    <Compile Include="Objects\Abilities\AbilityFactory.cs" />
+    <Compile Include="Objects\Abilities\AbilityType.cs" />
+    <Compile Include="Objects\Abilities\RangedAttack.cs" />
     <Compile Include="Objects\GameObject.cs" />
     <Compile Include="Objects\GameObjectExtensions.cs" />
     <Compile Include="Objects\Improvements\Farm.cs" />
@@ -102,6 +106,7 @@
     <Compile Include="World\Geometry\PathfindingResult.cs" />
     <Compile Include="World\Map.cs" />
     <Compile Include="World\Terrains\Desert.cs" />
+    <Compile Include="World\Terrains\Forest.cs" />
     <Compile Include="World\Terrains\Grass.cs" />
     <Compile Include="World\Terrains\Hill.cs" />
     <Compile Include="World\Terrains\Terrain.cs" />

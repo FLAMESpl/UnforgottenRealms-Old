@@ -3,7 +3,7 @@ using SFML.Window;
 
 namespace UnforgottenRealms.Common.Graphics
 {
-    public interface ITextureDescriptor
+    public interface ITile
     {
         Texture Texture { get; }
         Vector2i TileSize { get; }
