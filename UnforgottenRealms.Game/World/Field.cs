@@ -87,10 +87,7 @@ namespace UnforgottenRealms.Game.World
 
             units.Add(unit);
 
-            World.OnObjectCreated(new ObjectCreatedEventArgs(
-                location: this,
-                @object: unit
-            ));
+            World.OnObjectCreated(unit);
         }
 
         public void Create(ImprovementFactory factory, Player owner)
@@ -100,28 +97,19 @@ namespace UnforgottenRealms.Game.World
                 owner: owner
             );
 
-            World.OnObjectCreated(new ObjectCreatedEventArgs(
-                location: this,
-                @object: Improvement
-            ));
+            World.OnObjectCreated(Improvement);
         }
 
         public void Destroy(Unit unit)
         {
             units.Remove(unit);
-            World.OnObjectDestroyed(new ObjectDestroyedEventArgs(
-                location: this,
-                @object: unit
-            ));
+            World.OnObjectDestroyed(unit);
         }
 
         public void Destroy()
         {
             Improvement = null;
-            World.OnObjectDestroyed(new ObjectDestroyedEventArgs(
-                location: this,
-                @object: Improvement
-            ));
+            World.OnObjectDestroyed(Improvement);
         }
 
         public void Move(Unit unit)

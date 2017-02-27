@@ -5,6 +5,7 @@ namespace UnforgottenRealms.Game.Graphics
 {
     public class GameTilesets : IResource
     {
+        public AbilitiesTileset Abilities { get; }
         public DepositTileset Deposits { get; }
         public GuiTileset Gui { get; }
         public ImprovementsTileset Improvements { get; }
@@ -14,6 +15,7 @@ namespace UnforgottenRealms.Game.Graphics
 
         public GameTilesets()
         {
+            Abilities = new AbilitiesTileset(FilePath("abilities"));
             Gui = new GuiTileset(FilePath("gui"));
             Miscellaneous = new MiscellaneousTileset(FilePath("misc"));
             Terrain = new TerrainTileset(FilePath("fields"));

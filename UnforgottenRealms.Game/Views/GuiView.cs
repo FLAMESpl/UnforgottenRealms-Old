@@ -9,11 +9,14 @@ using UnforgottenRealms.Gui.Components.Container;
 using UnforgottenRealms.Game.Gui.ContextPreview;
 using UnforgottenRealms.Game.Gui;
 using UnforgottenRealms.Common.Geometry;
+using UnforgottenRealms.Game.Gui.Components;
+using UnforgottenRealms.Game.Objects;
 
 namespace UnforgottenRealms.Game.Views
 {
     public class GuiView : Drawable
     {
+        private AbilitiesContainer abilitiesContainer;
         private ContextInfo contextInfo;
         private HexModel model;
         private PageControl pageControl;
@@ -25,6 +28,7 @@ namespace UnforgottenRealms.Game.Views
 
         public GuiView(GameWindow window, ResourceManager resources, Map world, WorldView worldView)
         {
+            this.abilitiesContainer = new AbilitiesContainer(resources, window);
             this.contextInfo = new ContextInfo(new Vector2f(window.Size.X - 400, window.Size.Y - 50), 350);
             this.model = world.Model;
             this.pageControl = new PageControl();
@@ -33,7 +37,11 @@ namespace UnforgottenRealms.Game.Views
             this.worldView = worldView;
             
             pageControl.InitializeComponents(window, resources, world.TurnCycle);
+            pageControl.Active.Add(abilitiesContainer);
+            pageControl.Bus.Subscribe(window);
+
             window.MouseMoved += MouseMoved;
+            world.ObjectSelectStateChanged += ObjectSelectStateChanged;
         }
 
         private void MouseMoved(object sender, MouseMoveEventArgs e)
@@ -65,6 +73,20 @@ namespace UnforgottenRealms.Game.Views
             target.Draw(pageControl.Active, states);
             if (contextInfo.HasContent)
                 target.Draw(contextInfo, states);
+        }
+
+        private void ObjectSelectStateChanged(object sender, EventArgs e)
+        {
+            var @object = sender as GameObject;
+            
+            if (@object.Selected)
+            {
+                abilitiesContainer.Set(@object.Abilities);
+            }
+            else
+            {
+                abilitiesContainer.Components.Clear();
+            }
         }
     }
 }

@@ -144,6 +144,8 @@ namespace UnforgottenRealms.Game.Objects.Units
 
             emblemSprite.Color = emblemSprite.Color.SetAlpha(newAlpha);
             unitSprite.Color = unitSprite.Color.SetAlpha(newAlpha);
+
+            base.Select(isSelected);
         }
 
         protected virtual void Attack(Field target)

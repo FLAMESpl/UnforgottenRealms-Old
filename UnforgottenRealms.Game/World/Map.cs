@@ -12,13 +12,15 @@ using UnforgottenRealms.Common.Geometry.Coordinates;
 using UnforgottenRealms.Game.World.Deposits;
 using UnforgottenRealms.Game.World.Terrains;
 using UnforgottenRealms.Common.Geometry;
+using UnforgottenRealms.Game.Objects;
 
 namespace UnforgottenRealms.Game.World
 {
     public class Map : Drawable
     {
-        public event EventHandler<ObjectCreatedEventArgs> ObjectCreated;
-        public event EventHandler<ObjectDestroyedEventArgs> ObjectDestroyed;
+        public event EventHandler ObjectCreated;
+        public event EventHandler ObjectDestroyed;
+        public event EventHandler ObjectSelectStateChanged;
 
         private Field[][] fields;
         private List<List<VertexArray>> grid;
@@ -37,8 +39,9 @@ namespace UnforgottenRealms.Game.World
             TurnCycle = turnCycle;
         }
 
-        public void OnObjectCreated(ObjectCreatedEventArgs args) => ObjectCreated?.Invoke(this, args);
-        public void OnObjectDestroyed(ObjectDestroyedEventArgs args) => ObjectDestroyed?.Invoke(this, args);
+        public void OnObjectCreated(GameObject @object) => ObjectCreated?.Invoke(@object, EventArgs.Empty);
+        public void OnObjectDestroyed(GameObject @object) => ObjectDestroyed?.Invoke(@object, EventArgs.Empty);
+        public void OnObjectSelectStateChanged(GameObject @object) => ObjectSelectStateChanged?.Invoke(@object, EventArgs.Empty);
 
         public Field this[int column, int row]
         {
@@ -51,8 +54,6 @@ namespace UnforgottenRealms.Game.World
             get { return fields[position.Column][position.Row]; }
             set { fields[position.Column][position.Row] = value; }
         }
-
-
 
         public void Draw(RenderTarget target, RenderStates states)
         {

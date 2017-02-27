@@ -1,40 +1,32 @@
-﻿using System;
-using UnforgottenRealms.Gui.Components.Container;
-using UnforgottenRealms.Gui.Components.Events;
-using UnforgottenRealms.Common.Messaging;
-using UnforgottenRealms.Common.Helper;
-using UnforgottenRealms.Gui.Components.EventArguments;
+﻿using SFML.Graphics;
 using SFML.Window;
-using SFML.Graphics;
+using System;
+using UnforgottenRealms.Common.Helper;
+using UnforgottenRealms.Common.Messaging;
+using UnforgottenRealms.Gui.Components.Container;
+using UnforgottenRealms.Gui.Components.EventArguments;
+using UnforgottenRealms.Gui.Components.Events;
 
 namespace UnforgottenRealms.Gui.Components.Model
 {
-    /// <summary>
-    /// Base of SFML shape based components
-    /// </summary>
-    public abstract class ShapeComponentBase : IComponent,
+    public class ImageComponentBase : IComponent,
         IEventHandler<FocusGranted>,
         IEventHandler<MouseClicked>,
         IEventHandler<MouseMoved>
-
     {
         public event EventHandler<FocusChangeEventArgs> FocusChange;
         public event EventHandler<MouseButtonEventArgs> MouseClick;
         public event EventHandler<MouseMoveEventArgs> MouseEnter;
         public event EventHandler<MouseMoveEventArgs> MouseLeave;
-        
+
         private Vector2f _position;
-        private Vector2f _textPosition;
-        private Text _text;
-        private Shape _shape;
 
         public IComponentContainer Container { get; set; }
         public bool ContainsCursor { get; protected set; }
         public bool HasFocus { get; protected set; }
+        
+        public Sprite Image { get; set; }
 
-        /// <summary>
-        /// Relative to component's position
-        /// </summary>
         public virtual Vector2f Position
         {
             get
@@ -43,50 +35,22 @@ namespace UnforgottenRealms.Gui.Components.Model
             }
             set
             {
-                if (Container != null && Shape != null)
+                if (Container != null && Image != null)
                 {
-                    Shape.Position = Container.Position + value;
+                    Image.Position = Container.Position + value;
                 }
                 _position = value;
-                TextPosition = _textPosition;
             }
         }
 
-        /// <summary>
-        /// Relative to component's and container's position
-        /// </summary>
-        public virtual Vector2f TextPosition
-        {
-            get
-            {
-                return _textPosition;
-            }
-            set
-            {
-                if (Text != null && Container != null)
-                {
-                    Text.Position = value + Position + Container.Position;
-                }
-                _textPosition = value;
-            }
-        }
-        public Text Text { get; set; }
-
-        /// <summary>
-        /// Background shape
-        /// </summary>
-        public Shape Shape { get; set; }
-        public virtual Vector2f Size => Shape != null ? Shape.GetGlobalBounds().Size() : new Vector2f(0, 0);
+        public virtual Vector2f Size => Image != null ? Image.GetGlobalBounds().Size() : new Vector2f(0, 0);
 
         public virtual bool Acknowledged() => true;
 
         public virtual void Draw(RenderTarget target, RenderStates states)
         {
-            if (Shape != null)
-                target.Draw(Shape, states);
-
-            if (Text != null)
-                target.Draw(Text, states);
+            if (Image != null)
+                target.Draw(Image, states);
         }
 
         public virtual void Invalidate()
@@ -106,7 +70,7 @@ namespace UnforgottenRealms.Gui.Components.Model
 
         public virtual void Handle(MouseClicked @event)
         {
-            if (Shape?.GetGlobalBounds().Contains(@event.Mouse.X, @event.Mouse.Y) ?? false)
+            if (Image.GetGlobalBounds().Contains(@event.Mouse.X, @event.Mouse.Y))
             {
                 SetFocus(true);
                 OnMouseClick(@event.Mouse);
@@ -115,7 +79,7 @@ namespace UnforgottenRealms.Gui.Components.Model
 
         public virtual void Handle(MouseMoved @event)
         {
-            bool contains = Shape?.GetGlobalBounds().Contains(@event.Mouse.X, @event.Mouse.Y) ?? false;
+            bool contains = Image.GetGlobalBounds().Contains(@event.Mouse.X, @event.Mouse.Y);
 
             if (contains != ContainsCursor)
             {

@@ -65,10 +65,12 @@
     <Compile Include="Components\Events\MouseClicked.cs" />
     <Compile Include="Components\Events\MouseMoved.cs" />
     <Compile Include="Components\Events\TextEntered.cs" />
+    <Compile Include="Components\ImageBased\Button.cs" />
     <Compile Include="Components\ImageBased\Picture.cs" />
     <Compile Include="Components\Model\DisplayStyle.cs" />
     <Compile Include="Components\Model\IComponent.cs" />
     <Compile Include="Components\Container\IComponentEventHandler.cs" />
+    <Compile Include="Components\Model\ImageComponentBase.cs" />
     <Compile Include="Components\Model\ShapeComponentBase.cs" />
     <Compile Include="Components\ShapeBased\Button.cs" />
     <Compile Include="Components\ShapeBased\Frame.cs" />

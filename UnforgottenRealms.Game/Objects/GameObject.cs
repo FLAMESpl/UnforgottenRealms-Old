@@ -17,6 +17,7 @@ namespace UnforgottenRealms.Game.Objects
         public IEnumerable<Ability> Abilities => abilities;
         public Field Location { get; protected set; }
         public Player Owner { get; protected set; }
+        public bool Selected { get; protected set; }
 
         public GameObject(Field location, Player owner)
         {
@@ -32,7 +33,11 @@ namespace UnforgottenRealms.Game.Objects
 
         public abstract void PerformPrimaryAction(Field target);
 
-        public abstract void Select(bool isSelected);
+        public virtual void Select(bool isSelected)
+        {
+            Selected = isSelected;
+            Location.World.OnObjectSelectStateChanged(this);
+        }
 
         public Ability GrantAbility(AbilityFactory factory)
         {

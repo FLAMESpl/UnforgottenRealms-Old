@@ -63,11 +63,14 @@
     <Compile Include="Actions\ObjectActionResolver.cs" />
     <Compile Include="Events\ObjectCreatedEventArgs.cs" />
     <Compile Include="Events\ObjectDestroyedEventArgs.cs" />
+    <Compile Include="Events\ObjectSelectedEventArgs.cs" />
     <Compile Include="Events\RoundChangedEventArgs.cs" />
     <Compile Include="Events\ValueChangedEventArgs.cs" />
+    <Compile Include="Graphics\AbilitiesTileset.cs" />
     <Compile Include="Graphics\GameTilesets.cs" />
     <Compile Include="Graphics\GuiTileset.cs" />
     <Compile Include="Graphics\MiscellaneousTileset.cs" />
+    <Compile Include="Gui\Components\AbilitiesContainer.cs" />
     <Compile Include="Gui\Components\ActivePlayerLabel.cs" />
     <Compile Include="Gui\Components\CurrentRoundLabel.cs" />
     <Compile Include="Gui\Components\ResourceAmountLabel.cs" />

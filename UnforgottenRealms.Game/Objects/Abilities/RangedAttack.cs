@@ -1,4 +1,5 @@
 ﻿using UnforgottenRealms.Common.Resources;
+using UnforgottenRealms.Game.Graphics;
 using UnforgottenRealms.Game.Objects.Units;
 using UnforgottenRealms.Game.World.Terrains;
 
@@ -12,7 +13,11 @@ namespace UnforgottenRealms.Game.Objects.Abilities
 
         public override AbilityType Type => AbilityType.Passive;
 
-        public RangedAttack(Unit owner, ResourceManager resources) : base(null, owner)
+        public RangedAttack(Unit owner, ResourceManager resources) : 
+            base(
+                tile: resources.Get<GameTilesets>().Abilities.RangedAttack, 
+                owner: owner
+            )
         {
             this.owner = owner;
         }
