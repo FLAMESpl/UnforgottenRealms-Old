@@ -72,6 +72,8 @@ namespace UnforgottenRealms.Controllers
             window.OnKeyPress(Keyboard.Key.Space, worldView.Center);
             window.OnKeyPress(Keyboard.Key.F9, turnCycle.Next);
             window.OnKeyPress(Keyboard.Key.F10, () => worldMap.ShowGrid = !worldMap.ShowGrid);
+            window.OnKeyPress(Keyboard.Key.Multiply, () => worldView.ScrollSpeed *= 10);
+            window.OnKeyPress(Keyboard.Key.Divide, () => worldView.ScrollSpeed /= 10);
         }
 
         private void InitializeGameState(GameSettings settings)

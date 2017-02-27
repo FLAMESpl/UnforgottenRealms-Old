@@ -35,7 +35,7 @@ namespace UnforgottenRealms.Game.World.Terrains
         {
             var model = Location.World.Model;
             var topLeftCorner = model.GetTopLeftCorner(Location.Position);
-            
+
             var apexes = model.GetApexesPositions(topLeftCorner);
             var hexCenter = model.GetCenter(topLeftCorner);
 

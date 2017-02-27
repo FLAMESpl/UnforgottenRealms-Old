@@ -19,6 +19,7 @@ namespace UnforgottenRealms.Common.Graphics
             var left = rowIndex * tileSize.X;
             var top = row * tileSize.Y;
             var leftTop = new Vector2f(left, top);
+            leftTop.X += (maskModel.EdgeLength * 2 - maskModel.HorizontalSize) / 2;
             return new TextureTile(
                 apexes: maskModel.GetApexesPositions(leftTop),
                 center: maskModel.GetCenter(leftTop),
