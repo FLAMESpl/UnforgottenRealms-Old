@@ -71,6 +71,7 @@ namespace UnforgottenRealms.Controllers
 
             window.OnKeyPress(Keyboard.Key.Space, worldView.Center);
             window.OnKeyPress(Keyboard.Key.F9, turnCycle.Next);
+            window.OnKeyPress(Keyboard.Key.F10, () => worldMap.ShowGrid = !worldMap.ShowGrid);
         }
 
         private void InitializeGameState(GameSettings settings)

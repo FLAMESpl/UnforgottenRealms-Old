@@ -65,11 +65,14 @@ namespace UnforgottenRealms.Game.World
                 }
             }
 
-            for (int i = 0; i < Size.X; i++)
+            if (ShowGrid)
             {
-                for (int j = 0; j < Size.Y; j++)
+                for (int i = 0; i < Size.X; i++)
                 {
-                    target.Draw(grid[i][j], states);
+                    for (int j = 0; j < Size.Y; j++)
+                    {
+                        target.Draw(grid[i][j], states);
+                    }
                 }
             }
         }

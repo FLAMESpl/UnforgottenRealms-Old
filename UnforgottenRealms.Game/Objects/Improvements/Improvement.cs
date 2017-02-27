@@ -18,6 +18,7 @@ namespace UnforgottenRealms.Game.Objects.Improvements
     {
         private Sprite improvementSprite;
         private Sprite flagSprite;
+        private VertexArray selectVertex;
 
         public Improvement(Field location, Tile improvementTexture, Player owner) : base(
             location: location,
@@ -42,19 +43,21 @@ namespace UnforgottenRealms.Game.Objects.Improvements
                 Texture = flagTexture.Texture,
                 TextureRect = flagTexture.Bounds
             };
+
+            selectVertex = new VertexArray(PrimitiveType.LinesStrip);
+            selectVertex.CreateHexOutline(location.Position, model, Owner.Colour.ToRGB());
         }
 
         public override void Draw(RenderTarget target, RenderStates states)
         {
+            if (Selected)
+                target.Draw(selectVertex);
+
             target.Draw(flagSprite, states);
             target.Draw(improvementSprite, states);
         }
 
         public override void PerformPrimaryAction(Field target)
-        {
-        }
-
-        public override void Select(bool isSelected)
         {
         }
 
