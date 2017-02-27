@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.drawingSurface = new UnforgottenRealms.Editor.Controls.DrawingSurface(this.components);
+            this.palette = new UnforgottenRealms.Editor.Controls.Palette();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,8 +48,6 @@
             this.toolImprovements = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.imagesTerrainPalette = new System.Windows.Forms.ImageList(this.components);
-            this.drawingSurface = new UnforgottenRealms.Editor.Controls.DrawingSurface(this.components);
-            this.palette = new UnforgottenRealms.Editor.Controls.Palette();
             this.tableLayout.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -67,6 +67,24 @@
             this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayout.Size = new System.Drawing.Size(449, 251);
             this.tableLayout.TabIndex = 0;
+            // 
+            // drawingSurface
+            // 
+            this.drawingSurface.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.drawingSurface.Location = new System.Drawing.Point(142, 3);
+            this.drawingSurface.Name = "drawingSurface";
+            this.drawingSurface.Size = new System.Drawing.Size(304, 245);
+            this.drawingSurface.TabIndex = 2;
+            this.drawingSurface.Text = "drawingSurface";
+            // 
+            // palette
+            // 
+            this.palette.BrushesMargin = new System.Drawing.Size(6, 6);
+            this.palette.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.palette.Location = new System.Drawing.Point(3, 3);
+            this.palette.Name = "palette";
+            this.palette.Size = new System.Drawing.Size(133, 245);
+            this.palette.TabIndex = 3;
             // 
             // menuStrip
             // 
@@ -92,19 +110,20 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loadToolStripMenuItem.Text = "Load";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // propertiesToolStripMenuItem
@@ -198,24 +217,6 @@
             this.imagesTerrainPalette.Images.SetKeyName(4, "mountain.png");
             this.imagesTerrainPalette.Images.SetKeyName(5, "hill.png");
             this.imagesTerrainPalette.Images.SetKeyName(6, "forest.png");
-            // 
-            // drawingSurface
-            // 
-            this.drawingSurface.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.drawingSurface.Location = new System.Drawing.Point(142, 3);
-            this.drawingSurface.Name = "drawingSurface";
-            this.drawingSurface.Size = new System.Drawing.Size(304, 245);
-            this.drawingSurface.TabIndex = 2;
-            this.drawingSurface.Text = "drawingSurface";
-            // 
-            // palette
-            // 
-            this.palette.BrushesMargin = new System.Drawing.Size(6, 6);
-            this.palette.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.palette.Location = new System.Drawing.Point(3, 3);
-            this.palette.Name = "palette";
-            this.palette.Size = new System.Drawing.Size(133, 245);
-            this.palette.TabIndex = 3;
             // 
             // Main
             // 

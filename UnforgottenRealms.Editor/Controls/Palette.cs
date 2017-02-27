@@ -46,6 +46,14 @@ namespace UnforgottenRealms.Editor.Controls
             }
         }
 
+        public void Unload()
+        {
+            flowLayoutPanel.Controls.Clear();
+            probe = null;
+            selected = null;
+            brushButtons = null;
+        }
+
         private void ChangeBrush(BrushButton brushButton)
         {
             selected?.Deactivate();

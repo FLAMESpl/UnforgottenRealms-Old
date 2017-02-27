@@ -7,6 +7,7 @@ using UnforgottenRealms.Common.Geometry;
 using UnforgottenRealms.Common.Graphics;
 using UnforgottenRealms.Common.Resources;
 using UnforgottenRealms.Common.Window;
+using UnforgottenRealms.Editor.Events;
 using UnforgottenRealms.Editor.Graphics;
 using UnforgottenRealms.Editor.Level;
 using UnforgottenRealms.Editor.Palette;
@@ -16,9 +17,11 @@ namespace UnforgottenRealms.Editor.Forms
 {
     public partial class Main : Form
     {
-        private EditorView editorView;
+        private NewLevel newLevelDialog = new NewLevel();
         private PlayersOptions playersOptionDialog = new PlayersOptions();
         private WorldOptions worldOptionsDialog = new WorldOptions();
+
+        private EditorView editorView;
         private HexModel model = null;
         private ResourceManager resources;
         private GameWindow window;
@@ -29,6 +32,8 @@ namespace UnforgottenRealms.Editor.Forms
         public Main()
         {
             InitializeComponent();
+
+            newLevelDialog.NewLevelCreated += NewLevelCreated;
         }
 
         public void Process()
@@ -117,6 +122,17 @@ namespace UnforgottenRealms.Editor.Forms
                     image: images[i]
                 );
             }
-        } 
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            newLevelDialog.ShowDialog();
+        }
+
+        private void NewLevelCreated(object sender, NewLevelEventArgs e)
+        {
+            palette.Unload();
+            world.Create(e.Size);
+        }
     }
 }
