@@ -1,6 +1,5 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
-using System;
 using UnforgottenRealms.Common.Definitions.Entity;
 
 namespace UnforgottenRealms.Editor.Level
@@ -13,10 +12,12 @@ namespace UnforgottenRealms.Editor.Level
         private Texture texture;
         private VertexArray vertex;
 
+        public EntityId Id { get; }
         public TerrainMetadata Metadata { get; }
 
         public Terrain(Field location, TerrainMetadata metadata)
         {
+            Id = metadata.EntityId;
             Metadata = metadata;
             texture = metadata.TextureDescriptor?.Texture;
 

@@ -1,4 +1,5 @@
-﻿using UnforgottenRealms.Game.Graphics;
+﻿using UnforgottenRealms.Common.Definitions.Entity;
+using UnforgottenRealms.Game.Graphics;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.World;
 
@@ -8,6 +9,7 @@ namespace UnforgottenRealms.Game.Objects.Units
     {
         public static UnitFactory Factory => (location, owner) => new Swordsman(location, owner);
 
+        public override EntityId Id => UnitsDefinitions.Swordsman;
         public override int Combats => 1;
         public override string Name => "SWORDSMAN";
         public override UnitType Type => UnitType.Military;

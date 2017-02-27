@@ -2,18 +2,20 @@
 using SFML.Graphics;
 using UnforgottenRealms.Game.Gui.ContextPreview;
 using UnforgottenRealms.Common.Graphics;
+using UnforgottenRealms.Common.Definitions.Entity;
 
 namespace UnforgottenRealms.Game.World.Terrains
 {
     public delegate Terrain TerrainFactory(Field location);
 
-    public abstract class Terrain : Drawable, IContextInfoSubject
+    public abstract class Terrain : Drawable, IContextInfoSubject, ITerrain
     {
         protected VertexArray vertex;
         private Texture texture;
 
         public Field Location { get; }
-
+        
+        public abstract EntityId Id { get; }
         public abstract int MovementCost { get; }
         public abstract string Name { get; }
         public abstract TerrainType Type { get; }

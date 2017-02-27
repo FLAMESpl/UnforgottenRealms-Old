@@ -1,4 +1,5 @@
-﻿using UnforgottenRealms.Game.Graphics;
+﻿using UnforgottenRealms.Common.Definitions.Entity;
+using UnforgottenRealms.Game.Graphics;
 using UnforgottenRealms.Game.Objects.Abilities;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.World;
@@ -9,6 +10,7 @@ namespace UnforgottenRealms.Game.Objects.Units
     {
         public static UnitFactory Factory => (location, owner) => new Archer(location, owner);
 
+        public override EntityId Id => UnitsDefinitions.Archer;
         public override int Combats => 1;
         public override int Health => 100;
         public override int Movement => 2;

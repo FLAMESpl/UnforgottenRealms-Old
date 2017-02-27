@@ -1,4 +1,5 @@
-﻿using UnforgottenRealms.Game.Events;
+﻿using UnforgottenRealms.Common.Definitions.Entity;
+using UnforgottenRealms.Game.Events;
 using UnforgottenRealms.Game.Graphics;
 using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.Resources;
@@ -10,6 +11,7 @@ namespace UnforgottenRealms.Game.Objects.Improvements
     {
         public static ImprovementFactory Factory => (location, owner) => new Farm(location, owner);
 
+        public override EntityId Id => ImprovementDefinitions.Farm;
         public override string Name => "FARM";
         public int ProductionRate => 1;
 

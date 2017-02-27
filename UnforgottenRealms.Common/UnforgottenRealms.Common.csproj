@@ -56,14 +56,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AtomicReference.cs" />
+    <Compile Include="Definitions\Entity\DepositsDefinitions.cs" />
     <Compile Include="Definitions\Entity\EntityClass.cs" />
     <Compile Include="Definitions\Entity\EntityId.cs" />
     <Compile Include="Definitions\Entity\IDeposit.cs" />
     <Compile Include="Definitions\Entity\IEntity.cs" />
-    <Compile Include="Definitions\Entity\IField.cs" />
     <Compile Include="Definitions\Entity\IImprovement.cs" />
+    <Compile Include="Definitions\Entity\ImprovementDefinitions.cs" />
     <Compile Include="Definitions\Entity\ITerrain.cs" />
     <Compile Include="Definitions\Entity\IUnit.cs" />
+    <Compile Include="Definitions\Entity\TerrainDefinitions.cs" />
+    <Compile Include="Definitions\Entity\UnitsDefinitions.cs" />
     <Compile Include="Definitions\PlayerMetadata.cs" />
     <Compile Include="Enums\Direction.cs" />
     <Compile Include="Enums\PlayerColour.cs" />

@@ -8,6 +8,8 @@ namespace UnforgottenRealms.Editor.Level
 
     public class Deposit : IDeposit, Drawable
     {
+        public EntityId Id { get; }
+
         public void Draw(RenderTarget target, RenderStates states)
         {
             throw new NotImplementedException();

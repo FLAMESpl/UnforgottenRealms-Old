@@ -11,13 +11,14 @@ using UnforgottenRealms.Game.Events;
 using UnforgottenRealms.Game.World.Geometry;
 using UnforgottenRealms.Game.Gui.ContextPreview;
 using UnforgottenRealms.Common.Graphics;
+using UnforgottenRealms.Common.Definitions.Entity;
 
 namespace UnforgottenRealms.Game.Objects.Units
 {
     public delegate float StrengthModifier(Unit attacker, Unit foe);
     public delegate Unit UnitFactory(Field location, Player owner);
 
-    public abstract class Unit : GameObject
+    public abstract class Unit : GameObject, IUnit
     {
         private Vector2f unitSize;
         private Sprite unitSprite;

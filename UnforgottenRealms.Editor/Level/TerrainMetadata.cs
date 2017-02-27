@@ -6,16 +6,16 @@ namespace UnforgottenRealms.Editor.Level
     public class TerrainMetadata : IEntityMetadata
     {
         public bool IsEmpty { get; }
-        public EntityId? EntityId { get; }
+        public EntityId EntityId { get; }
         public TextureTile TextureDescriptor { get; }
 
-        public TerrainMetadata(EntityId? entityId, TextureTile textureDescriptor)
+        public TerrainMetadata(EntityId entityId, TextureTile textureDescriptor)
         {
-            IsEmpty = entityId == null;
+            IsEmpty = entityId.Value == null;
             EntityId = entityId;
             TextureDescriptor = textureDescriptor;
         }
 
-        public static TerrainMetadata Empty => new TerrainMetadata(null, null);
+        public static TerrainMetadata Empty => new TerrainMetadata(new EntityId(EntityClass.Terrain, null), null);
     }
 }

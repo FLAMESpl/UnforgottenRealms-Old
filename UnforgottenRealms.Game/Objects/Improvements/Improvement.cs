@@ -9,12 +9,13 @@ using UnforgottenRealms.Game.World.Geometry;
 using UnforgottenRealms.Game.Gui.ContextPreview;
 using UnforgottenRealms.Common.Graphics;
 using UnforgottenRealms.Common.Geometry;
+using UnforgottenRealms.Common.Definitions.Entity;
 
 namespace UnforgottenRealms.Game.Objects.Improvements
 {
     public delegate Improvement ImprovementFactory(Field location, Player owner);
 
-    public abstract class Improvement : GameObject
+    public abstract class Improvement : GameObject, IImprovement
     {
         private Sprite improvementSprite;
         private Sprite flagSprite;

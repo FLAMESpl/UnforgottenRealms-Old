@@ -5,13 +5,15 @@ using UnforgottenRealms.Game.Players;
 using UnforgottenRealms.Game.World;
 using UnforgottenRealms.Game.Gui.ContextPreview;
 using UnforgottenRealms.Game.Objects.Abilities;
+using UnforgottenRealms.Common.Definitions.Entity;
 
 namespace UnforgottenRealms.Game.Objects
 {
-    public abstract class GameObject : Drawable, IContextInfoSubject
+    public abstract class GameObject : Drawable, IContextInfoSubject, IEntity
     {
         private List<Ability> abilities = new List<Ability>();
 
+        public abstract EntityId Id { get; }
         public abstract string Name { get; }
 
         public IEnumerable<Ability> Abilities => abilities;
