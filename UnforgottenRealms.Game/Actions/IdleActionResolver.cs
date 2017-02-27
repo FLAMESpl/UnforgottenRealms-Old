@@ -1,6 +1,7 @@
 ﻿using SFML.Window;
 using System.Linq;
 using UnforgottenRealms.Common;
+using UnforgottenRealms.Game.Objects;
 using UnforgottenRealms.Game.Views;
 using UnforgottenRealms.Game.World;
 
@@ -33,7 +34,8 @@ namespace UnforgottenRealms.Game.Actions
             var position = worldMap.Find(mousePosition);
             if (position != null)
             {
-                var newObject = worldMap[position].Units.FirstOrDefault();
+                var location = worldMap[position];
+                var newObject = (GameObject)location.Units.LastOrDefault() ?? location.Improvement;
 
                 if (newObject != null && newObject.Owner.Active)
                 {

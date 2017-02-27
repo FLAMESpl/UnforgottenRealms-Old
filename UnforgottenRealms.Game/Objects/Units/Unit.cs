@@ -22,16 +22,17 @@ namespace UnforgottenRealms.Game.Objects.Units
         private Vector2f unitSize;
         private Sprite unitSprite;
         private Sprite emblemSprite;
-        
+
         public abstract int Combats { get; }
-        public abstract float Health { get; }
+        public abstract int Health { get; }
         public abstract int Movement { get; }
+        public abstract UnitType Type { get; }
         public abstract float Strength { get; }
 
         public int CombatsLeft { get; protected set; }
 
-        private float healthLeft;
-        public float HealthLeft
+        private int healthLeft;
+        public int HealthLeft
         {
             get { return healthLeft; }
             set { healthLeft = value > 0 ? value : 0; }
@@ -114,7 +115,23 @@ namespace UnforgottenRealms.Game.Objects.Units
 
         public virtual MovementAvailibility MovementAvailability(Field from, Field to)
         {
-            var type = to.Units.Any() ? MovementType.Occupied : MovementType.Free;
+            MovementType type;
+
+            if (!to.Units.Any())
+            {
+                type = MovementType.Free;
+            }
+            else
+            {
+                if (to.Units.All(u => u.Type != Type && u.Owner == Owner))
+                {
+                    type = MovementType.Free;
+                }
+                else
+                {
+                    type = MovementType.Occupied;
+                }
+            }
 
             switch (to.Terrain.Type)
             {
@@ -155,27 +172,37 @@ namespace UnforgottenRealms.Game.Objects.Units
 
             SpendCombat();
 
+            bool enemyDestroyed;
             var foe = target.Units.StrongestOpponent(this);
-            var strengthRatio = EffectiveStrengthAgainst(foe) / EffectiveStrengthAgainst(this);
-            var damage = DamageAmount(strengthRatio);
-            var counterDamage = CounterDamageAmount(strengthRatio, damage);
 
-            int dealtDamage;
-            int receivedDamage;
-
-            if (strengthRatio >= 1)
+            if (foe.Type != UnitType.Civil)
             {
-                receivedDamage = (int)counterDamage;
-                dealtDamage = (int)damage;
+                var strengthRatio = EffectiveStrengthAgainst(foe) / EffectiveStrengthAgainst(this);
+                var damage = DamageAmount(strengthRatio);
+                var counterDamage = CounterDamageAmount(strengthRatio, damage);
+
+                int dealtDamage;
+                int receivedDamage;
+
+                if (strengthRatio >= 1)
+                {
+                    receivedDamage = (int)counterDamage;
+                    dealtDamage = (int)damage;
+                }
+                else
+                {
+                    receivedDamage = (int)damage;
+                    dealtDamage = (int)counterDamage;
+                }
+
+                enemyDestroyed = foe.Damage(dealtDamage);
+                Damage(receivedDamage, enemyDestroyed);
             }
             else
             {
-                receivedDamage = (int)damage;
-                dealtDamage = (int)counterDamage;
+                enemyDestroyed = true;
+                foe.Destroy();
             }
-
-            var enemyDestroyed = foe.Damage(dealtDamage);
-            Damage(receivedDamage, enemyDestroyed);
 
             if (enemyDestroyed)
                 Move(target);

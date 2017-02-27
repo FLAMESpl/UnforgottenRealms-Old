@@ -1,9 +1,10 @@
 ﻿using SFML.Window;
 using System.Collections.Generic;
+using System.Linq;
 using UnforgottenRealms.Common.Graphics;
 using UnforgottenRealms.Common.Utils;
-using UnforgottenRealms.Game.Graphics;
 using UnforgottenRealms.Game.Objects.Units;
+using UnforgottenRealms.Game.World;
 
 namespace UnforgottenRealms.Game.Objects
 {
@@ -17,6 +18,11 @@ namespace UnforgottenRealms.Game.Objects
         public static Unit StrongestOpponent(this IEnumerable<Unit> units, Unit attacker)
         {
             return units.MaxBy(u => u.EffectiveStrengthAgainst(attacker));
+        }
+
+        public static bool ContainsOpponent(this Field field, GameObject comparedObject)
+        {
+            return field.Units.Any(u => u.Owner != comparedObject.Owner);
         }
     }
 }

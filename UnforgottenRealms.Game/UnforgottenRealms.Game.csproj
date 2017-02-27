@@ -90,7 +90,10 @@
     <Compile Include="Objects\MovementAvailibility.cs" />
     <Compile Include="Objects\MovementType.cs" />
     <Compile Include="Objects\Units\Archer.cs" />
+    <Compile Include="Objects\Units\Swordsman.cs" />
     <Compile Include="Objects\Units\Unit.cs" />
+    <Compile Include="Objects\Units\UnitType.cs" />
+    <Compile Include="Objects\Units\Worker.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Players\PlayerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

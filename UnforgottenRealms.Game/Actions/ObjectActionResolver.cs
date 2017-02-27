@@ -5,6 +5,7 @@ using UnforgottenRealms.Common;
 using UnforgottenRealms.Game.Objects;
 using UnforgottenRealms.Game.World;
 using UnforgottenRealms.Game.Views;
+using System.Linq;
 
 namespace UnforgottenRealms.Game.Actions
 {
@@ -37,7 +38,23 @@ namespace UnforgottenRealms.Game.Actions
             {
                 if (position.IsEqualTo(selectedObject.Location.Position))
                 {
-                    // TODO: unit cycling
+                    if (eventArgs.Button == Mouse.Button.Left)
+                    {
+                        selectedObject.Select(false);
+                        selectedObject.Location.CycleUnits();
+                        selectedObject = selectedObject.Location.Units.LastOrDefault() ?? selectedObject;
+                        selectedObject.Select(true);
+                    }
+                    else if (eventArgs.Button == Mouse.Button.Right)
+                    {
+                        var improvement = selectedObject.Location.Improvement;
+                        if (improvement != null)
+                        {
+                            selectedObject.Select(false);
+                            selectedObject = improvement;
+                            selectedObject.Select(true);
+                        }
+                    }
                 }
                 else
                 {

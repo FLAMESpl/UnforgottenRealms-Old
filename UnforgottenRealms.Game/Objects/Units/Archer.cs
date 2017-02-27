@@ -10,8 +10,9 @@ namespace UnforgottenRealms.Game.Objects.Units
         public static UnitFactory Factory => (location, owner) => new Archer(location, owner);
 
         public override int Combats => 1;
-        public override float Health => 100;
+        public override int Health => 100;
         public override int Movement => 2;
+        public override UnitType Type => UnitType.Military;
         public override string Name => "ARCHER";
         public override float Strength => 7;
 
@@ -34,7 +35,13 @@ namespace UnforgottenRealms.Game.Objects.Units
 
             var foe = target.Units.StrongestOpponent(this);
 
-            rangedAttack.Perform(foe);
+            if (foe.Type != UnitType.Civil)
+                rangedAttack.Perform(foe);
+            else
+            {
+                foe.Destroy();
+                Move(target);
+            }
         }
     }
 }

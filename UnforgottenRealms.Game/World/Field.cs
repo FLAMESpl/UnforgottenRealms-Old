@@ -54,12 +54,22 @@ namespace UnforgottenRealms.Game.World
             if (Improvement != null)
                 target.Draw(Improvement, states);
 
-            var unit = Units.FirstOrDefault();
+            var unit = Units.LastOrDefault();
             if (unit != null)
                 target.Draw(unit, states);
 
             if (Deposit != null)
                 target.Draw(Deposit, states);
+        }
+
+        public void CycleUnits()
+        {
+            var unit = units.LastOrDefault();
+            if (unit == null)
+                return;
+
+            units.Remove(unit);
+            units.Insert(0, unit);
         }
 
         public bool IsNeighbour(Field field) => Neighbours.Contains(field);

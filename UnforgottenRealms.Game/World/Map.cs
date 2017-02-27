@@ -142,6 +142,11 @@ namespace UnforgottenRealms.Game.World
 
             var unitPosition1 = new OffsetCoordinates(7, 7);
             var unitPosition2 = new OffsetCoordinates(5, 7);
+            var unitPosition3 = new OffsetCoordinates(7, 8);
+            var unitPosition4 = new OffsetCoordinates(5, 8);
+            var unitPosition5 = new OffsetCoordinates(6, 7);
+            var unitPosition6 = new OffsetCoordinates(6, 8);
+
             var improvementPosition = new OffsetCoordinates(6, 6);
             var depositPosition = new OffsetCoordinates(8, 8);
 
@@ -150,6 +155,10 @@ namespace UnforgottenRealms.Game.World
 
             this[unitPosition1].Create(Archer.Factory, player1);
             this[unitPosition2].Create(Archer.Factory, player2);
+            this[unitPosition3].Create(Swordsman.Factory, player1);
+            this[unitPosition4].Create(Swordsman.Factory, player2);
+            this[unitPosition5].Create(Worker.Factory, player1);
+            this[unitPosition6].Create(Worker.Factory, player2);
             this[improvementPosition].Create(Farm.Factory, player1);
             this[depositPosition].Create(Iron.Factory);
         }
