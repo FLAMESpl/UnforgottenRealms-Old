@@ -1,5 +1,9 @@
-﻿using UnforgottenRealms.Common.Resources;
+﻿using SFML.Graphics;
+using System;
+using System.Collections.Generic;
+using UnforgottenRealms.Common.Resources;
 using UnforgottenRealms.Game.Graphics;
+using UnforgottenRealms.Game.Gui.ContextPreview;
 using UnforgottenRealms.Game.Objects.Units;
 using UnforgottenRealms.Game.World.Terrains;
 
@@ -11,6 +15,7 @@ namespace UnforgottenRealms.Game.Objects.Abilities
 
         public static AbilityFactory Factory(Unit owner) => new RangedAttackFactory(owner);
 
+        public override string Name => "RANGED ATTACK";
         public override AbilityType Type => AbilityType.Passive;
 
         public RangedAttack(Unit owner, ResourceManager resources) : 
@@ -34,6 +39,11 @@ namespace UnforgottenRealms.Game.Objects.Abilities
             var enemyDestroyed = foe.Damage((int)dealtDamage);
             owner.SpendCombat();
             owner.SpendMovement(1);
+        }
+
+        protected override IEnumerable<ContextInfoLine> GetDescription()
+        {
+            yield return new ContextInfoLine(Color.Black, "IMMUNE TO COUNTER-ATTACKS");
         }
     }
 
