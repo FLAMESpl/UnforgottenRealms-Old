@@ -28,6 +28,7 @@ namespace UnforgottenRealms.Editor.Forms
         private Map world;
 
         private ImageBrushPair[] terrainBrushes = null;
+        private ImageBrushPair[] depositsBrushes = null;
 
         public Main()
         {
@@ -57,6 +58,7 @@ namespace UnforgottenRealms.Editor.Forms
 
             var tilesets = new EditorTilesets();
             CreateTerrainBrushes(tilesets.Terrain);
+            CreateDepositsBrushes(tilesets.Deposits);
 
             world.Create(new Vector2i(10, 10));
 
@@ -74,9 +76,9 @@ namespace UnforgottenRealms.Editor.Forms
 
         private void worldToolStripMenuItem_Click(object sender, EventArgs e) => worldOptionsDialog.ShowDialog();
         private void playersToolStripMenuItem_Click(object sender, EventArgs e) => playersOptionDialog.ShowDialog();
-
-        private void LoadPaletteContent(ImageList images) => palette.LoadContent(new PaletteContent(terrainBrushes, Probe.Terrain));
-        private void toolTerrain_Click(object sender, EventArgs e) => LoadPaletteContent(imagesTerrainPalette);
+        
+        private void toolTerrain_Click(object sender, EventArgs e) => palette.LoadContent(new PaletteContent(terrainBrushes, Probe.Terrain));
+        private void toolDeposits_Click(object sender, EventArgs e) => palette.LoadContent(new PaletteContent(depositsBrushes, Probe.Deposit));
 
         private void DrawOnSurface()
         {
@@ -117,6 +119,33 @@ namespace UnforgottenRealms.Editor.Forms
                                 value: i.ToString()
                             ),
                             textureDescriptor: tileset.Get(i-1)
+                        )
+                    ),
+                    image: images[i]
+                );
+            }
+        }
+
+        public void CreateDepositsBrushes(DepositTileset tileset)
+        {
+            var images = imagesDepositsPalette.Images;
+            depositsBrushes = new ImageBrushPair[images.Count];
+
+            depositsBrushes[0] = new ImageBrushPair(
+                brush: new DepositBrush(DepositMetadata.Empty),
+                image: images[0]
+            );
+
+            for (int i = 1; i < images.Count; i++)
+            {
+                depositsBrushes[i] = new ImageBrushPair(
+                    brush: new DepositBrush(
+                        new DepositMetadata(
+                            entityId: new EntityId(
+                                @class: EntityClass.Deposit,
+                                value: i.ToString()
+                            ),
+                            tile: tileset.Get(i - 1)
                         )
                     ),
                     image: images[i]

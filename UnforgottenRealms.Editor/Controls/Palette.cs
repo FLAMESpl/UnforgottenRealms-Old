@@ -25,7 +25,7 @@ namespace UnforgottenRealms.Editor.Controls
 
         public void LoadContent(PaletteContent content)
         {
-            flowLayoutPanel.Controls.Clear();
+            Unload();
             probe = content.Probe;
             brushButtons = new List<BrushButton>();
 

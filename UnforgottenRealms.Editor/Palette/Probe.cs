@@ -15,6 +15,7 @@ namespace UnforgottenRealms.Editor.Palette
 
         public EntityId? Pick(Field field) => selector.Invoke(field);
 
+        public static Probe Deposit => new Probe(f => f.Deposit?.Metadata.EntityId);
         public static Probe Terrain => new Probe(f => f.Terrain?.Metadata.EntityId);
     }
 }

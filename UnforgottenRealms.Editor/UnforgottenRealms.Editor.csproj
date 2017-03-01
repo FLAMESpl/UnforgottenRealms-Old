@@ -106,6 +106,7 @@
     <Compile Include="Graphics\EditorTilesets.cs" />
     <Compile Include="Helpers\VectorExtensions.cs" />
     <Compile Include="Level\Deposit.cs" />
+    <Compile Include="Level\DepositMetadata.cs" />
     <Compile Include="Level\EditorView.cs" />
     <Compile Include="Level\IEntityMetadata.cs" />
     <Compile Include="Level\Field.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Level\TerrainMetadata.cs" />
     <Compile Include="Level\Unit.cs" />
     <Compile Include="Palette\Brush.cs" />
+    <Compile Include="Palette\DepositBrush.cs" />
     <Compile Include="Palette\ImageBrushPair.cs" />
     <Compile Include="Palette\PaletteContent.cs" />
     <Compile Include="Palette\Probe.cs" />

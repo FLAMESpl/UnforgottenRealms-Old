@@ -13,7 +13,7 @@ namespace UnforgottenRealms.Game.Objects
 {
     public static class GameObjectExtensions
     {
-        public static Vector2f Scale(this ITile texture, Vector2f template)
+        public static Vector2f Scale(this TileBase texture, Vector2f template)
         {
             return new Vector2f(template.X / texture.TileSize.X, template.Y / texture.TileSize.Y);
         }

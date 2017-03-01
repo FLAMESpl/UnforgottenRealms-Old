@@ -20,9 +20,9 @@ namespace UnforgottenRealms.Editor.Level
             World = world;
         }
 
-        public void Create(DepositFactory factory)
+        public void Create(DepositMetadata metadata)
         {
-            Deposit = factory.Invoke(this);
+            Deposit = new Deposit(this, metadata);
         }
 
         public void Create(ImprovementFactory factory, int ownerId)
@@ -30,7 +30,10 @@ namespace UnforgottenRealms.Editor.Level
             Improvement = factory.Invoke(this, ownerId);
         }
 
-        public void Create(TerrainMetadata metadata) => Terrain = new Terrain(this, metadata);
+        public void Create(TerrainMetadata metadata)
+        {
+            Terrain = new Terrain(this, metadata);
+        }
 
         public void Create(UnitFactory factory, int ownerId)
         {

@@ -3,17 +3,13 @@ using SFML.Window;
 
 namespace UnforgottenRealms.Common.Graphics
 {
-    public class Tile : ITile
+    public class Tile : TileBase
     {
         public IntRect Bounds { get; private set; }
-        public Texture Texture { get; private set; }
-        public Vector2i TileSize { get; private set; }
 
-        public Tile(IntRect bounds, Texture texture, Vector2i tileSize)
+        public Tile(IntRect bounds, Texture texture, Vector2i tileSize) : base(texture, tileSize)
         {
             Bounds = bounds;
-            Texture = texture;
-            TileSize = tileSize;
         }
     }
 }
