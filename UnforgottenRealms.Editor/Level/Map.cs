@@ -1,17 +1,17 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
+using System;
 using System.Collections.Generic;
 using UnforgottenRealms.Common.Geometry;
 using UnforgottenRealms.Common.Geometry.Coordinates;
 using UnforgottenRealms.Common.Resources;
-using System;
-using UnforgottenRealms.Editor.Graphics;
 
 namespace UnforgottenRealms.Editor.Level
 {
     public class Map : Drawable
     {
         private List<List<Field>> fields;
+        private IntRect scene = new IntRect();
 
         public HexModel Model { get; }
         public ResourceManager Resources { get; }
@@ -44,6 +44,14 @@ namespace UnforgottenRealms.Editor.Level
                     fields[i][j].Create(TerrainMetadata.Empty);
                 }
             }
+        }
+
+        public void UpdateScene(FloatRect sceneInPixels)
+        { 
+            scene.Left = (int)Math.Floor(sceneInPixels.Left / Model.HorizontalSize) - 1;
+            scene.Top = (int)Math.Floor(sceneInPixels.Top / (Model.EdgeLength * 1.5)) - 1;
+            scene.Width = (int)Math.Ceiling(sceneInPixels.Width / Model.HorizontalSize) + 2;
+            scene.Height = (int)Math.Ceiling(sceneInPixels.Height / (Model.EdgeLength * 1.5)) + 2;
         }
 
         public void SetSize(Vector2i size)
@@ -88,9 +96,14 @@ namespace UnforgottenRealms.Editor.Level
 
         public void Draw(RenderTarget target, RenderStates states)
         {
-            foreach (var row in fields)
-                foreach (var field in row)
-                    target.Draw(field, states);
+            for (int i = 0; i < Size.X; i++)
+            {
+                for (int j = 0; j < Size.Y; j++)
+                {
+                    if (scene.Contains(i, j))
+                        target.Draw(fields[i][j], states);
+                }
+            }
         }
     }
 }

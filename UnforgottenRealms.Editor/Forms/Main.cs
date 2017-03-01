@@ -43,10 +43,9 @@ namespace UnforgottenRealms.Editor.Forms
             window.Cycle();
 
             DrawOnSurface();
-            editorView.Set();
 
             window.Clear();
-            window.Draw(world);
+            window.Draw(editorView);
             window.Display();
         }
 
@@ -63,7 +62,7 @@ namespace UnforgottenRealms.Editor.Forms
             world.Create(new Vector2i(10, 10));
 
             window = drawingSurface.InitializeSfml();
-            editorView = new EditorView(window);
+            editorView = new EditorView(window, world);
 
             window.OnKeyPress(Keyboard.Key.Space, () => editorView.Return());
             window.OnKeyHold(Keyboard.Key.Left, () => editorView.Scroll(Direction.Left));
