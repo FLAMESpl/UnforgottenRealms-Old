@@ -39,19 +39,13 @@
             this.propertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.worldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.toolTerrain = new System.Windows.Forms.ToolStripButton();
-            this.toolDeposits = new System.Windows.Forms.ToolStripButton();
-            this.toolUnits = new System.Windows.Forms.ToolStripButton();
-            this.toolImprovements = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.imagesTerrainPalette = new System.Windows.Forms.ImageList(this.components);
             this.imagesDepositsPalette = new System.Windows.Forms.ImageList(this.components);
-            this.drawingSurface = new UnforgottenRealms.Editor.Controls.DrawingSurface(this.components);
             this.palette = new UnforgottenRealms.Editor.Controls.Palette();
+            this.drawingSurface = new UnforgottenRealms.Editor.Controls.DrawingSurface(this.components);
+            this.toolBar = new UnforgottenRealms.Editor.Controls.EditorToolBar(this.components);
             this.tableLayout.SuspendLayout();
             this.menuStrip.SuspendLayout();
-            this.toolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayout
@@ -59,8 +53,8 @@
             this.tableLayout.ColumnCount = 2;
             this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 139F));
             this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayout.Controls.Add(this.drawingSurface, 1, 0);
             this.tableLayout.Controls.Add(this.palette, 0, 0);
+            this.tableLayout.Controls.Add(this.drawingSurface, 1, 0);
             this.tableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayout.Location = new System.Drawing.Point(0, 49);
             this.tableLayout.Name = "tableLayout";
@@ -132,64 +126,6 @@
             this.playersToolStripMenuItem.Text = "Players";
             this.playersToolStripMenuItem.Click += new System.EventHandler(this.playersToolStripMenuItem_Click);
             // 
-            // toolStrip
-            // 
-            this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolTerrain,
-            this.toolDeposits,
-            this.toolUnits,
-            this.toolImprovements,
-            this.toolStripSeparator1});
-            this.toolStrip.Location = new System.Drawing.Point(0, 24);
-            this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(449, 25);
-            this.toolStrip.TabIndex = 2;
-            this.toolStrip.Text = "toolStrip1";
-            // 
-            // toolTerrain
-            // 
-            this.toolTerrain.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolTerrain.Image = ((System.Drawing.Image)(resources.GetObject("toolTerrain.Image")));
-            this.toolTerrain.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolTerrain.Name = "toolTerrain";
-            this.toolTerrain.Size = new System.Drawing.Size(23, 22);
-            this.toolTerrain.Text = "toolTerrain";
-            this.toolTerrain.Click += new System.EventHandler(this.toolTerrain_Click);
-            // 
-            // toolDeposits
-            // 
-            this.toolDeposits.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolDeposits.Image = ((System.Drawing.Image)(resources.GetObject("toolDeposits.Image")));
-            this.toolDeposits.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolDeposits.Name = "toolDeposits";
-            this.toolDeposits.Size = new System.Drawing.Size(23, 22);
-            this.toolDeposits.Text = "toolStripButton4";
-            this.toolDeposits.Click += new System.EventHandler(this.toolDeposits_Click);
-            // 
-            // toolUnits
-            // 
-            this.toolUnits.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolUnits.Image = ((System.Drawing.Image)(resources.GetObject("toolUnits.Image")));
-            this.toolUnits.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolUnits.Name = "toolUnits";
-            this.toolUnits.Size = new System.Drawing.Size(23, 22);
-            this.toolUnits.Text = "toolStripButton2";
-            // 
-            // toolImprovements
-            // 
-            this.toolImprovements.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolImprovements.Image = ((System.Drawing.Image)(resources.GetObject("toolImprovements.Image")));
-            this.toolImprovements.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolImprovements.Name = "toolImprovements";
-            this.toolImprovements.Size = new System.Drawing.Size(23, 22);
-            this.toolImprovements.Text = "toolStripButton3";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
             // imagesTerrainPalette
             // 
             this.imagesTerrainPalette.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imagesTerrainPalette.ImageStream")));
@@ -211,15 +147,6 @@
             this.imagesDepositsPalette.Images.SetKeyName(2, "gems.png");
             this.imagesDepositsPalette.Images.SetKeyName(3, "pearls.png");
             // 
-            // drawingSurface
-            // 
-            this.drawingSurface.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.drawingSurface.Location = new System.Drawing.Point(142, 3);
-            this.drawingSurface.Name = "drawingSurface";
-            this.drawingSurface.Size = new System.Drawing.Size(304, 245);
-            this.drawingSurface.TabIndex = 2;
-            this.drawingSurface.Text = "drawingSurface";
-            // 
             // palette
             // 
             this.palette.BrushesMargin = new System.Drawing.Size(6, 6);
@@ -229,13 +156,31 @@
             this.palette.Size = new System.Drawing.Size(133, 245);
             this.palette.TabIndex = 3;
             // 
+            // drawingSurface
+            // 
+            this.drawingSurface.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.drawingSurface.Location = new System.Drawing.Point(142, 3);
+            this.drawingSurface.Name = "drawingSurface";
+            this.drawingSurface.Size = new System.Drawing.Size(304, 245);
+            this.drawingSurface.TabIndex = 2;
+            this.drawingSurface.Text = "drawingSurface";
+            // 
+            // toolBar
+            // 
+            this.toolBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolBar.Location = new System.Drawing.Point(0, 24);
+            this.toolBar.Name = "toolBar";
+            this.toolBar.Size = new System.Drawing.Size(449, 25);
+            this.toolBar.TabIndex = 2;
+            this.toolBar.Text = "editorToolBar1";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(449, 300);
             this.Controls.Add(this.tableLayout);
-            this.Controls.Add(this.toolStrip);
+            this.Controls.Add(this.toolBar);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
             this.Name = "Main";
@@ -243,8 +188,6 @@
             this.tableLayout.ResumeLayout(false);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            this.toolStrip.ResumeLayout(false);
-            this.toolStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -254,7 +197,6 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayout;
         private System.Windows.Forms.MenuStrip menuStrip;
-        private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
@@ -264,12 +206,8 @@
         private System.Windows.Forms.ToolStripMenuItem playersToolStripMenuItem;
         private Controls.DrawingSurface drawingSurface;
         private Controls.Palette palette;
-        private System.Windows.Forms.ToolStripButton toolTerrain;
-        private System.Windows.Forms.ToolStripButton toolDeposits;
-        private System.Windows.Forms.ToolStripButton toolUnits;
-        private System.Windows.Forms.ToolStripButton toolImprovements;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ImageList imagesTerrainPalette;
         private System.Windows.Forms.ImageList imagesDepositsPalette;
+        private Controls.EditorToolBar toolBar;
     }
 }

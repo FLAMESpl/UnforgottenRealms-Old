@@ -35,6 +35,7 @@ namespace UnforgottenRealms.Editor.Forms
             InitializeComponent();
 
             newLevelDialog.NewLevelCreated += NewLevelCreated;
+            toolBar.PaletteToolClicked += PaletteToolClicked;
         }
 
         public void Process()
@@ -73,11 +74,32 @@ namespace UnforgottenRealms.Editor.Forms
             window.OnKeyHold(Keyboard.Key.Subtract, editorView.DecrementScrollSpeed);
         }
 
+        private void PaletteToolClicked(object sender, PaletteToolClickedEventArgs e)
+        {
+            switch (e.PaletteType)
+            {
+                case PaletteType.Terrain:
+                    PalettToolLoad(terrainBrushes, Probe.Terrain);
+                    break;
+                case PaletteType.Deposits:
+                    PalettToolLoad(depositsBrushes, Probe.Deposit);
+                    break;
+                case PaletteType.Units:
+                    break;
+                case PaletteType.Improvements:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void PalettToolLoad(ImageBrushPair[] images, Probe probe)
+        {
+            palette.LoadContent(new PaletteContent(images, probe));
+        }
+
         private void worldToolStripMenuItem_Click(object sender, EventArgs e) => worldOptionsDialog.ShowDialog();
         private void playersToolStripMenuItem_Click(object sender, EventArgs e) => playersOptionDialog.ShowDialog();
-        
-        private void toolTerrain_Click(object sender, EventArgs e) => palette.LoadContent(new PaletteContent(terrainBrushes, Probe.Terrain));
-        private void toolDeposits_Click(object sender, EventArgs e) => palette.LoadContent(new PaletteContent(depositsBrushes, Probe.Deposit));
 
         private void DrawOnSurface()
         {

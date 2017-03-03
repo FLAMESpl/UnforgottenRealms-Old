@@ -72,6 +72,12 @@
     <Compile Include="Controls\DrawingSurface.Designer.cs">
       <DependentUpon>DrawingSurface.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\EditorToolBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\EditorToolBar.Designer.cs">
+      <DependentUpon>EditorToolBar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Palette.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -79,6 +85,7 @@
       <DependentUpon>Palette.cs</DependentUpon>
     </Compile>
     <Compile Include="Events\NewLevelEventArgs.cs" />
+    <Compile Include="Events\PaletteToolClickedEventArgs.cs" />
     <Compile Include="Forms\Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,10 +126,14 @@
     <Compile Include="Palette\DepositBrush.cs" />
     <Compile Include="Palette\ImageBrushPair.cs" />
     <Compile Include="Palette\PaletteContent.cs" />
+    <Compile Include="Palette\PaletteType.cs" />
     <Compile Include="Palette\Probe.cs" />
     <Compile Include="Palette\TerrainBrush.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\EditorToolBar.resx">
+      <DependentUpon>EditorToolBar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Palette.resx">
       <DependentUpon>Palette.cs</DependentUpon>
     </EmbeddedResource>
