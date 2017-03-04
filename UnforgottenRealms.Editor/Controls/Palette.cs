@@ -21,7 +21,9 @@ namespace UnforgottenRealms.Editor.Controls
         }
 
         public void PaintField(Field field) => selected?.Brush.Paint(field);
-        public void PickField(Field field) => ChangeBrush(brushButtons.Where(x => probe.Pick(field) == x.Brush.EntityMetadata.EntityId).Single());
+        public void PickField(Field field) => ChangeBrush(brushButtons
+            .Where(x => probe.Pick(field) == x.Brush.EntityMetadata.EntityId)
+            .Single());
 
         public void LoadContent(PaletteContent content)
         {
