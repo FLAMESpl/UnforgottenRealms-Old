@@ -78,6 +78,12 @@
     <Compile Include="Controls\EditorToolBar.Designer.cs">
       <DependentUpon>EditorToolBar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\OkCancelDialog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OkCancelDialog.Designer.cs">
+      <DependentUpon>OkCancelDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Palette.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -92,6 +98,7 @@
     </Compile>
     <Compile Include="Events\NewLevelEventArgs.cs" />
     <Compile Include="Events\PaletteToolClickedEventArgs.cs" />
+    <Compile Include="Events\PlayersOptionsChangedEventArgs.cs" />
     <Compile Include="Events\PlayerToolClickedEventArgs.cs" />
     <Compile Include="Forms\Main.cs">
       <SubType>Form</SubType>
@@ -142,6 +149,9 @@
     <EmbeddedResource Include="Controls\EditorToolBar.resx">
       <DependentUpon>EditorToolBar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OkCancelDialog.resx">
+      <DependentUpon>OkCancelDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Palette.resx">
       <DependentUpon>Palette.cs</DependentUpon>
     </EmbeddedResource>
@@ -150,6 +160,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\NewLevel.resx">
       <DependentUpon>NewLevel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PlayersOptions.resx">
+      <DependentUpon>PlayersOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

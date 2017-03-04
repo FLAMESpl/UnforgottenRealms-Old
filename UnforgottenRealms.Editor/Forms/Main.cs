@@ -18,7 +18,7 @@ namespace UnforgottenRealms.Editor.Forms
     public partial class Main : Form
     {
         private NewLevel newLevelDialog = new NewLevel();
-        private PlayersOptions playersOptionDialog = new PlayersOptions();
+        private PlayersOptions playersOptionsDialog = new PlayersOptions();
         private WorldOptions worldOptionsDialog = new WorldOptions();
 
         private EditorView editorView;
@@ -34,7 +34,14 @@ namespace UnforgottenRealms.Editor.Forms
         {
             InitializeComponent();
 
+            var allowedNumbersOfPlayers = new int[] { 2, 3, 4 };
+
+            newLevelDialog.SetAllowedNumbersOfPlayers(allowedNumbersOfPlayers);
+            playersOptionsDialog.SetAllowedNumbersOfPlayers(allowedNumbersOfPlayers);
+
             newLevelDialog.NewLevelCreated += NewLevelCreated;
+            playersOptionsDialog.PlayerOptionsChanged += PlayerOptionsChanged;
+
             toolBar.PaletteToolClicked += PaletteToolClicked;
         }
 
@@ -99,7 +106,7 @@ namespace UnforgottenRealms.Editor.Forms
         }
 
         private void worldToolStripMenuItem_Click(object sender, EventArgs e) => worldOptionsDialog.ShowDialog();
-        private void playersToolStripMenuItem_Click(object sender, EventArgs e) => playersOptionDialog.ShowDialog();
+        private void playersToolStripMenuItem_Click(object sender, EventArgs e) => playersOptionsDialog.ShowDialog();
 
         private void DrawOnSurface()
         {
@@ -183,6 +190,12 @@ namespace UnforgottenRealms.Editor.Forms
         {
             palette.Unload();
             world.Create(e.Size);
+            toolBar.NumberOfPlayers = e.NumberOfPlayers;
+        }
+
+        private void PlayerOptionsChanged(object sender, PlayersOptionsChangedEventArgs e)
+        {
+            toolBar.NumberOfPlayers = e.NumberOfPlayers;
         }
     }
 }

@@ -12,14 +12,23 @@ namespace UnforgottenRealms.Editor.Forms
         public NewLevel()
         {
             InitializeComponent();
+
+            okCancelDialog.Ok += ButtonOkClick;
+            okCancelDialog.Cancel += ButtonCancelClick;
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        public void SetAllowedNumbersOfPlayers(params int[] allowedNumbersOfPlayers)
+        {
+            foreach (var allowedNumberOfPlayer in allowedNumbersOfPlayers)
+                playersComboBox.Items.Add(allowedNumberOfPlayer);
+        }
+
+        private void ButtonCancelClick(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void okButton_Click(object sender, EventArgs e)
+        private void ButtonOkClick(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(nameTextBox.Text))
             {
@@ -37,9 +46,15 @@ namespace UnforgottenRealms.Editor.Forms
                     ShowError("Level dimensions cannot be smaller than 10");
                     return;
                 }
+                if (playersComboBox.SelectedItem == null)
+                {
+                    ShowError("Number of players must be selected");
+                    return;
+                }
 
                 OnNewLevelCreated(new NewLevelEventArgs(
                     name: nameTextBox.Text,
+                    numberOfPlayers: (int)playersComboBox.SelectedItem,
                     size: new Vector2i(width, height)
                 ));
                 Close();

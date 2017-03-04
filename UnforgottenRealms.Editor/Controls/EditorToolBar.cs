@@ -46,6 +46,7 @@ namespace UnforgottenRealms.Editor.Controls
                         }
                     }
                     numberOfPlayers = value;
+                    SelectPlayer(playerTools[0].Player);
                 }
             }
         }
