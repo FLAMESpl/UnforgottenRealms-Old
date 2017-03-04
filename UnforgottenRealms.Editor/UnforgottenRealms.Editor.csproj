@@ -84,8 +84,15 @@
     <Compile Include="Controls\Palette.Designer.cs">
       <DependentUpon>Palette.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PlayerToolButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\PlayerToolButton.Designer.cs">
+      <DependentUpon>PlayerToolButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Events\NewLevelEventArgs.cs" />
     <Compile Include="Events\PaletteToolClickedEventArgs.cs" />
+    <Compile Include="Events\PlayerToolClickedEventArgs.cs" />
     <Compile Include="Forms\Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +118,7 @@
       <DependentUpon>WorldOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="Graphics\EditorTilesets.cs" />
+    <Compile Include="Helpers\ColorExtensions.cs" />
     <Compile Include="Helpers\VectorExtensions.cs" />
     <Compile Include="Level\Deposit.cs" />
     <Compile Include="Level\DepositMetadata.cs" />
