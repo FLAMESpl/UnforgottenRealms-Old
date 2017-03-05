@@ -7,7 +7,7 @@ using UnforgottenRealms.Common.Definitions.Entity;
 using UnforgottenRealms.Common.Enums;
 using UnforgottenRealms.Common.Graphics;
 
-namespace UnforgottenRealms.Editor.Level
+namespace UnforgottenRealms.Editor.Level.Entities.Metadata
 {
     public class ImprovementMetadata : IEntityMetadata
     {

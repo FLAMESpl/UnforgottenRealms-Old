@@ -4,8 +4,9 @@ using UnforgottenRealms.Common.Definitions.Entity;
 using UnforgottenRealms.Common.Geometry;
 using UnforgottenRealms.Common.Utils;
 using UnforgottenRealms.Editor.Graphics;
+using UnforgottenRealms.Editor.Level.Entities.Metadata;
 
-namespace UnforgottenRealms.Editor.Level
+namespace UnforgottenRealms.Editor.Level.Entities
 {
     public class Improvement : IImprovement, Drawable
     {

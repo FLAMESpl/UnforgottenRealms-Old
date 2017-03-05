@@ -11,6 +11,7 @@ using UnforgottenRealms.Editor.Events;
 using UnforgottenRealms.Editor.Graphics;
 using UnforgottenRealms.Editor.Helpers;
 using UnforgottenRealms.Editor.Level;
+using UnforgottenRealms.Editor.Level.Entities.Metadata;
 using UnforgottenRealms.Editor.Palette;
 
 namespace UnforgottenRealms.Editor.Forms

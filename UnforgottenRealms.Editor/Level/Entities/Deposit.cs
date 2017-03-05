@@ -1,7 +1,8 @@
 ﻿using SFML.Graphics;
 using UnforgottenRealms.Common.Definitions.Entity;
+using UnforgottenRealms.Editor.Level.Entities.Metadata;
 
-namespace UnforgottenRealms.Editor.Level
+namespace UnforgottenRealms.Editor.Level.Entities
 {
     public class Deposit : IDeposit, Drawable
     {

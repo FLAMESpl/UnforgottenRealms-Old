@@ -1,5 +1,7 @@
 ﻿using SFML.Graphics;
 using UnforgottenRealms.Common.Geometry.Coordinates;
+using UnforgottenRealms.Editor.Level.Entities;
+using UnforgottenRealms.Editor.Level.Entities.Metadata;
 
 namespace UnforgottenRealms.Editor.Level
 {

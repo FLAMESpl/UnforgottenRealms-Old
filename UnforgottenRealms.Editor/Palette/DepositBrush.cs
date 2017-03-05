@@ -1,4 +1,5 @@
 ﻿using UnforgottenRealms.Editor.Level;
+using UnforgottenRealms.Editor.Level.Entities.Metadata;
 
 namespace UnforgottenRealms.Editor.Palette
 {

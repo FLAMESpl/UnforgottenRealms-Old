@@ -1,8 +1,9 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
 using UnforgottenRealms.Common.Definitions.Entity;
+using UnforgottenRealms.Editor.Level.Entities.Metadata;
 
-namespace UnforgottenRealms.Editor.Level
+namespace UnforgottenRealms.Editor.Level.Entities
 {
     public class Terrain : ITerrain, Drawable
     {

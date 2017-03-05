@@ -4,6 +4,7 @@ using UnforgottenRealms.Common.Definitions.Entity;
 using UnforgottenRealms.Common.Graphics;
 using UnforgottenRealms.Editor.Controls;
 using UnforgottenRealms.Editor.Level;
+using UnforgottenRealms.Editor.Level.Entities.Metadata;
 using UnforgottenRealms.Editor.Palette;
 
 namespace UnforgottenRealms.Editor.Helpers

@@ -2,8 +2,9 @@
 using UnforgottenRealms.Common.Definitions.Entity;
 using UnforgottenRealms.Common.Utils;
 using UnforgottenRealms.Editor.Graphics;
+using UnforgottenRealms.Editor.Level.Entities.Metadata;
 
-namespace UnforgottenRealms.Editor.Level
+namespace UnforgottenRealms.Editor.Level.Entities
 {
     public class Unit : IUnit, Drawable
     {
