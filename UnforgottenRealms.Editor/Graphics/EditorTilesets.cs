@@ -7,6 +7,7 @@ namespace UnforgottenRealms.Editor.Graphics
     {
         public DepositTileset Deposits { get; set; }
         public ImprovementsTileset Improvements { get; set; }
+        public MiscellaneousTileset Miscellaneous { get; set; }
         public TerrainTileset Terrain { get; set; }
         public UnitsTileset Units { get; set; }
 
@@ -14,6 +15,7 @@ namespace UnforgottenRealms.Editor.Graphics
         {
             Deposits = new DepositTileset(GetPath("deps"));
             Improvements = new ImprovementsTileset(GetPath("imps"));
+            Miscellaneous = new MiscellaneousTileset(GetPath("misc"));
             Terrain = new TerrainTileset(GetPath("terrain"));
             Units = new UnitsTileset(GetPath("units"));
         }

@@ -39,8 +39,9 @@
             this.propertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.worldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.imagesTerrainPalette = new System.Windows.Forms.ImageList(this.components);
-            this.imagesDepositsPalette = new System.Windows.Forms.ImageList(this.components);
+            this.terrainPaletteImages = new System.Windows.Forms.ImageList(this.components);
+            this.depositsPaletteImages = new System.Windows.Forms.ImageList(this.components);
+            this.unitsPalleteImages = new System.Windows.Forms.ImageList(this.components);
             this.palette = new UnforgottenRealms.Editor.Controls.Palette();
             this.drawingSurface = new UnforgottenRealms.Editor.Controls.DrawingSurface(this.components);
             this.toolBar = new UnforgottenRealms.Editor.Controls.EditorToolBar(this.components);
@@ -126,26 +127,38 @@
             this.playersToolStripMenuItem.Text = "Players";
             this.playersToolStripMenuItem.Click += new System.EventHandler(this.playersToolStripMenuItem_Click);
             // 
-            // imagesTerrainPalette
+            // terrainPaletteImages
             // 
-            this.imagesTerrainPalette.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imagesTerrainPalette.ImageStream")));
-            this.imagesTerrainPalette.TransparentColor = System.Drawing.Color.Transparent;
-            this.imagesTerrainPalette.Images.SetKeyName(0, "none.png");
-            this.imagesTerrainPalette.Images.SetKeyName(1, "grass.png");
-            this.imagesTerrainPalette.Images.SetKeyName(2, "desert.png");
-            this.imagesTerrainPalette.Images.SetKeyName(3, "water.png");
-            this.imagesTerrainPalette.Images.SetKeyName(4, "mountain.png");
-            this.imagesTerrainPalette.Images.SetKeyName(5, "hill.png");
-            this.imagesTerrainPalette.Images.SetKeyName(6, "forest.png");
+            this.terrainPaletteImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("terrainPaletteImages.ImageStream")));
+            this.terrainPaletteImages.TransparentColor = System.Drawing.Color.Transparent;
+            this.terrainPaletteImages.Images.SetKeyName(0, "none");
+            this.terrainPaletteImages.Images.SetKeyName(1, "grass");
+            this.terrainPaletteImages.Images.SetKeyName(2, "desert");
+            this.terrainPaletteImages.Images.SetKeyName(3, "water");
+            this.terrainPaletteImages.Images.SetKeyName(4, "mountain");
+            this.terrainPaletteImages.Images.SetKeyName(5, "hill");
+            this.terrainPaletteImages.Images.SetKeyName(6, "forest");
             // 
-            // imagesDepositsPalette
+            // depositsPaletteImages
             // 
-            this.imagesDepositsPalette.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imagesDepositsPalette.ImageStream")));
-            this.imagesDepositsPalette.TransparentColor = System.Drawing.Color.Transparent;
-            this.imagesDepositsPalette.Images.SetKeyName(0, "none.png");
-            this.imagesDepositsPalette.Images.SetKeyName(1, "iron.png");
-            this.imagesDepositsPalette.Images.SetKeyName(2, "gems.png");
-            this.imagesDepositsPalette.Images.SetKeyName(3, "pearls.png");
+            this.depositsPaletteImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("depositsPaletteImages.ImageStream")));
+            this.depositsPaletteImages.TransparentColor = System.Drawing.Color.Transparent;
+            this.depositsPaletteImages.Images.SetKeyName(0, "none");
+            this.depositsPaletteImages.Images.SetKeyName(1, "iron");
+            this.depositsPaletteImages.Images.SetKeyName(2, "gems");
+            this.depositsPaletteImages.Images.SetKeyName(3, "pearls");
+            // 
+            // unitsPalleteImages
+            // 
+            this.unitsPalleteImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("unitsPalleteImages.ImageStream")));
+            this.unitsPalleteImages.TransparentColor = System.Drawing.Color.Transparent;
+            this.unitsPalleteImages.Images.SetKeyName(0, "none");
+            this.unitsPalleteImages.Images.SetKeyName(1, "archer");
+            this.unitsPalleteImages.Images.SetKeyName(2, "swordsman");
+            this.unitsPalleteImages.Images.SetKeyName(3, "worker");
+            this.unitsPalleteImages.Images.SetKeyName(4, "boat");
+            this.unitsPalleteImages.Images.SetKeyName(5, "horseman");
+            this.unitsPalleteImages.Images.SetKeyName(6, "dragon");
             // 
             // palette
             // 
@@ -170,6 +183,7 @@
             this.toolBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolBar.Location = new System.Drawing.Point(0, 24);
             this.toolBar.Name = "toolBar";
+            this.toolBar.NumberOfPlayers = 2;
             this.toolBar.Size = new System.Drawing.Size(449, 25);
             this.toolBar.TabIndex = 2;
             this.toolBar.Text = "editorToolBar1";
@@ -206,8 +220,9 @@
         private System.Windows.Forms.ToolStripMenuItem playersToolStripMenuItem;
         private Controls.DrawingSurface drawingSurface;
         private Controls.Palette palette;
-        private System.Windows.Forms.ImageList imagesTerrainPalette;
-        private System.Windows.Forms.ImageList imagesDepositsPalette;
+        private System.Windows.Forms.ImageList terrainPaletteImages;
+        private System.Windows.Forms.ImageList depositsPaletteImages;
         private Controls.EditorToolBar toolBar;
+        private System.Windows.Forms.ImageList unitsPalleteImages;
     }
 }

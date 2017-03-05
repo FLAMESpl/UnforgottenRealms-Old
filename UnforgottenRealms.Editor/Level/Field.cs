@@ -35,9 +35,9 @@ namespace UnforgottenRealms.Editor.Level
             Terrain = new Terrain(this, metadata);
         }
 
-        public void Create(UnitFactory factory, int ownerId)
+        public void Create(UnitMetadata metadata)
         {
-            Unit = factory.Invoke(this, ownerId);
+            Unit = new Unit(this, metadata);
         }
 
         public void Draw(RenderTarget target, RenderStates states)

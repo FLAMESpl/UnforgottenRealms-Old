@@ -30,6 +30,7 @@
         {
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelButtons = new System.Windows.Forms.TableLayoutPanel();
+            this.okCancelDialog = new UnforgottenRealms.Editor.Controls.OkCancelDialog();
             this.tableLayoutPanelSize = new System.Windows.Forms.TableLayoutPanel();
             this.labelHeight = new System.Windows.Forms.Label();
             this.labelWidth = new System.Windows.Forms.Label();
@@ -39,7 +40,6 @@
             this.heightTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.playersComboBox = new System.Windows.Forms.ComboBox();
-            this.okCancelDialog = new UnforgottenRealms.Editor.Controls.OkCancelDialog();
             this.tableLayoutPanelMain.SuspendLayout();
             this.tableLayoutPanelButtons.SuspendLayout();
             this.tableLayoutPanelSize.SuspendLayout();
@@ -73,6 +73,13 @@
             this.tableLayoutPanelButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelButtons.Size = new System.Drawing.Size(221, 34);
             this.tableLayoutPanelButtons.TabIndex = 0;
+            // 
+            // okCancelDialog
+            // 
+            this.okCancelDialog.Location = new System.Drawing.Point(71, 3);
+            this.okCancelDialog.Name = "okCancelDialog";
+            this.okCancelDialog.Size = new System.Drawing.Size(147, 28);
+            this.okCancelDialog.TabIndex = 0;
             // 
             // tableLayoutPanelSize
             // 
@@ -179,13 +186,6 @@
             this.playersComboBox.Name = "playersComboBox";
             this.playersComboBox.Size = new System.Drawing.Size(45, 21);
             this.playersComboBox.TabIndex = 9;
-            // 
-            // okCancelDialog
-            // 
-            this.okCancelDialog.Location = new System.Drawing.Point(71, 3);
-            this.okCancelDialog.Name = "okCancelDialog";
-            this.okCancelDialog.Size = new System.Drawing.Size(147, 28);
-            this.okCancelDialog.TabIndex = 0;
             // 
             // NewLevel
             // 

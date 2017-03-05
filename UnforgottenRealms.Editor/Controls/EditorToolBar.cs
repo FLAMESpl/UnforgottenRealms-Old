@@ -93,7 +93,6 @@ namespace UnforgottenRealms.Editor.Controls
             AddSeparator();
 
             NumberOfPlayers = 2;
-            SelectPlayer(playerTools[0].Player);
         }
 
         private void AddPaletteTool(PaletteType paletteType, string imageName)

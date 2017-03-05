@@ -1,17 +1,17 @@
 ﻿using SFML.Window;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using UnforgottenRealms.Common.Definitions.Entity;
 using UnforgottenRealms.Common.Enums;
 using UnforgottenRealms.Common.Geometry;
-using UnforgottenRealms.Common.Graphics;
 using UnforgottenRealms.Common.Resources;
 using UnforgottenRealms.Common.Window;
 using UnforgottenRealms.Editor.Events;
 using UnforgottenRealms.Editor.Graphics;
+using UnforgottenRealms.Editor.Helpers;
 using UnforgottenRealms.Editor.Level;
 using UnforgottenRealms.Editor.Palette;
-using Color = SFML.Graphics.Color;
 
 namespace UnforgottenRealms.Editor.Forms
 {
@@ -27,8 +27,9 @@ namespace UnforgottenRealms.Editor.Forms
         private GameWindow window;
         private Map world;
 
-        private ImageBrushPair[] terrainBrushes = null;
-        private ImageBrushPair[] depositsBrushes = null;
+        private List<ImageBrushPair> terrainBrushes;
+        private List<ImageBrushPair> depositsBrushes;
+        private List<ImageBrushPair> unitsBrushes;
 
         public Main()
         {
@@ -59,14 +60,16 @@ namespace UnforgottenRealms.Editor.Forms
 
         public void InitializeSfml()
         {
+            var tilesets = new EditorTilesets();
+
             model = new HexModel(40);
             resources = new ResourceManager();
+            resources.Add(tilesets);
+
+            CreateBrushes(tilesets);
+            toolBar.SelectPlayer(PlayerColour.Red);
+
             world = new Map(model, resources);
-
-            var tilesets = new EditorTilesets();
-            CreateTerrainBrushes(tilesets.Terrain);
-            CreateDepositsBrushes(tilesets.Deposits);
-
             world.Create(new Vector2i(10, 10));
 
             window = drawingSurface.InitializeSfml();
@@ -92,6 +95,7 @@ namespace UnforgottenRealms.Editor.Forms
                     PalettToolLoad(depositsBrushes, Probe.Deposit);
                     break;
                 case PaletteType.Units:
+                    PalettToolLoad(unitsBrushes, Probe.Unit);
                     break;
                 case PaletteType.Improvements:
                     break;
@@ -100,7 +104,7 @@ namespace UnforgottenRealms.Editor.Forms
             }
         }
 
-        private void PalettToolLoad(ImageBrushPair[] images, Probe probe)
+        private void PalettToolLoad(IEnumerable<ImageBrushPair> images, Probe probe)
         {
             palette.LoadContent(new PaletteContent(images, probe));
         }
@@ -127,58 +131,39 @@ namespace UnforgottenRealms.Editor.Forms
                 palette.PickField(world[position]);
         }
 
-        private void CreateTerrainBrushes(TerrainTileset tileset)
+        private void CreateBrushes(EditorTilesets tilesets)
         {
-            var images = imagesTerrainPalette.Images;
-            terrainBrushes = new ImageBrushPair[images.Count];
+            ImageList.ImageCollection images;
 
-            terrainBrushes[0] = new ImageBrushPair(
-                brush: new TerrainBrush(TerrainMetadata.Empty),
-                image: images[0]
-            );
+            images = terrainPaletteImages.Images;
+            terrainBrushes = new List<ImageBrushPair>();
 
-            for (int i = 1; i < images.Count; i++)
-            {
-                terrainBrushes[i] = new ImageBrushPair(
-                    brush: new TerrainBrush(
-                        new TerrainMetadata(
-                            entityId: new EntityId(
-                                @class: EntityClass.Terrain,
-                                value: i.ToString()
-                            ),
-                            textureDescriptor: tileset.Get(i-1)
-                        )
-                    ),
-                    image: images[i]
-                );
-            }
-        }
+            terrainBrushes.AddTerrainBrush(images["none"], TerrainMetadata.Empty);
+            terrainBrushes.AddTerrainBrush(images["grass"], TerrainDefinitions.Grass, tilesets.Terrain.Grass);
+            terrainBrushes.AddTerrainBrush(images["desert"], TerrainDefinitions.Desert, tilesets.Terrain.Desert);
+            terrainBrushes.AddTerrainBrush(images["water"], TerrainDefinitions.Water, tilesets.Terrain.Water);
+            terrainBrushes.AddTerrainBrush(images["forest"], TerrainDefinitions.Forest, tilesets.Terrain.Forest);
+            terrainBrushes.AddTerrainBrush(images["hill"], TerrainDefinitions.Hill, tilesets.Terrain.Hill);
+            terrainBrushes.AddTerrainBrush(images["mountain"], TerrainDefinitions.Mountain, tilesets.Terrain.Mountain);
 
-        public void CreateDepositsBrushes(DepositTileset tileset)
-        {
-            var images = imagesDepositsPalette.Images;
-            depositsBrushes = new ImageBrushPair[images.Count];
+            images = depositsPaletteImages.Images;
+            depositsBrushes = new List<ImageBrushPair>();
 
-            depositsBrushes[0] = new ImageBrushPair(
-                brush: new DepositBrush(DepositMetadata.Empty),
-                image: images[0]
-            );
+            depositsBrushes.AddDepositBrush(images["none"], DepositMetadata.Empty);
+            depositsBrushes.AddDepositBrush(images["iron"], DepositsDefinitions.Iron, tilesets.Deposits.Iron);
+            depositsBrushes.AddDepositBrush(images["gems"], DepositsDefinitions.Gems, tilesets.Deposits.Gems);
+            depositsBrushes.AddDepositBrush(images["pearls"], DepositsDefinitions.Pearls, tilesets.Deposits.Pearls);
 
-            for (int i = 1; i < images.Count; i++)
-            {
-                depositsBrushes[i] = new ImageBrushPair(
-                    brush: new DepositBrush(
-                        new DepositMetadata(
-                            entityId: new EntityId(
-                                @class: EntityClass.Deposit,
-                                value: i.ToString()
-                            ),
-                            tile: tileset.Get(i - 1)
-                        )
-                    ),
-                    image: images[i]
-                );
-            }
+            images = unitsPalleteImages.Images;
+            unitsBrushes = new List<ImageBrushPair>();
+
+            unitsBrushes.AddUnitBrush(images["none"], UnitMetadata.Empty);
+            unitsBrushes.AddUnitBrush(toolBar, images["worker"], UnitsDefinitions.Worker, tilesets.Units.Worker);
+            unitsBrushes.AddUnitBrush(toolBar, images["archer"], UnitsDefinitions.Archer, tilesets.Units.Archer);
+            unitsBrushes.AddUnitBrush(toolBar, images["swordsman"], UnitsDefinitions.Swordsman, tilesets.Units.Swordsman);
+            unitsBrushes.AddUnitBrush(toolBar, images["horseman"], UnitsDefinitions.Horseman, tilesets.Units.Horseman);
+            unitsBrushes.AddUnitBrush(toolBar, images["boat"], UnitsDefinitions.Boat, tilesets.Units.Boat);
+            unitsBrushes.AddUnitBrush(toolBar, images["dragon"], UnitsDefinitions.Dragon, tilesets.Units.Dragon);
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)

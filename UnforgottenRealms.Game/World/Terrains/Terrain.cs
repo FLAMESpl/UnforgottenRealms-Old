@@ -20,7 +20,7 @@ namespace UnforgottenRealms.Game.World.Terrains
         public abstract string Name { get; }
         public abstract TerrainType Type { get; }
 
-        public Terrain(Field location, TextureTile textureDescriptor)
+        public Terrain(Field location, TerrainTile textureDescriptor)
         {
             Location = location;
             texture = textureDescriptor.Texture;
@@ -33,7 +33,7 @@ namespace UnforgottenRealms.Game.World.Terrains
             target.Draw(vertex, states);
         }
 
-        private void InitializeVertex(TextureTile textureDescriptor)
+        private void InitializeVertex(TerrainTile textureDescriptor)
         {
             var model = Location.World.Model;
             var topLeftCorner = model.GetTopLeftCorner(Location.Position);

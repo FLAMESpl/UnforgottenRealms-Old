@@ -11,7 +11,7 @@ namespace UnforgottenRealms.Common.Graphics
         public Tile Archer => Get(0);
         public Tile Swordsman => Get(1);
         public Tile Worker => Get(2);
-        public Tile Ship => Get(3);
+        public Tile Boat => Get(3);
         public Tile Horseman => Get(4);
         public Tile Dragon => Get(5);
     }

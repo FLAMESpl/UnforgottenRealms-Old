@@ -69,7 +69,6 @@
     <Compile Include="Graphics\AbilitiesTileset.cs" />
     <Compile Include="Graphics\GameTilesets.cs" />
     <Compile Include="Graphics\GuiTileset.cs" />
-    <Compile Include="Graphics\MiscellaneousTileset.cs" />
     <Compile Include="Gui\Components\AbilitiesContainer.cs" />
     <Compile Include="Gui\Components\AbilityButton.cs" />
     <Compile Include="Gui\Components\ActivePlayerLabel.cs" />

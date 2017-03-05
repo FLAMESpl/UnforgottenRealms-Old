@@ -7,9 +7,9 @@ namespace UnforgottenRealms.Editor.Level
     {
         public bool IsEmpty { get; }
         public EntityId EntityId { get; }
-        public TextureTile TextureDescriptor { get; }
+        public TerrainTile TextureDescriptor { get; }
 
-        public TerrainMetadata(EntityId entityId, TextureTile textureDescriptor)
+        public TerrainMetadata(EntityId entityId, TerrainTile textureDescriptor)
         {
             IsEmpty = entityId.Value == null;
             EntityId = entityId;

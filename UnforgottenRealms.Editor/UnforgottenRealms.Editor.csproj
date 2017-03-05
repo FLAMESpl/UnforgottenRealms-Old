@@ -125,6 +125,7 @@
       <DependentUpon>WorldOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="Graphics\EditorTilesets.cs" />
+    <Compile Include="Helpers\BrushesExtensions.cs" />
     <Compile Include="Helpers\ColorExtensions.cs" />
     <Compile Include="Helpers\VectorExtensions.cs" />
     <Compile Include="Level\Deposit.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Level\Terrain.cs" />
     <Compile Include="Level\TerrainMetadata.cs" />
     <Compile Include="Level\Unit.cs" />
+    <Compile Include="Level\UnitMetadata.cs" />
     <Compile Include="Palette\Brush.cs" />
     <Compile Include="Palette\DepositBrush.cs" />
     <Compile Include="Palette\ImageBrushPair.cs" />
@@ -144,6 +146,7 @@
     <Compile Include="Palette\PaletteType.cs" />
     <Compile Include="Palette\Probe.cs" />
     <Compile Include="Palette\TerrainBrush.cs" />
+    <Compile Include="Palette\UnitBrush.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\EditorToolBar.resx">

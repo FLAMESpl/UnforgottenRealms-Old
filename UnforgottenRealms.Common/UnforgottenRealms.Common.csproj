@@ -77,8 +77,9 @@
     <Compile Include="Geometry\HexModel.cs" />
     <Compile Include="Graphics\DepositTileset.cs" />
     <Compile Include="Graphics\ImprovementsTileset.cs" />
+    <Compile Include="Graphics\MiscellaneousTileset.cs" />
     <Compile Include="Graphics\TileBase.cs" />
-    <Compile Include="Graphics\TextureTile.cs" />
+    <Compile Include="Graphics\TerrainTile.cs" />
     <Compile Include="Graphics\TerrainTileset.cs" />
     <Compile Include="Graphics\Tile.cs" />
     <Compile Include="Graphics\Tileset.cs" />
