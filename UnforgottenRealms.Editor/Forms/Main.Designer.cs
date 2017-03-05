@@ -45,6 +45,7 @@
             this.palette = new UnforgottenRealms.Editor.Controls.Palette();
             this.drawingSurface = new UnforgottenRealms.Editor.Controls.DrawingSurface(this.components);
             this.toolBar = new UnforgottenRealms.Editor.Controls.EditorToolBar(this.components);
+            this.improvementsPalleteImages = new System.Windows.Forms.ImageList(this.components);
             this.tableLayout.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -188,6 +189,19 @@
             this.toolBar.TabIndex = 2;
             this.toolBar.Text = "editorToolBar1";
             // 
+            // improvementsPalleteImages
+            // 
+            this.improvementsPalleteImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("improvementsPalleteImages.ImageStream")));
+            this.improvementsPalleteImages.TransparentColor = System.Drawing.Color.Transparent;
+            this.improvementsPalleteImages.Images.SetKeyName(0, "none");
+            this.improvementsPalleteImages.Images.SetKeyName(1, "barracks");
+            this.improvementsPalleteImages.Images.SetKeyName(2, "dragonlair");
+            this.improvementsPalleteImages.Images.SetKeyName(3, "farm");
+            this.improvementsPalleteImages.Images.SetKeyName(4, "lumberjacks");
+            this.improvementsPalleteImages.Images.SetKeyName(5, "mine");
+            this.improvementsPalleteImages.Images.SetKeyName(6, "shipyard");
+            this.improvementsPalleteImages.Images.SetKeyName(7, "stable");
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -224,5 +238,6 @@
         private System.Windows.Forms.ImageList depositsPaletteImages;
         private Controls.EditorToolBar toolBar;
         private System.Windows.Forms.ImageList unitsPalleteImages;
+        private System.Windows.Forms.ImageList improvementsPalleteImages;
     }
 }

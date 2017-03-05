@@ -23,6 +23,33 @@ namespace UnforgottenRealms.Editor.Helpers
             ));
         }
 
+        public static void AddImprovementBrush(this List<ImageBrushPair> list, Image image, ImprovementMetadata metadata)
+        {
+            list.Add(new ImageBrushPair(
+                brush: new ImprovementBrush(
+                    metadata: metadata
+                ),
+                image: image
+            ));
+        }
+
+        public static void AddImprovementBrush(this List<ImageBrushPair> list, EditorToolBar toolBar, Image image, EntityId id, Tile tile)
+        {
+            var brush = new ImprovementBrush(
+                metadata: new ImprovementMetadata(
+                    entityId: id,
+                    owner: null,
+                    tile: tile
+            ));
+
+            list.Add(new ImageBrushPair(
+                brush: brush,
+                image: image
+            ));
+
+            toolBar.PlayerSelected += (s, e) => brush.ChangePlayer(e.Colour);
+        }
+
         public static void AddDepositBrush(this List<ImageBrushPair> list, Image image, DepositMetadata metadata)
         {
             list.Add(new ImageBrushPair(

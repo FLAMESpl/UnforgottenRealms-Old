@@ -27,8 +27,9 @@ namespace UnforgottenRealms.Editor.Forms
         private GameWindow window;
         private Map world;
 
-        private List<ImageBrushPair> terrainBrushes;
         private List<ImageBrushPair> depositsBrushes;
+        private List<ImageBrushPair> improvementBrushes;
+        private List<ImageBrushPair> terrainBrushes;
         private List<ImageBrushPair> unitsBrushes;
 
         public Main()
@@ -89,22 +90,23 @@ namespace UnforgottenRealms.Editor.Forms
             switch (e.PaletteType)
             {
                 case PaletteType.Terrain:
-                    PalettToolLoad(terrainBrushes, Probe.Terrain);
+                    PaletteToolLoad(terrainBrushes, Probe.Terrain);
                     break;
                 case PaletteType.Deposits:
-                    PalettToolLoad(depositsBrushes, Probe.Deposit);
+                    PaletteToolLoad(depositsBrushes, Probe.Deposit);
                     break;
                 case PaletteType.Units:
-                    PalettToolLoad(unitsBrushes, Probe.Unit);
+                    PaletteToolLoad(unitsBrushes, Probe.Unit);
                     break;
                 case PaletteType.Improvements:
+                    PaletteToolLoad(improvementBrushes, Probe.Improvement);
                     break;
                 default:
                     break;
             }
         }
 
-        private void PalettToolLoad(IEnumerable<ImageBrushPair> images, Probe probe)
+        private void PaletteToolLoad(IEnumerable<ImageBrushPair> images, Probe probe)
         {
             palette.LoadContent(new PaletteContent(images, probe));
         }
@@ -164,6 +166,18 @@ namespace UnforgottenRealms.Editor.Forms
             unitsBrushes.AddUnitBrush(toolBar, images["horseman"], UnitsDefinitions.Horseman, tilesets.Units.Horseman);
             unitsBrushes.AddUnitBrush(toolBar, images["boat"], UnitsDefinitions.Boat, tilesets.Units.Boat);
             unitsBrushes.AddUnitBrush(toolBar, images["dragon"], UnitsDefinitions.Dragon, tilesets.Units.Dragon);
+
+            images = improvementsPalleteImages.Images;
+            improvementBrushes = new List<ImageBrushPair>();
+
+            improvementBrushes.AddImprovementBrush(images["none"], ImprovementMetadata.Empty);
+            improvementBrushes.AddImprovementBrush(toolBar, images["farm"], ImprovementDefinitions.Farm, tilesets.Improvements.Farm);
+            improvementBrushes.AddImprovementBrush(toolBar, images["lumberjacks"], ImprovementDefinitions.LumberjacksHut, tilesets.Improvements.LumberjacksHut);
+            improvementBrushes.AddImprovementBrush(toolBar, images["mine"], ImprovementDefinitions.Mine, tilesets.Improvements.IronMine);
+            improvementBrushes.AddImprovementBrush(toolBar, images["barracks"], ImprovementDefinitions.Barracks, tilesets.Improvements.Barracks);
+            improvementBrushes.AddImprovementBrush(toolBar, images["stable"], ImprovementDefinitions.Stable, tilesets.Improvements.Stable);
+            improvementBrushes.AddImprovementBrush(toolBar, images["shipyard"], ImprovementDefinitions.Shipyard, tilesets.Improvements.Shipyard);
+            improvementBrushes.AddImprovementBrush(toolBar, images["dragonlair"], ImprovementDefinitions.DragonLair, tilesets.Improvements.DragonLair);
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)

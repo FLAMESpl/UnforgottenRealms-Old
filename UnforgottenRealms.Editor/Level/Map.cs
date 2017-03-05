@@ -41,9 +41,6 @@ namespace UnforgottenRealms.Editor.Level
                 for (int j = 0; j < size.Y; j++)
                 {
                     fields[i].Add(CreateField(i, j));
-                    fields[i][j].Create(TerrainMetadata.Empty);
-                    fields[i][j].Create(DepositMetadata.Empty);
-                    fields[i][j].Create(UnitMetadata.Empty);
                 }
             }
         }
@@ -98,9 +95,9 @@ namespace UnforgottenRealms.Editor.Level
 
         public void Draw(RenderTarget target, RenderStates states)
         {
-            for (int i = 0; i < Size.X; i++)
+            for (int j= 0; j < Size.Y; j++)
             {
-                for (int j = 0; j < Size.Y; j++)
+                for (int i = 0; i < Size.X; i++)
                 {
                     if (scene.Contains(i, j))
                         target.Draw(fields[i][j], states);

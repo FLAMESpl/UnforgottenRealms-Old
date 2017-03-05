@@ -134,6 +134,7 @@
     <Compile Include="Level\IEntityMetadata.cs" />
     <Compile Include="Level\Field.cs" />
     <Compile Include="Level\Improvement.cs" />
+    <Compile Include="Level\ImprovementMetadata.cs" />
     <Compile Include="Level\Map.cs" />
     <Compile Include="Level\Terrain.cs" />
     <Compile Include="Level\TerrainMetadata.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Palette\Brush.cs" />
     <Compile Include="Palette\DepositBrush.cs" />
     <Compile Include="Palette\ImageBrushPair.cs" />
+    <Compile Include="Palette\ImprovementBrush.cs" />
     <Compile Include="Palette\PaletteContent.cs" />
     <Compile Include="Palette\PaletteType.cs" />
     <Compile Include="Palette\Probe.cs" />

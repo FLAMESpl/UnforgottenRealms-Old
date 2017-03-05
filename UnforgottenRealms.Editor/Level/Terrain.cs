@@ -4,8 +4,6 @@ using UnforgottenRealms.Common.Definitions.Entity;
 
 namespace UnforgottenRealms.Editor.Level
 {
-    public delegate Terrain TerrainFactory(Field location);
-
     public class Terrain : ITerrain, Drawable
     {
         private Color nullTextureColor = new Color(50, 50, 200);

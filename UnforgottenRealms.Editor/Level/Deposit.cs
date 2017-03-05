@@ -3,8 +3,6 @@ using UnforgottenRealms.Common.Definitions.Entity;
 
 namespace UnforgottenRealms.Editor.Level
 {
-    public delegate Deposit DepositFactory(Field location);
-
     public class Deposit : IDeposit, Drawable
     {
         private Sprite sprite = null;

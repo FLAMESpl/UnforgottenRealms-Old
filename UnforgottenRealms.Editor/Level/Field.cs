@@ -1,5 +1,4 @@
 ﻿using SFML.Graphics;
-using System.Collections.Generic;
 using UnforgottenRealms.Common.Geometry.Coordinates;
 
 namespace UnforgottenRealms.Editor.Level
@@ -18,6 +17,11 @@ namespace UnforgottenRealms.Editor.Level
         {
             Position = position;
             World = world;
+
+            Deposit = new Deposit(this, DepositMetadata.Empty);
+            Improvement = new Improvement(this, ImprovementMetadata.Empty);
+            Terrain = new Terrain(this, TerrainMetadata.Empty);
+            Unit = new Unit(this, UnitMetadata.Empty);
         }
 
         public void Create(DepositMetadata metadata)
@@ -25,9 +29,9 @@ namespace UnforgottenRealms.Editor.Level
             Deposit = new Deposit(this, metadata);
         }
 
-        public void Create(ImprovementFactory factory, int ownerId)
+        public void Create(ImprovementMetadata metadata)
         {
-            Improvement = factory.Invoke(this, ownerId);
+            Improvement = new Improvement(this, metadata);
         }
 
         public void Create(TerrainMetadata metadata)
